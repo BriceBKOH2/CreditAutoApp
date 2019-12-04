@@ -1,0 +1,18 @@
+Client :
+  Id : serial generated
+  firstName : String
+  lastName : String
+  dateOfBirth : Date
+  phoneNumber : String
+  address : String
+  accountNumber : Long
+
+
+Contract :
+  Id : serial generated
+  vehiculeCategory : String
+  vehiculePrice : Long
+  loanDuration : Int
+  loanRate: Float
+  loanCreationDate : Date
+  IdClient : foreign Key Client.Id
