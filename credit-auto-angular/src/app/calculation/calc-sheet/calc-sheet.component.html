@@ -1,23 +1,36 @@
-<div class="form-group">
+<div class="container d-flex form1">
   <form>
-    <div>
-      <label for="car_price">Montant de l'achat </label>
-      <input type="text" />
-    </div>
-    <div>
-      <label for="loan_amount">Montant du crédit </label>
-      <input type="text" />
-    </div>
-    <div>
-      <label for="car_class">Catégorie de la voiture </label>
-      <select name="car_class" id=""> </select>
-    </div>
-    <div>
-      <label for="loan_duration">Durée du crédit </label>
-      <input type="text" /><span> mois</span>
-    </div>
-    <div>
-      <button>Créer simulation</button>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="car_price">Montant de l'achat </label>
+          <div class="d-inline-block">
+            <input class="form-control" type="text" placeholder="Ex: 10000" />
+          </div>
+          <div class="d-inline-block"><p>Mois</p></div>
+        </div>
+        <div class="form-group">
+          <label for="loan_amount">Montant du crédit </label>
+          <input class="form-control" type="text" placeholder="Ex: 5000" />
+        </div>
+        <div class="form-group">
+          <label for="car_class">Catégorie de la voiture </label>
+          <select class="form-control" name="car_class" id="">
+            <option value="">A</option>
+            <option value="">B</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="loan_duration">Durée du crédit </label>
+
+          <input class="form-control" type="text" placeholder="Ex : 36" />
+        </div>
+        <div>
+          <button class="btn btn-squared-default btn-success">
+            Créer simulation
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>
