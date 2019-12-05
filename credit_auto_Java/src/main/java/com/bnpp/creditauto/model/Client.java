@@ -2,6 +2,7 @@ package com.bnpp.creditauto.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Client {
 	private Date dateOfBirth;
 	private String phoneNumber;
 	private String address;
+	@Column(unique = true)
 	private Long accountNumber; // Currently not bind to any table, can be set as a foreign key from the account
 								// table later
 
