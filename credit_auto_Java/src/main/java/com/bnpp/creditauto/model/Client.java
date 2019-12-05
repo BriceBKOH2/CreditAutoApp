@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "client")
 public class Client {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,6 +27,10 @@ public class Client {
 //	private Contract;
 
 	/* Constructors */
+	
+	public Client() {
+		
+	}
 
 	public Client(String firstName, String lastName, Date dateOfBirth, String phoneNumber, String address,
 			Long accountNumber) {
