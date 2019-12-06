@@ -21,6 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @PropertySource("classpath:application.properties")
 public class JpaConfiguration {
+	
 	@Autowired
 	private Environment environment;
 
