@@ -10,12 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    loadChildren: './catalog/catalog.module#CatalogModule'
+    loadChildren: './calculation/calculation.module#CalculationModule'
   }
 ];
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule]
+  imports: [RouterModule.forRoot(routes), CommonModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
