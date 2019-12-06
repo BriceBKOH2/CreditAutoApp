@@ -20,16 +20,16 @@ public class RateDao extends AbstractDao<Rate> {
 	 */
 	public Rate getDecisionRate(Category cat, int vehiclePrice, int duration) {
 
-		String jpql = "from rate join"
-				+ "decision on decision_rate_id = rate_id"
-				+ "where decision_car_category = :cat"
-				+ "and decision_min_amount <= :vehiclePrice" // smaller or equals : boundaries do not overlap
-				+ "and decision_max_amount >= :vehiclePrice"
-				+ "and decision_min_duration <= :duration"
+		String jpql = "from Rate join decision "
+				+ "on decision_rate_id = rate_id "
+//				+ "and decision_car_category_id = :catId "
+				+ "where decision_min_amount <= :vehiclePrice " // smaller or equals : boundaries do not overlap
+				+ "and decision_max_amount >= :vehiclePrice "
+				+ "and decision_min_duration <= :duration "
 				+ "and decision_max_duration >= :duration";
 		
 		TypedQuery<Rate> query = em.createQuery(jpql, Rate.class);
-		query.setParameter("cat", cat);
+		query.setParameter("catId", cat.getId());
 		query.setParameter("vehiclePrice", vehiclePrice);
 		query.setParameter("duration", duration);
 		
