@@ -8,7 +8,7 @@
 
 CREATE TABLE IF NOT EXISTS role_ (
 
-    role_id SERIAL NOT NULL,
+    role_id bigserial NOT NULL,
     role_name VARCHAR(75) NOT NULL,
 
     PRIMARY KEY (role_id)
@@ -18,13 +18,13 @@ CREATE TABLE IF NOT EXISTS role_ (
 
 CREATE TABLE IF NOT EXISTS user_ (
 
-    user_id SERIAL NOT NULL,
+    user_id bigserial NOT NULL,
     user_firstname VARCHAR(75) NOT NULL,
     user_lastname VARCHAR(75) NOT NULL,
     user_login VARCHAR(75) NOT NULL,
     user_password VARCHAR(75) NOT NULL,
     user_mail VARCHAR(255) NOT NULL,
-    user_role_id SERIAL NOT NULL,
+    user_role_id bigserial NOT NULL,
 
     PRIMARY KEY (user_id),
     FOREIGN KEY (user_role_id) REFERENCES role_ (role_id)
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS user_ (
 
 CREATE TABLE IF NOT EXISTS right_ (
 
-    right_id SERIAL NOT NULL,
+    right_id bigserial NOT NULL,
     right_name VARCHAR(75) NOT NULL,
 
     PRIMARY KEY (right_id)
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS right_ (
 
 CREATE TABLE IF NOT EXISTS role_right_ (
 
-    role_fk SERIAL NOT NULL,
-    right_fk SERIAL NOT NULL,
+    role_fk bigserial NOT NULL,
+    right_fk bigserial NOT NULL,
 
     FOREIGN KEY (role_fk) REFERENCES role_ (role_id),
     FOREIGN KEY (right_fk) REFERENCES right_ (right_id)
@@ -57,9 +57,10 @@ CREATE TABLE IF NOT EXISTS role_right_ (
 
 CREATE TABLE IF NOT EXISTS client_ (
 
-    client_id SERIAL NOT NULL,
+    client_id bigserial NOT NULL,
     client_firstname VARCHAR(75) NOT NULL,
     client_lasttname VARCHAR(75) NOT NULL,
+    client_active BOOLEAN NOT NULL,
     client_birth DATE NOT NULL,
     client_phone VARCHAR(75) NOT NULL,
     client_address TEXT NOT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE IF NOT EXISTS client_ (
 
 CREATE TABLE IF NOT EXISTS car_category_ (
 
-    car_category_id SERIAL NOT NULL,
+    car_category_id bigserial NOT NULL,
     car_category_name VARCHAR(75) NOT NULL,
 
     PRIMARY KEY (car_category_id)
@@ -84,14 +85,15 @@ CREATE TABLE IF NOT EXISTS car_category_ (
 
 CREATE TABLE IF NOT EXISTS contract_ (
 
-    contract_id SERIAL NOT NULL,
+    contract_id bigserial NOT NULL,
     contract_vehicle_price FLOAT NOT NULL,
     contract_amount FLOAT NOT NULL,
     contract_duration INT NOT NULL,
     contract_rate FLOAT NOT NULL,
     contract_rent_right BOOLEAN NOT NULL,
-    contract_client_id SERIAL NOT NULL,
-    contract_car_category_id SERIAL NOT NULL,
+    contract_close BOOLEAN NOT NULL,
+    contract_client_id bigserial NOT NULL,
+    contract_car_category_id bigserial NOT NULL,
 
     PRIMARY KEY (contract_id),
     FOREIGN KEY (contract_client_id) REFERENCES client_ (client_id),
@@ -103,7 +105,7 @@ CREATE TABLE IF NOT EXISTS contract_ (
 
 CREATE TABLE IF NOT EXISTS rate_ (
 
-    rate_id SERIAL NOT NULL,
+    rate_id bigserial NOT NULL,
     rate_name VARCHAR(75) NOT NULL,
     rate_amount FLOAT NOT NULL,
 
@@ -115,13 +117,13 @@ CREATE TABLE IF NOT EXISTS rate_ (
 
 CREATE TABLE IF NOT EXISTS decision_ (
 
-    decision_id SERIAL NOT NULL,
+    decision_id bigserial NOT NULL,
     decision_min_amount integer NOT NULL,
     decision_max_amount integer NOT NULL,
     decision_min_duration integer NOT NULL,
     decision_max_duration integer NOT NULL,
-    decision_car_category_id SERIAL NOT NULL,
-    decision_rate_id SERIAL NOT NULL,
+    decision_car_category_id bigserial NOT NULL,
+    decision_rate_id bigserial NOT NULL,
 
     PRIMARY KEY (decision_id),
     FOREIGN KEY (decision_car_category_id) REFERENCES car_category_ (car_category_id),
@@ -133,7 +135,7 @@ CREATE TABLE IF NOT EXISTS decision_ (
 
 CREATE TABLE IF NOT EXISTS car_company_ (
 
-    car_company_id SERIAL NOT NULL,
+    car_company_id bigserial NOT NULL,
     car_company_name VARCHAR(75) NOT NULL,
 
     PRIMARY KEY (car_company_id)
