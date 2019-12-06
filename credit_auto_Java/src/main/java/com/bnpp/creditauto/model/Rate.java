@@ -16,6 +16,7 @@ public class Rate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
+	@Column(name="rate_name")
 	private String name;
 	
 	@Column(name="rate_amount")
@@ -40,6 +41,14 @@ public class Rate {
 
 	public void setRateAmount(Double rateAmount) {
 		this.rateAmount = rateAmount;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
