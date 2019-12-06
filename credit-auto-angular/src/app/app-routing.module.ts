@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
+    redirectTo: 'simul-page',
     pathMatch: 'full'
   },
   {
-    path: 'index',
+    path: 'simul-page',
     loadChildren: './calculation/calculation.module#CalculationModule'
   }
 ];

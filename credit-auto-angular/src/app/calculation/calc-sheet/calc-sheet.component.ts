@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SimulationService } from '../service/simulation.service';
+import { Observable } from 'rxjs';
+import { Loan } from '../class/loan';
+import { Category } from '../class/category';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -6,7 +10,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calc-sheet.component.scss']
 })
 export class CalcSheetComponent implements OnInit {
-  constructor() {}
+  loan$: Observable<Loan>;
+  categories: Category[];
+  constructor(private simulationService: SimulationService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let cat1 = new Category('A');
+    let cat2 = new Category('B');
+    let cat3 = new Category('C');
+    this.categories = [cat1, cat2, cat3];
+  }
 }
