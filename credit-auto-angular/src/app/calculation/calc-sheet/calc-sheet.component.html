@@ -8,20 +8,23 @@
             <input class="form-control" type="text" placeholder="Ex: 10000" />
           </div>
         </div>
+
         <div class="form-group">
           <label for="loan_amount">Montant du prêt </label>
           <input class="form-control" type="text" placeholder="Ex: 5000" />
         </div>
+
         <div class="form-group">
           <label for="car_class">Catégorie de la voiture </label>
           <select class="form-control" name="car_class" id="">
-            <option value="">A</option>
-            <option value="">B</option>
+            <option *ngFor="let category of categories">{{
+              category.name
+            }}</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="loan_duration">Durée du crédit </label>
-
           <input class="form-control" type="text" placeholder="Ex : 36" />
         </div>
         <ng-container *ngIf="loan$ | async as loan">
@@ -34,7 +37,7 @@
             /></div
         ></ng-container>
         <div>
-          <button class="btn btn-squared-default btn-success">
+          <button class="btn btn-squared-default btn-success" type="submit">
             Créer simulation
           </button>
         </div>
@@ -42,7 +45,7 @@
     </div>
   </form>
 
-  <ng-container *ngIf="loan$ | async">
+  <ng-container *ngIf="loan$ | async as loan">
     <div class="col-lg-4">
       <table class="table">
         <thead>
