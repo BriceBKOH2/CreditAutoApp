@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="loan_amount">Montant du crédit </label>
+          <label for="loan_amount">Montant du prêt </label>
           <input class="form-control" type="text" placeholder="Ex: 5000" />
         </div>
         <div class="form-group">
@@ -24,6 +24,15 @@
 
           <input class="form-control" type="text" placeholder="Ex : 36" />
         </div>
+        <ng-container *ngIf="loan$ | async as loan">
+          <div class="form-group">
+            <label for="loan_amount">Montant du crédit </label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Ex: 5000"
+            /></div
+        ></ng-container>
         <div>
           <button class="btn btn-squared-default btn-success">
             Créer simulation
@@ -32,36 +41,39 @@
       </div>
     </div>
   </form>
-  <div class="col-lg-4">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+  <ng-container *ngIf="loan$ | async">
+    <div class="col-lg-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 </div>
