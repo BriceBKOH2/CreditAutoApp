@@ -15,11 +15,11 @@ import com.bnpp.creditauto.service.RateService;
 
 @Configuration
 @ComponentScan//("com.bnpp.creditauto")
-public class Test {
+public class App {
 
 	public static void main(String[] args) {
 
-		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(Test.class)) {
+		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class)) {
 			
 			System.out.println("Creation d'un client");
 			ClientService cs = context.getBean(ClientService.class);
@@ -27,16 +27,6 @@ public class Test {
 			Client client = new Client("test","test",d,"phonenum","adresse",123456789L);
 			cs.save(client);
 			System.out.println(cs.findAll());
-
-			System.out.println("Test getDecisionRate");
-			RateService rateService = context.getBean(RateService.class);
-			System.out.println("Find all :");
-			System.out.println(rateService.findAll());
-			System.out.println("cat=A; vehiclePrice=5000; duration=24");
-			System.out.println("résultat attendu : T1");
-			Category a = new Category("A");
-			a.setId(1L);
-			System.out.println(rateService.getDecisionRate(a, 5000, 24));
 		}
 	}
 
