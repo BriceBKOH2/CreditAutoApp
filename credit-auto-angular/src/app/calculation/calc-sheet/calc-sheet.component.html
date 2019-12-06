@@ -1,6 +1,8 @@
 <h2 class="mb-5">Simulation d'un contrat de crédit</h2>
 
-<div class="container d-flex justify-content-around form1 alert alert-secondary">
+<div
+  class="container d-flex justify-content-around form1 alert alert-secondary"
+>
   <form>
     <div class="row">
       <div class="col">
@@ -10,20 +12,23 @@
             <input class="form-control" type="text" placeholder="Ex: 10000" />
           </div>
         </div>
+
         <div class="form-group">
           <label for="loan_amount">Montant du prêt </label>
           <input class="form-control" type="text" placeholder="Ex: 5000" />
         </div>
+
         <div class="form-group">
           <label for="car_class">Catégorie de la voiture </label>
           <select class="form-control" name="car_class" id="">
-            <option value="">A</option>
-            <option value="">B</option>
+            <option *ngFor="let category of categories">{{
+              category.name
+            }}</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="loan_duration">Durée du crédit </label>
-
           <input class="form-control" type="text" placeholder="Ex : 36" />
         </div>
 
@@ -34,12 +39,10 @@
               class="form-control"
               type="text"
               placeholder="Ex: 5000"
-            />
-            </div
+            /></div
         ></ng-container>
         <div>
-
-          <button class="btn btn-squared-default btn-success">
+          <button class="btn btn-squared-default btn-success" type="submit">
             Créer simulation
           </button>
         </div>
@@ -48,40 +51,39 @@
   </form>
   <ng-container *ngIf="loan$ | async">
     <div class="align-self-sm-center">
-        <h4 class="mb-3">Echeancier</h4>
-        <div class="col-lg align-self-sm-center alert alert-dark">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+      <h4 class="mb-3">Echeancier</h4>
+      <div class="col-lg align-self-sm-center alert alert-dark">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </ng-container>
 </div>
-
