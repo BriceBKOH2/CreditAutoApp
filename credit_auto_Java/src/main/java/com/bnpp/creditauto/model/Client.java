@@ -1,32 +1,47 @@
 package com.bnpp.creditauto.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client")
+@Table
 public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column//(name="client_id")
 	private Long id;
+	
+	@Column//(name="client_firstname")
 	private String firstName;
+	
+	@Column//(name="client_lasttname")
 	private String lastName;
+	
+	@Column//(name="client_birth")
 	private Date dateOfBirth;
+	
+	@Column//(name="client_phone")
 	private String phoneNumber;
+	
+	@Column//(name="client_address")
 	private String address;
-	@Column(unique = true)
+	
+	//@Column(unique = true)
+	@Column//(name="client_account_number")
 	private Long accountNumber; // Currently not bind to any table, can be set as a foreign key from the account
 								// table later
 
-//	@OneToOne
-//	private Contract;
+	@OneToMany(mappedBy="client")
+	private List<Contract> contract;
 
 	/* Constructors */
 	

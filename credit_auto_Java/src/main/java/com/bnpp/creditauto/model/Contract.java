@@ -2,33 +2,49 @@ package com.bnpp.creditauto.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="contract")
+@Table
 public class Contract {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private Long id;
-	private Long vehiculePrice;
+	
+	@Column
+	private Long vehiclePrice;
+	
+	@Column
 	private Long loanAmount;
+	
+	@Column
 	private Integer loanDuration;
-	private Float rate;
+	
+	@Column
+	private Double rate;
+	
+	@Column
 	private Boolean rentRight;
+	
+	
+	@Column
 	private Date creationDate;
 	
-	@OneToOne
+	@ManyToOne
+	//@Column
 	private Client client;
 	
 	@ManyToOne
-	private Category vehiculeCategory;
+	//@Column
+	private Category vehicleCategory;
 	
 	/* Constructors */
 	
@@ -36,31 +52,31 @@ public class Contract {
 		
 	}
 	
-	public Contract(Long vehiculePrice, Long loanAmount, Integer loanDuration, Float rate, Boolean rentRight,
-			Date creationDate, Client client, Category vehiculeCategory) {
+	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
+			Date creationDate, Client client, Category vehicleCategory) {
 		super();
-		this.vehiculePrice = vehiculePrice;
+		this.vehiclePrice = vehiclePrice;
 		this.loanAmount = loanAmount;
 		this.loanDuration = loanDuration;
 		this.rate = rate;
 		this.rentRight = rentRight;
 		this.creationDate = creationDate;
 		this.client = client;
-		this.vehiculeCategory = vehiculeCategory;
+		this.vehicleCategory = vehicleCategory;
 	}
 
-	public Contract(Long id, Long vehiculePrice, Long loanAmount, Integer loanDuration, Float rate, Boolean rentRight,
-			Date creationDate, Client client, Category vehiculeCategory) {
+	public Contract(Long id, Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
+			Date creationDate, Client client, Category vehicleCategory) {
 		super();
 		this.id = id;
-		this.vehiculePrice = vehiculePrice;
+		this.vehiclePrice = vehiclePrice;
 		this.loanAmount = loanAmount;
 		this.loanDuration = loanDuration;
 		this.rate = rate;
 		this.rentRight = rentRight;
 		this.creationDate = creationDate;
 		this.client = client;
-		this.vehiculeCategory = vehiculeCategory;
+		this.vehicleCategory = vehicleCategory;
 	}
 	
 	/* Getters and Setters */
@@ -73,12 +89,12 @@ public class Contract {
 		this.id = id;
 	}
 
-	public Long getVehiculePrice() {
-		return vehiculePrice;
+	public Long getVehiclePrice() {
+		return vehiclePrice;
 	}
 
-	public void setVehiculePrice(Long vehiculePrice) {
-		this.vehiculePrice = vehiculePrice;
+	public void setVehiclePrice(Long vehiclePrice) {
+		this.vehiclePrice = vehiclePrice;
 	}
 
 	public Long getLoanAmount() {
@@ -97,11 +113,11 @@ public class Contract {
 		this.loanDuration = loanDuration;
 	}
 
-	public Float getRate() {
+	public Double getRate() {
 		return rate;
 	}
 
-	public void setRate(Float rate) {
+	public void setRate(Double rate) {
 		this.rate = rate;
 	}
 
@@ -129,21 +145,21 @@ public class Contract {
 		this.client = client;
 	}
 
-	public Category getVehiculeCategory() {
-		return vehiculeCategory;
+	public Category getVehicleCategory() {
+		return vehicleCategory;
 	}
 
-	public void setVehiculeCategory(Category vehiculeCategory) {
-		this.vehiculeCategory = vehiculeCategory;
+	public void setVehicleCategory(Category vehicleCategory) {
+		this.vehicleCategory = vehicleCategory;
 	}
 
 	/* Other Methods */
 	
 	@Override
 	public String toString() {
-		return "Contract [id=" + id + ", vehiculePrice=" + vehiculePrice + ", loanAmount=" + loanAmount
+		return "Contract [id=" + id + ", vehiclePrice=" + vehiclePrice + ", loanAmount=" + loanAmount
 				+ ", loanDuration=" + loanDuration + ", rate=" + rate + ", rentRight=" + rentRight + ", creationDate="
-				+ creationDate + ", client=" + client + ", vehiculeCategory=" + vehiculeCategory + "]";
+				+ creationDate + ", client=" + client + ", vehicleCategory=" + vehicleCategory + "]";
 	}
 	
 	

@@ -4,12 +4,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Contains entity manager and general methods for data access objects.
  * @author Jordi
  *
  */
+@Transactional
 public abstract class AbstractDao<T> {
 	
 	protected Class<T> entityClass;

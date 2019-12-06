@@ -1,5 +1,7 @@
 package com.bnpp.creditauto.dao;
 
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -20,19 +22,22 @@ public class RateDao extends AbstractDao<Rate> {
 	 */
 	public Rate getDecisionRate(Category cat, int vehiclePrice, int duration) {
 
-		String jpql = "from Rate join decision "
-				+ "on decision_rate_id = rate_id "
-//				+ "and decision_car_category_id = :catId "
-				+ "where decision_min_amount <= :vehiclePrice " // smaller or equals : boundaries do not overlap
-				+ "and decision_max_amount >= :vehiclePrice "
-				+ "and decision_min_duration <= :duration "
-				+ "and decision_max_duration >= :duration";
+		String jpql = "select rate from DecisionTable dt "
+				+ "where dt.categ = :cat "
+				+ "and dt.minAmount <= :vehiclePrice " // smaller or equals : boundaries do not overlap
+				+ "and dt.maxAmount >= :vehiclePrice "
+				+ "and dt.minDuration <= :duration "
+				+ "and dt.maxDuration >= :duration";
 		
 		TypedQuery<Rate> query = em.createQuery(jpql, Rate.class);
-		query.setParameter("catId", cat.getId());
-		query.setParameter("vehiclePrice", vehiclePrice);
-		query.setParameter("duration", duration);
 		
+		query.setParameter("cat", cat);
+		query.setParameter("vehiclePrice", Long.valueOf(vehiclePrice));
+		query.setParameter("duration", Long.valueOf(duration));
 		return query.getSingleResult();
+	}
+	
+	public List<Rate> findAll() {
+		return em.createQuery("from Rate", Rate.class).getResultList();
 	}
 }

@@ -1,25 +1,32 @@
 package com.bnpp.creditauto.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="rate_")
+@Table
 public class Rate {
 	
 	@Id
-	@Column(name="rate_id")
+	@Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
+	@Column
 	private String name;
 	
-	@Column(name="rate_amount")
+	@Column
 	private Double rateAmount;
+	
+	@OneToMany(mappedBy="rate")
+	private List<DecisionTable> listDecisionTable;
 	
 	@Override
 	public String toString() {
