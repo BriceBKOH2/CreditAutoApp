@@ -1,6 +1,6 @@
 <h2 class="mb-5">Simulation d'un contrat de crédit</h2>
 
-<div class="container d-flex justify-content-around form1 alert alert-success">
+<div class="container d-flex justify-content-around form1 alert alert-secondary">
   <form>
     <div class="row">
       <div class="col">
@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="loan_amount">Montant du crédit </label>
+          <label for="loan_amount">Montant du prêt </label>
           <input class="form-control" type="text" placeholder="Ex: 5000" />
         </div>
         <div class="form-group">
@@ -26,7 +26,19 @@
 
           <input class="form-control" type="text" placeholder="Ex : 36" />
         </div>
-        <div class="form-group">
+
+        <ng-container *ngIf="loan$ | async as loan">
+          <div class="form-group">
+            <label for="loan_amount">Montant du crédit </label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Ex: 5000"
+            />
+            </div
+        ></ng-container>
+        <div>
+
           <button class="btn btn-squared-default btn-success">
             Créer simulation
           </button>
@@ -34,40 +46,42 @@
       </div>
     </div>
   </form>
+  <ng-container *ngIf="loan$ | async">
+    <div class="align-self-sm-center">
+        <h4 class="mb-3">Echeancier</h4>
+        <div class="col-lg align-self-sm-center alert alert-dark">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </ng-container>
+</div>
 
-<div class="align-self-sm-center">
-<h4 class="mb-3">Echeancier</h4>
-  <div class="col-lg align-self-sm-center alert alert-dark">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-</div>

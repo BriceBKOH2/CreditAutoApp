@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SimulationService } from '../service/simulation.service';
+import { Observable } from 'rxjs';
+import { Loan } from '../interface/loan';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -6,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calc-sheet.component.scss']
 })
 export class CalcSheetComponent implements OnInit {
-  constructor() {}
+  loan$: Observable<Loan>;
+
+  constructor(private simulationService: SimulationService) {}
 
   ngOnInit() {}
 }
