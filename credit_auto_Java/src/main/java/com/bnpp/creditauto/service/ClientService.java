@@ -49,8 +49,12 @@ public class ClientService {
 	}
 	
 	@Transactional(rollbackFor = ClientNotFoundException.class)
-	public Client findByAccNumb(String accountNumber) throws ClientNotFoundException{
+	public Client findByAccNumb(Long accountNumber) throws ClientNotFoundException{
 		return clientDao.findByAccNumb(accountNumber);
-		
+	}
+	
+	@Transactional(rollbackFor = ClientNotFoundException.class)
+	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
+		return clientDao.findByNames(firstName, lastName);
 	}
 }

@@ -1,5 +1,6 @@
 package com.bnpp.creditauto.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -51,7 +52,7 @@ public class ClientDao extends AbstractDao<Client> {
 		return session.createQuery("FROM Client", Client.class).getResultList();
 	}
 
-	public Client findByAccNumb(String accountNumber) throws ClientNotFoundException {
+	public Client findByAccNumb(Long accountNumber) throws ClientNotFoundException {
 		Session session = getSession();
 		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.accountNumber=:accountNumber",
 				Client.class);
@@ -66,6 +67,27 @@ public class ClientDao extends AbstractDao<Client> {
 		}
 		return client;
 
+	}
+	
+	
+	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
+		
+		Session session = getSession();
+		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.firstName=:firstName "
+														+ "AND cl.lastName=:lastName",
+														Client.class);
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
+		List<Client> clients;
+		
+		try {
+			clients = query.getResultList();
+		} catch (NoResultException e) {
+			throw new ClientNotFoundException(firstName, lastName); // We transform to string to differentiate with
+																			// argument
+			// Long Id since accountNumber is also a Long type
+		}
+		return clients;
 	}
 
 }

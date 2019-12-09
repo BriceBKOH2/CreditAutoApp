@@ -35,6 +35,9 @@ public class Client {
 	@Column//(name="client_address")
 	private String address;
 	
+	@Column//(name="client_active")
+	private Boolean isActive;
+	
 	//@Column(unique = true)
 	@Column//(name="client_account_number")
 	private Long accountNumber; // Currently not bind to any table, can be set as a foreign key from the account
@@ -58,6 +61,7 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.accountNumber = accountNumber;
+		this.isActive = true;
 	}
 
 	public Client(Long id, String firstName, String lastName, Date dateOfBirth, String phoneNumber, String address,
@@ -70,8 +74,22 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.accountNumber = accountNumber;
+		this.isActive = true;
 	}
 
+	// Constructor to choose the value of field "isActive" to know if the account is closed or not
+	public Client(String firstName, String lastName, Date dateOfBirth, String phoneNumber, String address,
+			Long accountNumber, Boolean isActive) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.accountNumber = accountNumber;
+		this.isActive = isActive;
+	}
+	
 	/* Getters and Setters */
 
 	public Long getId() {

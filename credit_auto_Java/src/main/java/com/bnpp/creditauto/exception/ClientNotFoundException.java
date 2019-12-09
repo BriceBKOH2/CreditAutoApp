@@ -14,4 +14,8 @@ public class ClientNotFoundException extends Exception {
 	public ClientNotFoundException(String accountNumber) {
 		System.err.println("Client account number : " + accountNumber + " not found in database");
 	}
+	
+	public ClientNotFoundException(String firstName, String lastName) {
+		System.err.println("Client firstName : " + firstName + " ans lastName : " + lastName + " not found in database");
+	}
 }
