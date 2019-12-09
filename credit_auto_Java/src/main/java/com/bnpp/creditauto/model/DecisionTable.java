@@ -10,31 +10,60 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class DecisionTable {
-	
+public class DecisionTable implements IdEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
-	
+
 	@ManyToOne
 	private Category categ;
-	
+
 	@ManyToOne
 	private Rate rate;
-	
+
 	private Long maxAmount;
-	
+
 	private Long minAmount;
-	
+
 	private Long maxDuration;
-	
+
 	private Long minDuration;
 
+	public DecisionTable() {
+
+	}
+
+	public DecisionTable(Long id, Category cat, Rate rate, Long maxAmount,
+			Long minAmount, Long maxDuration, Long minDuration) {
+		
+		this.setId(id);
+		this.setCateg(cat);
+		this.setRate(rate);
+		this.setMaxAmount(maxAmount);
+		this.setMinAmount(minAmount);
+		this.setMaxDuration(maxDuration);
+		this.setMinDuration(minDuration);
+	}
+	
+	public DecisionTable(Category cat, Rate rate, Long maxAmount,
+			Long minAmount, Long maxDuration, Long minDuration) {
+		
+		this.setCateg(cat);
+		this.setRate(rate);
+		this.setMaxAmount(maxAmount);
+		this.setMinAmount(minAmount);
+		this.setMaxDuration(maxDuration);
+		this.setMinDuration(minDuration);
+	}
+
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

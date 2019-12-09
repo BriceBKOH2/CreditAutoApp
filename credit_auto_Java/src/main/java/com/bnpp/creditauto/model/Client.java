@@ -13,31 +13,30 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Client {
+public class Client implements IdEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column//(name="client_id")
+	@Column
 	private Long id;
 	
-	@Column//(name="client_firstname")
+	@Column
 	private String firstName;
 	
-	@Column//(name="client_lasttname")
+	@Column
 	private String lastName;
 	
-	@Column//(name="client_birth")
+	@Column
 	private Date dateOfBirth;
 	
-	@Column//(name="client_phone")
+	@Column
 	private String phoneNumber;
 	
-	@Column//(name="client_address")
+	@Column
 	private String address;
 	
-	//@Column(unique = true)
-	@Column//(name="client_account_number")
-	private Long accountNumber; // Currently not bind to any table, can be set as a foreign key from the account
+	@Column//(unique = true)
+	private Long accountNumber; // Currently not bound to any table, can be set as a foreign key from the account
 								// table later
 
 	@OneToMany(mappedBy="client")
@@ -74,10 +73,12 @@ public class Client {
 
 	/* Getters and Setters */
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

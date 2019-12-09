@@ -9,7 +9,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.service.ClientService;
 
-@ComponentScan//("com.bnpp.creditauto")
+@ComponentScan
 public class App {
 
 	public static void main(String[] args) {

@@ -1,7 +1,5 @@
 package com.bnpp.creditauto.dao;
 
-import java.util.List;
-
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -14,6 +12,11 @@ import com.bnpp.creditauto.model.Client;
 @Repository
 public class ClientDao extends AbstractDao<Client> {
 
+	@Override
+	protected Class<Client> getEntityClass() {
+		return Client.class;
+	}
+
 	public void update(Client client) throws ClientNotFoundException {
 		Session session = getSession();
 		Long id = client.getId();
@@ -25,6 +28,7 @@ public class ClientDao extends AbstractDao<Client> {
 		session.merge(client);
 	}
 
+	@Override
 	public void delete(Client client) throws ClientNotFoundException {
 		Session session = getSession();
 		Long id = client.getId();
@@ -35,18 +39,7 @@ public class ClientDao extends AbstractDao<Client> {
 		}
 		session.delete(client);
 	}
-
-	public void deleteAll() {
-		Session session = getSession();
-		session.createQuery("DELETE FROM Client").executeUpdate();
-	}
-
-	/** Can return an empty list instead of an ClientNotFoundException */
-	public List<Client> findAll() {
-		Session session = getSession();
-		return session.createQuery("FROM Client", Client.class).getResultList();
-	}
-
+	
 	public Client findByAccNumb(String accountNumber) throws ClientNotFoundException {
 		Session session = getSession();
 		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.accountNumber=:accountNumber",
