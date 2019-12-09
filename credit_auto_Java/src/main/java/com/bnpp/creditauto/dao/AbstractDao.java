@@ -9,10 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.model.IdEntity;
-
-import javassist.NotFoundException;
 
 /**
  * Contains entity manager and general methods for data access objects.
