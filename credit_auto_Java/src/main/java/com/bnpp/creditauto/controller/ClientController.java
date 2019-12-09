@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.model.Client;
-import com.bnpp.creditauto.model.Rate;
 
 @RestController
 @RequestMapping("/api/client")

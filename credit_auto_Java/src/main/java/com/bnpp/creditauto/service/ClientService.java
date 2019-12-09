@@ -16,7 +16,7 @@ public class ClientService {
 	ClientDao clientDao;
 	
 	public void save(Client client) {
-		clientDao.save(client);
+		clientDao.persist(client);
 	}
 
 	@Transactional(rollbackFor = ClientNotFoundException.class)

@@ -33,6 +33,7 @@ public class TestRateService {
 		b.setId(2L);
 	}
 	
+	/*       Test de RateService::getDecisionRate      */
 	// //////////// Tests sur catégorie A //////////// //
 
 	@Test
