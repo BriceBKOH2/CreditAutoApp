@@ -49,4 +49,12 @@ public class Rate {
 		this.rateAmount = rateAmount;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }

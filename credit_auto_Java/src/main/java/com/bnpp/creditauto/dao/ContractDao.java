@@ -10,10 +10,6 @@ import com.bnpp.creditauto.model.Contract;
 
 @Repository
 public class ContractDao extends AbstractDao<Contract>{
-	
-	public void save(Contract contract) {
-		persist(contract);
-	}
 
 	public void update(Contract contract) throws ContractNotFoundException {
 		Session session = getSession();

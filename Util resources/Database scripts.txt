@@ -1,0 +1,9 @@
+*** Kill database connections ***
+
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE
+    pid <> pg_backend_pid()
+    AND datname = 'credit_auto';
+
+DROP DATABASE credit_auto;

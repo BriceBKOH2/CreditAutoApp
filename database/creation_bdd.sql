@@ -1,4 +1,4 @@
---# ------------------------------------------------------------------
+﻿--# ------------------------------------------------------------------
 
 --# CREATION TABLES
 
@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS client_ (
     client_id bigserial NOT NULL,
     client_firstname VARCHAR(75) NOT NULL,
     client_lasttname VARCHAR(75) NOT NULL,
+    client_active BOOLEAN NOT NULL,
     client_birth DATE NOT NULL,
     client_phone VARCHAR(75) NOT NULL,
     client_address TEXT NOT NULL,
@@ -90,6 +91,7 @@ CREATE TABLE IF NOT EXISTS contract_ (
     contract_duration INT NOT NULL,
     contract_rate FLOAT NOT NULL,
     contract_rent_right BOOLEAN NOT NULL,
+    contract_close BOOLEAN NOT NULL,
     contract_client_id bigserial NOT NULL,
     contract_car_category_id bigserial NOT NULL,
 
@@ -142,7 +144,7 @@ CREATE TABLE IF NOT EXISTS car_company_ (
 
 --# INSERTION --------------------------------------------------
 
-INSERT INTO car_category_ (car_category_name) VALUES ('A'), ('B'), ('C'), ('D'), ('E'), ('F');
+INSERT INTO category (name) VALUES ('A'), ('B'), ('C'), ('D'), ('E'), ('F');
 
 INSERT INTO rate_ (rate_name, rate_amount) VALUES ('T1', 0.65), 
                                                   ('T2', 0.34), 

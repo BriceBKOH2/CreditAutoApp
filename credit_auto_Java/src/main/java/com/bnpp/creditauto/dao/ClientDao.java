@@ -14,10 +14,6 @@ import com.bnpp.creditauto.model.Client;
 @Repository
 public class ClientDao extends AbstractDao<Client> {
 
-	public void save(Client client) {
-		persist(client);
-	}
-
 	public void update(Client client) throws ClientNotFoundException {
 		Session session = getSession();
 		Long id = client.getId();

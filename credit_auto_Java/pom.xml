@@ -15,6 +15,8 @@
 		<spring.version>5.2.2.RELEASE</spring.version>
 		<postgresql.version>42.2.8</postgresql.version>
 		<hibernate.version>5.4.4.Final</hibernate.version>
+		<jackson.version>2.10.1</jackson.version>
+		<servlet.version>4.0.1</servlet.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -32,8 +34,22 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.12</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -59,6 +75,16 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 		
 		<dependency>
