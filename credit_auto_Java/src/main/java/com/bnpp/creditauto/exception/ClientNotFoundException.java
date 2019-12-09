@@ -1,5 +1,7 @@
 package com.bnpp.creditauto.exception;
 
+import javassist.NotFoundException;
+
 public class ClientNotFoundException extends Exception {
 
 	/** Exception generated when call to dataBase returns empty

@@ -8,12 +8,19 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.AbstractApplicationContext;
 
+<<<<<<< HEAD
 import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.service.ClientService;
 
 
 @ComponentScan//("com.bnpp.creditauto")
+=======
+import com.bnpp.creditauto.model.Client;
+import com.bnpp.creditauto.service.ClientService;
+
+@ComponentScan
+>>>>>>> 4d0e4e1e322cb71d6878ffbed3b484da5cf4cab6
 public class App {
 
 	public static void main(String[] args) {

@@ -10,9 +10,10 @@ import com.bnpp.creditauto.model.Contract;
 
 @Repository
 public class ContractDao extends AbstractDao<Contract>{
-	
-	public void save(Contract contract) {
-		persist(contract);
+
+	@Override
+	protected Class<Contract> getEntityClass() {
+		return Contract.class;
 	}
 
 	public void update(Contract contract) throws ContractNotFoundException {
@@ -26,6 +27,7 @@ public class ContractDao extends AbstractDao<Contract>{
 		session.merge(contract);
 	}
 
+	@Override
 	public void delete(Contract contract) throws ContractNotFoundException {
 		Session session = getSession();
 		Long id = contract.getId();
@@ -35,11 +37,6 @@ public class ContractDao extends AbstractDao<Contract>{
 			throw new ContractNotFoundException(id);
 		}
 		session.delete(contract);
-	}
-	
-	public void deleteAll() {
-		Session session = getSession();
-		session.createQuery("DELETE FROM Contract").executeUpdate();
 	}
 	
 	/** Can return an empty list instead of an ContractNotFoundException */
