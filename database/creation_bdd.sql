@@ -1,4 +1,4 @@
---# ------------------------------------------------------------------
+﻿--# ------------------------------------------------------------------
 
 --# CREATION TABLES
 
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS car_company_ (
 
 --# INSERTION --------------------------------------------------
 
-INSERT INTO car_category_ (car_category_name) VALUES ('A'), ('B'), ('C'), ('D'), ('E'), ('F');
+INSERT INTO category (name) VALUES ('A'), ('B'), ('C'), ('D'), ('E'), ('F');
 
 INSERT INTO rate_ (rate_name, rate_amount) VALUES ('T1', 0.65), 
                                                   ('T2', 0.34), 
