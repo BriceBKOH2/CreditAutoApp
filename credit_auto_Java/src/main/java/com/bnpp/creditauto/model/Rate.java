@@ -28,6 +28,17 @@ public class Rate implements IdEntity {
 	@OneToMany(mappedBy="rate")
 	private List<DecisionTable> listDecisionTable;
 	
+	public Rate() {
+		super();
+	}
+
+	public Rate(String name, Double rateAmount, List<DecisionTable> listDecisionTable) {
+		super();
+		this.name = name;
+		this.rateAmount = rateAmount;
+		this.listDecisionTable = listDecisionTable;
+	}
+
 	@Override
 	public String toString() {
 		return "Rate [name=" + name + ", rateAmount=" + rateAmount + "]";

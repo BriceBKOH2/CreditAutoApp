@@ -23,7 +23,7 @@ public class Contract implements IdEntity {
 	private Long vehiclePrice;
 	
 	@Column
-	private Long loanAmount;
+	private Long loanAmount; // Amount the client need to repay
 	
 	@Column
 	private Integer loanDuration;
@@ -33,7 +33,6 @@ public class Contract implements IdEntity {
 	
 	@Column
 	private Boolean rentRight;
-	
 	
 	@Column
 	private Date creationDate;

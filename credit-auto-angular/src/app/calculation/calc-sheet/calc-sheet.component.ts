@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Loan } from '../class/loan';
 import { Category } from '../class/category';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { Rate } from '../class/rate';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -14,8 +15,8 @@ export class CalcSheetComponent implements OnInit {
   loan$: Observable<Loan>;
   categories: Category[];
   myForm: string;
-
-  filterForm = new FormGroup({});
+  query: string;
+  rate$: Rate[];
 
   constructor(private simulationService: SimulationService) {}
 
@@ -27,8 +28,9 @@ export class CalcSheetComponent implements OnInit {
   }
 
   loanCalc(form: NgForm) {
-    this.simulationService.getRate('YO', 123, 123).subscribe(response => {
-      console.log(response);
+    this.simulationService.getRates().subscribe(response => {
+      this.rate$ = response;
+      console.log(this.rate$);
     });
   }
 }
