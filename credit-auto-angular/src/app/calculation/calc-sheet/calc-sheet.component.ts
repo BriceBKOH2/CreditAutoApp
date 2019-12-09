@@ -14,8 +14,7 @@ export class CalcSheetComponent implements OnInit {
   loan$: Observable<Loan>;
   categories: Category[];
   myForm: string;
-
-  filterForm = new FormGroup({});
+  query: string;
 
   constructor(private simulationService: SimulationService) {}
 
