@@ -16,7 +16,7 @@ public class ContractService {
 	ContractDao contractDao;
 	
 	public void save(Contract contract) {
-		contractDao.save(contract);
+		contractDao.persist(contract);
 	}
 
 	@Transactional(rollbackFor = ContractNotFoundException.class)
