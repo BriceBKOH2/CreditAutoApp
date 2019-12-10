@@ -1,14 +1,13 @@
 package com.bnpp.creditauto.utils;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.bnpp.creditauto.App;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.DecisionTable;
 import com.bnpp.creditauto.model.Rate;
 import com.bnpp.creditauto.service.CategoryService;
+import com.bnpp.creditauto.service.ClientService;
 import com.bnpp.creditauto.service.DecisionTableService;
 import com.bnpp.creditauto.service.RateService;
 
@@ -20,27 +19,39 @@ import com.bnpp.creditauto.service.RateService;
  * @author Jordi
  *
  */
-@ComponentScan
+@Service
 public class DBData {
+
+	@Autowired
+	private CategoryService categSvc;
+	@Autowired
+	private RateService rateSvc;
+	@Autowired
+	private DecisionTableService dtSvc;
+	@Autowired
+	private ClientService cliSvc;
 	
 	private static Category[] categs = new Category[6];
 	private static Rate[] rates = new Rate[6];
 	private static DecisionTable[] dTables = new DecisionTable[10];
 	
-	public static void init() {
+	public void init() {
 		
-		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class)) {
-			CategoryService categSvc = context.getBean(CategoryService.class);
-			RateService rateSvc = context.getBean(RateService.class);
-			DecisionTableService dtSvc = context.getBean(DecisionTableService.class);
-			deleteAll(categSvc, rateSvc, dtSvc);
-			createCateg(categSvc);
-			createRates(rateSvc);
-			createDecisions(dtSvc);
-		}
+//		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class)) {
+//			CategoryService categSvc = context.getBean(CategoryService.class);
+//			RateService rateSvc = context.getBean(RateService.class);
+//			DecisionTableService dtSvc = context.getBean(DecisionTableService.class);
+//			ClientService cliSvc = context.getBean(ClientService.class);
+//			deleteAll(cliSvc, categSvc, rateSvc, dtSvc);
+//		}
+		deleteAll(cliSvc, categSvc, rateSvc, dtSvc);
+		createCateg(categSvc);
+		createRates(rateSvc);
+		createDecisions(dtSvc);
 	}
 
-	private static void deleteAll(CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc) {
+	private static void deleteAll(ClientService cliSvc, CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc) {
+		cliSvc.deleteAll();
 		dtSvc.deleteAll();
 		rateSvc.deleteAll();
 		categSvc.deleteAll();
