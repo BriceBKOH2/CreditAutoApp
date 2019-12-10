@@ -18,6 +18,11 @@ public class ClientService {
 	public void save(Client client) {
 		clientDao.persist(client);
 	}
+	
+	
+	public Client findById(Long id) {
+		return clientDao.findById(id);
+	}
 
 	@Transactional(rollbackFor = ClientNotFoundException.class)
 	public void update(Client... clients) throws ClientNotFoundException {
