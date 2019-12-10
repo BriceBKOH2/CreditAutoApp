@@ -1,5 +1,5 @@
 export class Rate {
-  id: number;
+  rateId: number;
   name: string;
   rateAmount: number;
 }

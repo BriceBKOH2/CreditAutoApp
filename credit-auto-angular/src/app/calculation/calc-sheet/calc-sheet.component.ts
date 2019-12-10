@@ -17,20 +17,29 @@ export class CalcSheetComponent implements OnInit {
   myForm: string;
   query: string;
   rate$: Rate[];
+  rateLoan: Rate;
 
   constructor(private simulationService: SimulationService) {}
 
   ngOnInit() {
-    let cat1 = new Category('A');
-    let cat2 = new Category('B');
-    let cat3 = new Category('C');
+    let cat1 = new Category('A', 1);
+    let cat2 = new Category('B', 2);
+    let cat3 = new Category('C', 3);
     this.categories = [cat1, cat2, cat3];
   }
 
-  loanCalc(form: NgForm) {
+  showRates() {
     this.simulationService.getRates().subscribe(response => {
       this.rate$ = response;
       console.log(this.rate$);
+    });
+  }
+
+  loanCalculation() {
+    console.log(this.simulationService.getRateForLoan());
+    this.simulationService.getRateForLoan().subscribe(response => {
+      this.rateLoan = response;
+      console.log(this.rateLoan);
     });
   }
 }
