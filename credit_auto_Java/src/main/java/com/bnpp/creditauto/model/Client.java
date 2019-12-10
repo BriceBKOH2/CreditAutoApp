@@ -10,12 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table//(uniqueConstraints= {@UniqueConstraint(columnNames = {"accountNumber"})})
+@Table
 public class Client implements IdEntity {
 
 	@Id
@@ -40,7 +39,7 @@ public class Client implements IdEntity {
 	@Column
 	private String address;
 	
-	@Column//(name="client_active")
+	@Column
 	private Boolean isActive;
 	
 	@Column(unique=true)
