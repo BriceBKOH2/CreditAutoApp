@@ -38,7 +38,7 @@ public class RateController {
 	
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	@ResponseBody
-	public Rate findRateDecision(@RequestBody Category cat, @RequestBody int price, @RequestBody int dur) {
+	public Rate findRateDecision(Category cat, int price, int dur) {
 		return rateSvc.getDecisionRate(cat, price, dur);
 	}
 	
