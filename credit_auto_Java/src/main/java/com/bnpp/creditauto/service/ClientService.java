@@ -57,4 +57,8 @@ public class ClientService {
 	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
 		return clientDao.findByNames(firstName, lastName);
 	}
+	
+	public Client findById(Long id) {
+		return clientDao.findById(id);
+	}
 }

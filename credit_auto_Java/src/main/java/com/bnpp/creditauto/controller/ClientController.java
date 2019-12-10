@@ -1,6 +1,7 @@
 package com.bnpp.creditauto.controller;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +31,7 @@ public class ClientController {
 		client.setId(2000L);
 		client.setFirstName("John");
 		client.setLastName("Doe");
-		client.setDateOfBirth(new Date(1995, 02, 14));
+		client.setDateOfBirth(Date.valueOf(LocalDate.of(1995, 02, 14)));
 		client.setAddress("45 rue des pinguoins");
 		client.setAccountNumber(945487621L);
 		client.setPhoneNumber("06 57 84 35 19");

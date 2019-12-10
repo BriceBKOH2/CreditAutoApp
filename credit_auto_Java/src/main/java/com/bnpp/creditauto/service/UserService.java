@@ -20,4 +20,8 @@ public class UserService {
 	public List<User> findByNames(String firstName, String lastName) throws UserNotFoundException {
 		return userDao.findByNames(firstName, lastName);
 	}
+	
+	public User findById(Long id) {
+		return userDao.findById(id);
+	}
 }
