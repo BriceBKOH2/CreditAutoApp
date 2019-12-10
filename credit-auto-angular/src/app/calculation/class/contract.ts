@@ -1,6 +1,6 @@
 import { Category } from './category';
 
-export class Loan {
+export class Contract {
   vehicleCat: Category;
   vehiclePrice: number;
   loanAmount: number;

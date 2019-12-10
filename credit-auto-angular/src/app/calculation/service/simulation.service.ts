@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Rate } from '../class/rate';
+import { Contract } from '../class/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,6 @@ export class SimulationService {
   }
 
   getRateForLoan(): Observable<Rate> {
-    let headers = new HttpHeaders();
-
     let params = new HttpParams()
       .set('cat', '1')
       .set('price', '5000')

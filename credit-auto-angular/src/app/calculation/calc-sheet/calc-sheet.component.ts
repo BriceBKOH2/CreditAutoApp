@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SimulationService } from '../service/simulation.service';
 import { Observable } from 'rxjs';
-import { Loan } from '../class/loan';
+import { Contract } from '../class/contract';
 import { Category } from '../class/category';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Rate } from '../class/rate';
@@ -12,7 +12,7 @@ import { Rate } from '../class/rate';
   styleUrls: ['./calc-sheet.component.scss']
 })
 export class CalcSheetComponent implements OnInit {
-  loan$: Observable<Loan>;
+  loan$: Observable<Contract>;
   categories: Category[];
   myForm: string;
   query: string;
@@ -39,6 +39,7 @@ export class CalcSheetComponent implements OnInit {
     console.log(this.simulationService.getRateForLoan());
     this.simulationService.getRateForLoan().subscribe(response => {
       this.rateLoan = response;
+      this.rate$ = [this.rateLoan];
       console.log(this.rateLoan);
     });
   }

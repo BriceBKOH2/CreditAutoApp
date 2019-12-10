@@ -13,47 +13,50 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Contract implements IdEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
-	
+
 	@Column
 	private Long vehiclePrice;
-	
+
 	@Column
-	private Long loanAmount; // Amount the client need to repay
-	
+	private Long loanAmount; // Amount lent to the client
+
+	@Column
+	private Long amountDue; // Amount the client need to repay
+
 	@Column
 	private Integer loanDuration;
-	
+
 	@Column
 	private Double rate;
-	
+
 	@Column
 	private Boolean rentRight;
-	
+
 	@Column
 	private Date creationDate;
-	
+
 	@Column
 	private Boolean isActive;
-	
+
 	@ManyToOne
-	//@Column
+	// @Column
 	private Client client;
-	
+
 	@ManyToOne
-	//@Column
+	// @Column
 	private Category vehicleCategory;
-	
+
 	/* Constructors */
-	
+
 	public Contract() {
-		
+
 	}
-	
+
 	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
 			Date creationDate, Client client, Category vehicleCategory) {
 		super();
@@ -82,7 +85,7 @@ public class Contract implements IdEntity {
 		this.vehicleCategory = vehicleCategory;
 		this.isActive = true;
 	}
-	
+
 	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
 			Date creationDate, Client client, Category vehicleCategory, Boolean isActive) {
 		super();
@@ -96,7 +99,7 @@ public class Contract implements IdEntity {
 		this.vehicleCategory = vehicleCategory;
 		this.isActive = isActive;
 	}
-	
+
 	/* Getters and Setters */
 
 	@Override
@@ -174,14 +177,12 @@ public class Contract implements IdEntity {
 	}
 
 	/* Other Methods */
-	
+
 	@Override
 	public String toString() {
 		return "Contract [id=" + id + ", vehiclePrice=" + vehiclePrice + ", loanAmount=" + loanAmount
 				+ ", loanDuration=" + loanDuration + ", rate=" + rate + ", rentRight=" + rentRight + ", creationDate="
 				+ creationDate + ", client=" + client + ", vehicleCategory=" + vehicleCategory + "]";
 	}
-	
-	
-	
+
 }
