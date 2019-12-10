@@ -15,8 +15,8 @@ public class ClientService {
 	@Autowired
 	ClientDao clientDao;
 	
-	public void save(Client client) {
-		clientDao.persist(client);
+	public Client save(Client client) {
+		return clientDao.persist(client);
 	}
 	
 	

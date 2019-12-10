@@ -1,19 +1,19 @@
 package com.bnpp.creditauto.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.exception.ClientNotFoundException;
-import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Client;
-import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.ClientService;
 
 @RestController
@@ -68,6 +68,16 @@ public class ClientController {
 	public List<Client> findOneByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
 		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public Client create(@RequestBody Client client) throws ClientNotFoundException {
+		 
+		 System.out.println(client);
+		 clientService.save(client);
+		 System.out.println(client);
+		 return client;
 	}
 }
 
