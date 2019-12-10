@@ -28,6 +28,10 @@ public class RateService {
 		return rateDao.getDecisionRate(cat, vehiclePrice, duration);
 	}
 	
+	public Rate findById(Long id) {
+		return rateDao.findById(id);
+	}
+	
 	public List<Rate> findAll() {
 		return rateDao.findAll();
 	}

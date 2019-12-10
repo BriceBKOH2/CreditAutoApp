@@ -36,7 +36,7 @@ public class RateDao extends AbstractDao<Rate> {
 		query.setParameter("duration", Long.valueOf(duration));
 		return query.getSingleResult();
 	}
-	
+
 	public List<Rate> findAll() {
 		return em.createQuery("from Rate", Rate.class).getResultList();
 	}

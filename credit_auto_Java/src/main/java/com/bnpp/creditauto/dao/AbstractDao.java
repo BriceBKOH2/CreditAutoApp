@@ -31,4 +31,8 @@ public abstract class AbstractDao<T> {
 	public void persist(Object entity) {
 		em.persist(entity);
 	}
+	
+	public T findById(Long id) {
+		return em.find(entityClass, id);
+	}
 }
