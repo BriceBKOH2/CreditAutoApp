@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Rate;
+import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.RateService;
 
 @RestController
@@ -20,14 +21,17 @@ import com.bnpp.creditauto.service.RateService;
 public class RateController {
 	// TODO
 	// Cette classe doit définir les methodes qui vont renvoyer du json
-	// Fera le lien entre le formulaire et le java.	
-	
+	// Fera le lien entre le formulaire et le java.
+
 	@Autowired
 	private RateService rateSvc;
-	
+
+	@Autowired
+	private CategoryService categSvc;
+
 	/**
-	 * Create and return an arbitrary rate.
-	 * For testing purposes.
+	 * Create and return an arbitrary rate. For testing purposes.
+	 * 
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -35,11 +39,11 @@ public class RateController {
 	public List<Rate> findAll() {
 		return rateSvc.findAll();
 	}
-	
+
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	@ResponseBody
-	public Rate findRateDecision(Category cat, int price, int dur) {
-		return rateSvc.getDecisionRate(cat, price, dur);
+	public Rate findRateDecision(int cat, int price, int dur) {
+		return rateSvc.getDecisionRate(categSvc.findById(Long.valueOf(cat)), price, dur);
 	}
-	
+
 }

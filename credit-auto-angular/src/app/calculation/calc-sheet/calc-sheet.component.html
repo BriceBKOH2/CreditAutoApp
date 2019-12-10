@@ -3,7 +3,7 @@
 <div
   class="container d-flex justify-content-around form1 alert alert-secondary"
 >
-  <form (ngSubmit)="loanCalc(myForm)" #myform="ngForm">
+  <form (ngSubmit)="loanCalculation()" #myform="ngForm">
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -14,7 +14,8 @@
               id="car_price"
               name="car_price"
               class="form-control"
-              type="text"
+              type="number"
+              min="10000"
               placeholder="Ex: 10000"
             />
           </div>
@@ -26,7 +27,9 @@
             id="loan_amount"
             name="loan_amount"
             class="form-control"
-            type="text"
+            type="number"
+            min="5000"
+            max="50000"
             placeholder="Ex: 5000"
           />
         </div>
@@ -54,7 +57,7 @@
             type="number"
             min="0"
             max="48"
-            placeholder="Ex : 36"
+            placeholder="Ex : 36 mois"
           />
         </div>
 
