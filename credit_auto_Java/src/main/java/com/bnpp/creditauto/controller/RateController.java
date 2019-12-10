@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Rate;
 import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.RateService;

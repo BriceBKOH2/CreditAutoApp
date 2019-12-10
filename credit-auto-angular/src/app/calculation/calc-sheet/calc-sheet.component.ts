@@ -5,6 +5,7 @@ import { Contract } from '../class/contract';
 import { Category } from '../class/category';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Rate } from '../class/rate';
+import { Client } from '../class/client';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -18,6 +19,7 @@ export class CalcSheetComponent implements OnInit {
   query: string;
   rate$: Rate[];
   rateLoan: Rate;
+  client: Client;
 
   constructor(private simulationService: SimulationService) {}
 
@@ -26,6 +28,18 @@ export class CalcSheetComponent implements OnInit {
     let cat2 = new Category('B', 2);
     let cat3 = new Category('C', 3);
     this.categories = [cat1, cat2, cat3];
+
+    this.client = new Client(
+      'Jade',
+      'Paul',
+      '12/4/1987',
+      '0605040302',
+      '03 diginamic street 34000 Montpellier',
+      true,
+      123456789
+    );
+
+    this.simulationService.postClient(this.client);
   }
 
   showRates() {
@@ -36,7 +50,6 @@ export class CalcSheetComponent implements OnInit {
   }
 
   loanCalculation() {
-    console.log(this.simulationService.getRateForLoan());
     this.simulationService.getRateForLoan().subscribe(response => {
       this.rateLoan = response;
       this.rate$ = [this.rateLoan];
