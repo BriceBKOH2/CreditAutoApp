@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,16 +45,17 @@ public class RateController {
 	@RequestMapping(value = "{str}", method = RequestMethod.GET)
 	@ResponseBody
 	public String alacon(@PathVariable String str) {
-		return "Salut " + str + " !\n" + jsonHelper.serialize(new Category());
+		return "Salut " + str + " !\n" + jsonHelper.serialize(new Category()) + "\n" + jsonHelper.serialize(5);
 	}
 	
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	@ResponseBody
-	public Rate findRateDecision(@RequestBody Category cat, @RequestBody int price, @RequestBody int dur) {
+	public String /*Rate*/ findRateDecision(@RequestParam Category cat, @RequestParam int price/*, @RequestParam int dur*/) {
 		System.out.println(cat);
 		System.out.println(price);
-		System.out.println(dur);
-		return rateSvc.getDecisionRate(cat, price, dur);
+//		System.out.println(dur);
+		//return rateSvc.getDecisionRate(cat, price, dur);
+		return cat.toString();
 	}
 	
 }
