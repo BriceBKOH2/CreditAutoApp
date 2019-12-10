@@ -58,7 +58,7 @@ public abstract class AbstractDao<T extends IdEntity> {
 	public T findById(Long id) {
 		return em.find(entityClass, id);
 	}
-	
+
 	@Transactional
 	public List<T> findAll() {
 		return em.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
@@ -85,4 +85,5 @@ public abstract class AbstractDao<T extends IdEntity> {
 	public boolean isNew(T entity) {
 		return entity.getId() == null;
 	}
+
 }
