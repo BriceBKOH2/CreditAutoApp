@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Rate {
+public class Rate implements IdEntity {
 	
 	@Id
 	@Column
@@ -28,6 +28,17 @@ public class Rate {
 	@OneToMany(mappedBy="rate")
 	private List<DecisionTable> listDecisionTable;
 	
+	public Rate() {
+		super();
+	}
+
+	public Rate(String name, Double rateAmount, List<DecisionTable> listDecisionTable) {
+		super();
+		this.name = name;
+		this.rateAmount = rateAmount;
+		this.listDecisionTable = listDecisionTable;
+	}
+
 	@Override
 	public String toString() {
 		return "Rate [name=" + name + ", rateAmount=" + rateAmount + "]";
@@ -49,10 +60,12 @@ public class Rate {
 		this.rateAmount = rateAmount;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

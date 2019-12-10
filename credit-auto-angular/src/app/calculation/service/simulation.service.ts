@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Rate } from '../interface/rate';
+import { map } from 'rxjs/operators';
+import { Rate } from '../class/rate';
 import { filter } from 'minimatch';
 
 @Injectable({
@@ -14,11 +15,7 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/rate';
   }
 
-  getRate(
-    carCat: string,
-    carPrice: number,
-    duration: number
-  ): Observable<Rate> {
-    return this.httpClient.get<Rate>(this.endpoint);
+  getRates(): Observable<Rate[]> {
+    return this.httpClient.get<Rate[]>(this.endpoint);
   }
 }

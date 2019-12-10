@@ -10,6 +10,7 @@
           <label for="car_price">Montant de l'achat </label>
           <div>
             <input
+              [(ngModel)]="query"
               id="car_price"
               name="car_price"
               class="form-control"
@@ -52,7 +53,7 @@
             class="form-control"
             type="number"
             min="0"
-            max="60"
+            max="48"
             placeholder="Ex : 36"
           />
         </div>
@@ -75,41 +76,23 @@
       </div>
     </div>
   </form>
-  <ng-container *ngIf="loan$ | async">
-    <div class="align-self-sm-center">
-      <h4 class="mb-3">Echeancier</h4>
-      <div class="col-lg align-self-sm-center alert alert-dark">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+  <ng-container *ngIf="rate$">
+    <div class="list-group">
+      <a
+        *ngFor="let rate of rate$"
+        [routerLink]="rate.rateAmount"
+        class="list-group-item list-group-item-action flex-column align-items-start"
+      >
+        <div class="row">
+          <div class="col">
+            <h4>
+              {{ rate.name }} :
+              <small class="text-muted">{{ rate.rateAmount }}%</small>
+            </h4>
+          </div>
+        </div>
+      </a>
     </div>
   </ng-container>
 </div>

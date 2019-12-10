@@ -1,6 +1,6 @@
 package com.bnpp.creditauto.config;
 
-import javax.servlet.ServletContext;
+import javax.servlet.ServletContext; 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
@@ -9,6 +9,8 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import com.bnpp.creditauto.utils.DBData;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
@@ -20,6 +22,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 				new DispatcherServlet(context));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
+		DBData.init();
 	}
 
 	private AnnotationConfigWebApplicationContext getContext() {

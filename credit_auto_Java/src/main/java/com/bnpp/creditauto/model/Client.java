@@ -13,31 +13,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Client {
+public class Client implements IdEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column//(name="client_id")
+	@Column
 	private Long id;
 	
-	@Column//(name="client_firstname")
+	@Column
 	private String firstName;
 	
-	@Column//(name="client_lasttname")
+	@Column
 	private String lastName;
 	
-	@Column//(name="client_birth")
+	@Column
 	private Date dateOfBirth;
 	
-	@Column//(name="client_phone")
+	@Column
 	private String phoneNumber;
 	
-	@Column//(name="client_address")
+	@Column
 	private String address;
 	
-	//@Column(unique = true)
-	@Column//(name="client_account_number")
-	private Long accountNumber; // Currently not bind to any table, can be set as a foreign key from the account
+	@Column//(name="client_active")
+	private Boolean isActive;
+	
+	@Column//(unique = true)
+	private Long accountNumber; // Currently not bound to any table, can be set as a foreign key from the account
 								// table later
 
 	@OneToMany(mappedBy="client")
@@ -58,6 +60,7 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.accountNumber = accountNumber;
+		this.isActive = true;
 	}
 
 	public Client(Long id, String firstName, String lastName, Date dateOfBirth, String phoneNumber, String address,
@@ -70,14 +73,30 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.accountNumber = accountNumber;
+		this.isActive = true;
 	}
 
+	// Constructor to choose the value of field "isActive" to know if the account is closed or not
+	public Client(String firstName, String lastName, Date dateOfBirth, String phoneNumber, String address,
+			Long accountNumber, Boolean isActive) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.accountNumber = accountNumber;
+		this.isActive = isActive;
+	}
+	
 	/* Getters and Setters */
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

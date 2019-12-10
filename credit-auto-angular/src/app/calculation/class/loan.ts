@@ -6,4 +6,5 @@ export class Loan {
   loanAmount: number;
   loanDuration: number;
   rate: number;
+  amountDue: number;
 }

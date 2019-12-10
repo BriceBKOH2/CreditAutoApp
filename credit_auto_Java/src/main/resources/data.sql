@@ -1,13 +1,11 @@
-﻿--# INSERTION --------------------------------------------------
+INSERT INTO category (id, name) VALUES (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D'), (5, 'E'), (6, 'F');
 
-INSERT INTO category (name) VALUES ('A'), ('B'), ('C'), ('D'), ('E'), ('F');
-
-INSERT INTO rate (name, amount) VALUES ('T1', 0.65), 
-                                                  ('T2', 0.34), 
-                                                  ('T3', 0.45), 
-                                                  ('T4', 0.21),
-                                                  ('T5', 0.44), 
-                                                  ('T6', 0.74);
+INSERT INTO rate (id, name, rateamount) VALUES (1, 'T1', 0.65), 
+                                                  (2, 'T2', 0.34), 
+                                                  (3, 'T3', 0.45), 
+                                                  (4, 'T4', 0.21),
+                                                  (5, 'T5', 0.44), 
+                                                  (6, 'T6', 0.74);
 
 INSERT INTO decisiontable ( minamount,
                         maxamount,
