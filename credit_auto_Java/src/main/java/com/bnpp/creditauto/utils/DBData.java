@@ -14,6 +14,7 @@ import com.bnpp.creditauto.service.RateService;
 /**
  * Add some data to the database so that it can be operational for basic
  * features. Need to run only one time.
+ * Delete all clients.
  * Delete all and then adds default Categories, Rates and DecisionTable entries.
  * 
  * @author Jordi

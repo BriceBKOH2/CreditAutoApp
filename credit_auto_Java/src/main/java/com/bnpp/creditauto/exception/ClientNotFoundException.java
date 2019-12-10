@@ -1,6 +1,6 @@
 package com.bnpp.creditauto.exception;
 
-public class ClientNotFoundException extends Exception {
+public class ClientNotFoundException extends NotFoundException {
 
 	/** Exception generated when call to dataBase returns empty
 	 * 

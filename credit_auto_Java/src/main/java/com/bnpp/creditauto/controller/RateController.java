@@ -41,7 +41,7 @@ public class RateController {
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public Rate alacon(@PathVariable Long id) {
+	public Rate findById(@PathVariable Long id) {
 		return rateSvc.findById(id);
 	}
 	

@@ -44,9 +44,8 @@ public class Client implements IdEntity {
 	private Boolean isActive;
 	
 	@Column(unique=true)
-	private Long accountNumber; // Currently not bound to any table, can be set as a foreign key from the account
-								// table later
-
+	private Long accountNumber;
+	
 	@OneToMany(mappedBy="client")
 	private List<Contract> contract;
 

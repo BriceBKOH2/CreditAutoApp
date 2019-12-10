@@ -1,6 +1,6 @@
 package com.bnpp.creditauto.exception;
 
-public class RateNotFoundException extends Exception {
+public class RateNotFoundException extends NotFoundException {
 
 	private static final long serialVersionUID = -2257361142610221210L;
 
@@ -9,6 +9,6 @@ public class RateNotFoundException extends Exception {
 	}
 
 	public RateNotFoundException(String msg) {
-		System.err.println(msg);
+		super(msg);
 	}
 }

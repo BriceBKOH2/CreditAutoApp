@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,12 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
+
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Category findById(@PathVariable Long id) {
+		return categoryService.findById(id);
+	}
 	
 	/**
 	 * Create and return an arbitrary rate.
@@ -33,5 +40,7 @@ public class CategoryController {
 	public List<Category> findAll() {
 		return categoryService.findAll();
 	}
+	
+	
 	
 }
