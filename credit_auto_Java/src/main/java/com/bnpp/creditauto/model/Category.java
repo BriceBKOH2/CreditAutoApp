@@ -14,21 +14,28 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table//(name="car_category_")
-public class Category {
+@Table
+public class Category implements IdEntity {
 	
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + "]";
+	}
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column//(name="car_category_id")
+	@Column
 	private Long id;
 
-	@Column//(name="car_category_name")
+	@Column
 	private String name;
 	
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

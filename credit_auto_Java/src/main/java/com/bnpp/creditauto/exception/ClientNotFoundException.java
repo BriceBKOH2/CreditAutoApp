@@ -1,5 +1,7 @@
 package com.bnpp.creditauto.exception;
 
+import javassist.NotFoundException;
+
 public class ClientNotFoundException extends Exception {
 
 	/** Exception generated when call to dataBase returns empty
@@ -13,5 +15,9 @@ public class ClientNotFoundException extends Exception {
 	
 	public ClientNotFoundException(String accountNumber) {
 		System.err.println("Client account number : " + accountNumber + " not found in database");
+	}
+	
+	public ClientNotFoundException(String firstName, String lastName) {
+		System.err.println("Client firstName : " + firstName + " ans lastName : " + lastName + " not found in database");
 	}
 }

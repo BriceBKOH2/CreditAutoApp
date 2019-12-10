@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Contract {
+public class Contract implements IdEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,9 @@ public class Contract {
 	
 	@Column
 	private Date creationDate;
+	
+	@Column
+	private Boolean isActive;
 	
 	@ManyToOne
 	//@Column
@@ -62,6 +65,7 @@ public class Contract {
 		this.creationDate = creationDate;
 		this.client = client;
 		this.vehicleCategory = vehicleCategory;
+		this.isActive = true;
 	}
 
 	public Contract(Long id, Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
@@ -76,14 +80,31 @@ public class Contract {
 		this.creationDate = creationDate;
 		this.client = client;
 		this.vehicleCategory = vehicleCategory;
+		this.isActive = true;
+	}
+	
+	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
+			Date creationDate, Client client, Category vehicleCategory, Boolean isActive) {
+		super();
+		this.vehiclePrice = vehiclePrice;
+		this.loanAmount = loanAmount;
+		this.loanDuration = loanDuration;
+		this.rate = rate;
+		this.rentRight = rentRight;
+		this.creationDate = creationDate;
+		this.client = client;
+		this.vehicleCategory = vehicleCategory;
+		this.isActive = isActive;
 	}
 	
 	/* Getters and Setters */
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

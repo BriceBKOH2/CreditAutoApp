@@ -1,7 +1,5 @@
 package com.bnpp.creditauto.dao;
 
-import java.util.List;
-
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -11,6 +9,11 @@ import com.bnpp.creditauto.model.Rate;
 
 @Repository
 public class RateDao extends AbstractDao<Rate> {
+
+	@Override
+	protected Class<Rate> getEntityClass() {
+		return Rate.class;
+	}
 
 	// aller chercher le bon taux en fonction des paramètres saisis par le conseiller.
 	/**
@@ -35,9 +38,5 @@ public class RateDao extends AbstractDao<Rate> {
 		query.setParameter("vehiclePrice", Long.valueOf(vehiclePrice));
 		query.setParameter("duration", Long.valueOf(duration));
 		return query.getSingleResult();
-	}
-
-	public List<Rate> findAll() {
-		return em.createQuery("from Rate", Rate.class).getResultList();
 	}
 }

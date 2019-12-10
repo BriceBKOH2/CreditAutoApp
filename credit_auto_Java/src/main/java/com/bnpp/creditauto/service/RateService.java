@@ -35,4 +35,13 @@ public class RateService {
 	public List<Rate> findAll() {
 		return rateDao.findAll();
 	}
+
+	public void save(Rate rate) {
+		rateDao.persist(rate);
+	}
+
+	@Transactional
+	public void deleteAll() {
+		rateDao.deleteAll();
+	}
 }

@@ -14,6 +14,11 @@ import com.bnpp.creditauto.model.Client;
 @Repository
 public class ClientDao extends AbstractDao<Client> {
 
+	@Override
+	protected Class<Client> getEntityClass() {
+		return Client.class;
+	}
+
 	public void update(Client client) throws ClientNotFoundException {
 		Session session = getSession();
 		Long id = client.getId();
@@ -25,6 +30,7 @@ public class ClientDao extends AbstractDao<Client> {
 		session.merge(client);
 	}
 
+	@Override
 	public void delete(Client client) throws ClientNotFoundException {
 		Session session = getSession();
 		Long id = client.getId();
@@ -36,18 +42,8 @@ public class ClientDao extends AbstractDao<Client> {
 		session.delete(client);
 	}
 
-	public void deleteAll() {
-		Session session = getSession();
-		session.createQuery("DELETE FROM Client").executeUpdate();
-	}
 
-	/** Can return an empty list instead of an ClientNotFoundException */
-	public List<Client> findAll() {
-		Session session = getSession();
-		return session.createQuery("FROM Client", Client.class).getResultList();
-	}
-
-	public Client findByAccNumb(String accountNumber) throws ClientNotFoundException {
+	public Client findByAccNumb(Long accountNumber) throws ClientNotFoundException {
 		Session session = getSession();
 		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.accountNumber=:accountNumber",
 				Client.class);
@@ -62,6 +58,27 @@ public class ClientDao extends AbstractDao<Client> {
 		}
 		return client;
 
+	}
+	
+	
+	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
+		
+		Session session = getSession();
+		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.firstName=:firstName "
+														+ "AND cl.lastName=:lastName",
+														Client.class);
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
+		List<Client> clients;
+		
+		try {
+			clients = query.getResultList();
+		} catch (NoResultException e) {
+			throw new ClientNotFoundException(firstName, lastName); // We transform to string to differentiate with
+																			// argument
+			// Long Id since accountNumber is also a Long type
+		}
+		return clients;
 	}
 
 }

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Rate {
+public class Rate implements IdEntity {
 	
 	@Id
 	@Column
@@ -60,10 +60,12 @@ public class Rate {
 		this.rateAmount = rateAmount;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
