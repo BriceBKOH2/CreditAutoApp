@@ -32,7 +32,7 @@ export class SimulationService {
 
   getRateForLoan(): Observable<Rate> {
     let params = new HttpParams()
-      .set('cat', '1')
+      .set('catId', '1')
       .set('price', '5000')
       .set('dur', '24');
 
