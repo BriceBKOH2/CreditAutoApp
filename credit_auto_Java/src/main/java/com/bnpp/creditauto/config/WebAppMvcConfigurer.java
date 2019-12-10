@@ -1,12 +1,12 @@
 package com.bnpp.creditauto.config;
 
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@WebAppConfiguration
+@Configuration
 @EnableWebMvc
 public class WebAppMvcConfigurer implements WebMvcConfigurer {
 	@Override
