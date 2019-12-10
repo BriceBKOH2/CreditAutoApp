@@ -1,9 +1,10 @@
-package com.bnpp.creditauto;
+package com.bnpp.creditauto.utils;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.AbstractApplicationContext;
 
+import com.bnpp.creditauto.App;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.DecisionTable;
 import com.bnpp.creditauto.model.Rate;
@@ -26,7 +27,7 @@ public class DBData {
 	private static Rate[] rates = new Rate[6];
 	private static DecisionTable[] dTables = new DecisionTable[10];
 	
-	public static void main(String[] args) {
+	public static void init() {
 		
 		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class)) {
 			CategoryService categSvc = context.getBean(CategoryService.class);
