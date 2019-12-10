@@ -80,18 +80,16 @@
     </div>
   </form>
 
-  <ng-container *ngIf="rate$">
+  <ng-container *ngIf="rateLoan">
     <div class="list-group">
       <a
-        *ngFor="let rate of rate$"
-        [routerLink]="rate.rateAmount"
         class="list-group-item list-group-item-action flex-column align-items-start"
       >
         <div class="row">
           <div class="col">
             <h4>
-              {{ rate.name }} :
-              <small class="text-muted">{{ rate.rateAmount }}%</small>
+              {{ rateLoan.name }} :
+              <small class="text-muted">{{ rateLoan.rateAmount }}%</small>
             </h4>
           </div>
         </div>

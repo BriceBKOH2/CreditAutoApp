@@ -20,9 +20,7 @@ export class SimulationService {
   }
 
   postClient(client: Client) {
-    let params = new HttpParams()
-      .set('client', JSON.stringify(client))
-      .set('id', '10');
+    let params = new HttpParams().set('client', JSON.stringify(client));
     console.log(params);
 
     return this.httpClient.post(this.endpointClient, { params });
