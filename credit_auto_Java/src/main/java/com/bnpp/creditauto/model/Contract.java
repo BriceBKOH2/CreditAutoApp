@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table
 public class Contract implements IdEntity {
@@ -20,6 +22,7 @@ public class Contract implements IdEntity {
 	private Long id;
 	
 	@Column
+	@NotBlank
 	private Long vehiclePrice;
 	
 	@Column
@@ -29,9 +32,11 @@ public class Contract implements IdEntity {
 	private Long amountDue; // Amount the client need to repay
 	
 	@Column
+	@NotBlank
 	private Integer loanDuration;
 	
 	@Column
+	@NotBlank
 	private Double rate;
 	
 	@Column
