@@ -23,7 +23,10 @@ public class Contract implements IdEntity {
 	private Long vehiclePrice;
 	
 	@Column
-	private Long loanAmount; // Amount the client need to repay
+	private Long loanAmount; // Amount lent to the client
+	
+	@Column
+	private Long amountDue; // Amount the client need to repay
 	
 	@Column
 	private Integer loanDuration;
