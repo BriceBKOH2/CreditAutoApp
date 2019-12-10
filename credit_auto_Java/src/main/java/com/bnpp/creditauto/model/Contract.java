@@ -26,16 +26,8 @@ public class Contract implements IdEntity {
 	private Long loanAmount; // Amount lent to the client
 
 	@Column
-<<<<<<< HEAD
 	private Long amountDue; // Amount the client need to repay
 
-=======
-	private Long loanAmount; // Amount lent to the client
-	
-	@Column
-	private Long amountDue; // Amount the client need to repay
-	
->>>>>>> d71b1fa88ad6b730e9d9f4459b4996b6679b2dd0
 	@Column
 	private Integer loanDuration;
 
