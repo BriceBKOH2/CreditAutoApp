@@ -22,7 +22,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 				new DispatcherServlet(context));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
-		DBData.init();
+//		DBData.init();
 	}
 
 	private AnnotationConfigWebApplicationContext getContext() {
