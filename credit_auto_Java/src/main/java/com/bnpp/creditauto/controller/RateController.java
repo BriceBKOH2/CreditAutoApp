@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Rate;
+import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.RateService;
 
 @RestController
@@ -24,6 +24,9 @@ public class RateController {
 	
 	@Autowired
 	private RateService rateSvc;
+	
+	@Autowired
+	private CategoryService catSvc;
 	
 	/**
 	 * Create and return an arbitrary rate.
@@ -38,8 +41,8 @@ public class RateController {
 	
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	@ResponseBody
-	public Rate findRateDecision(@RequestBody Category cat, @RequestBody int price, @RequestBody int dur) {
-		return rateSvc.getDecisionRate(cat, price, dur);
+	public Rate findRateDecision(@RequestBody int cat, @RequestBody int price, @RequestBody int dur) {
+		return rateSvc.getDecisionRate(catSvc.findById(Long.valueOf(cat)), price, dur);
 	}
 	
 }

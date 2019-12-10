@@ -14,6 +14,10 @@ public class CategoryService {
 	@Autowired
 	CategoryDao categDao;
 	
+	public Category findById(Long id) {
+		return categDao.findById(id);
+	}
+	
 	public List<Category> findAll() {
 		return categDao.findAll();
 	}
