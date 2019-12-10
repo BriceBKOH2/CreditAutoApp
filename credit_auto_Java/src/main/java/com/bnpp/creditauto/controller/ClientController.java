@@ -79,6 +79,12 @@ public class ClientController {
 		 System.out.println(client);
 		 return client;
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public void update(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
+		client.setId(id);
+		clientService.update(client);
+	}
 }
 
 
