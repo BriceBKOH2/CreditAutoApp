@@ -15,7 +15,7 @@ import com.bnpp.creditauto.model.Rate;
 import com.bnpp.creditauto.service.ClientService;
 import com.bnpp.creditauto.service.RateService;
 
-@ComponentScan//("com.bnpp.creditauto")
+//@ComponentScan//("com.bnpp.creditauto")
 public class Test {
 
 	public static void main(String[] args) {

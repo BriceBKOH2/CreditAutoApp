@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Rate } from '../class/rate';
-import { filter } from 'minimatch';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +16,18 @@ export class SimulationService {
 
   getRates(): Observable<Rate[]> {
     return this.httpClient.get<Rate[]>(this.endpoint);
+  }
+
+  getRateForLoan(): Observable<Rate> {
+    let headers = new HttpHeaders();
+
+    let params = new HttpParams()
+      .set('cat', '1')
+      .set('price', '5000')
+      .set('dur', '24');
+
+    return this.httpClient
+      .get(`${this.endpoint}/decision`, { params })
+      .pipe(map((rate: Rate) => rate));
   }
 }
