@@ -36,7 +36,7 @@ export class CalcSheetComponent implements OnInit {
   }
 
   loanCalculation() {
-    console.log(this.simulationService.getRateForLoan());
+    
     this.simulationService.getRateForLoan().subscribe(response => {
       this.rateLoan = response;
       console.log(this.rateLoan);
