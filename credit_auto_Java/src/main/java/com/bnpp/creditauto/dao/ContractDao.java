@@ -2,10 +2,15 @@ package com.bnpp.creditauto.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.ContractNotFoundException;
+import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.Contract;
 
 @Repository

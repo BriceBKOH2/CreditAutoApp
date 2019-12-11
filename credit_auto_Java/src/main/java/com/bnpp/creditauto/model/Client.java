@@ -46,7 +46,7 @@ public class Client implements IdEntity {
 	private Long accountNumber;
 	
 	@OneToMany(mappedBy="client")
-	private List<Contract> contract;
+	private List<Contract> contracts;
 
 	/* Constructors */
 	
@@ -151,9 +151,26 @@ public class Client implements IdEntity {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+	
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
+	}
 
 	/* Other Methods */
-
+	
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
