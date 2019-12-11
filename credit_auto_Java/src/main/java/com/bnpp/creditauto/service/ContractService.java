@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.creditauto.dao.ContractDao;
 import com.bnpp.creditauto.exception.ContractNotFoundException;
+import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.Contract;
 
 @Service
@@ -17,6 +18,10 @@ public class ContractService {
 	
 	public void save(Contract contract) {
 		contractDao.persist(contract);
+	}
+	
+	public Contract findById(Long id) {
+		return contractDao.findById(id);
 	}
 
 	@Transactional(rollbackFor = ContractNotFoundException.class)

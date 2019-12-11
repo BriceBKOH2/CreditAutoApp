@@ -8,7 +8,9 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.UserNotFoundException;
+import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.User;
 
 
@@ -18,6 +20,17 @@ public class UserDao extends AbstractDao<User> {
 	@Override
 	protected Class<User> getEntityClass() {
 		return User.class;
+	}
+	
+	public void update(User user) throws UserNotFoundException {
+		Session session = getSession();
+		Long id = user.getId();
+		if (id == null) {
+			throw new UserNotFoundException(id);
+		} else if (session.find(User.class, user.getId()) == null) {
+			throw new UserNotFoundException(id);
+		}
+		session.merge(user);
 	}
 
 	public List<User> findByNames(String firstName, String lastName) throws UserNotFoundException {
