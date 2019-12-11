@@ -1,5 +1,5 @@
 package com.bnpp.creditauto.controller;
 
-public class AbstractController {
+public abstract class AbstractController {
 
 }

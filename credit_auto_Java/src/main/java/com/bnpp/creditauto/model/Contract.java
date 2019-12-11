@@ -25,14 +25,24 @@ public class Contract implements IdEntity {
 	@NotBlank
 	private Long vehiclePrice;
 	
+	/**
+	 * Amount lent to the client.
+	 */
 	@Column
 	@NotBlank
-	private Long loanAmount; // Amount lent to the client
+	private Long loanAmount;
 	
+	/**
+	 * This is the total amount that the client have to pay. 
+	 * It is equal to the Loan amount with the interests.
+	 */
 	@Column
 	@NotBlank
-	private Long amountDue; // Amount the client need to repay
+	private Long amountDue;
 	
+	/**
+	 * Duration, in months.
+	 */
 	@Column
 	@NotBlank
 	private Integer loanDuration;
@@ -185,6 +195,22 @@ public class Contract implements IdEntity {
 
 	/* Other Methods */
 	
+	public Long getAmountDue() {
+		return amountDue;
+	}
+
+	public void setAmountDue(Long amountDue) {
+		this.amountDue = amountDue;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	@Override
 	public String toString() {
 		return "Contract [id=" + id + ", vehiclePrice=" + vehiclePrice + ", loanAmount=" + loanAmount

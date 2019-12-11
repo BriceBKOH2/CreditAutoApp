@@ -25,7 +25,7 @@ public class RateService {
 	 * @return the Rate if found, null otherwise.
 	 */
 	@Transactional
-	public Rate getDecisionRate(Category cat, int vehiclePrice, int duration) {
+	public Rate getDecisionRate(Category cat, long vehiclePrice, int duration) {
 		try {
 			return rateDao.getDecisionRate(cat, vehiclePrice, duration);
 		} catch (RateNotFoundException e) {
