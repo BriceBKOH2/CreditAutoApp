@@ -22,29 +22,7 @@ public class ClientController {
 	
 	// Cette classe doit définir les methodes qui vont renvoyer du json
 	// Fera le lien entre le formulaire et le java.	
-	
-//	@Autowired
-//	private RateService rateSvc;
-	
-	/**
-	 * Create and return an arbitrary client.
-	 * For testing purposes.
-	 * @return
-	 */
-//	@RequestMapping(method = RequestMethod.GET)
-//	
-//	public Client mock() {
-//		Client client = new Client();
-//		client.setId(2000L);
-//		client.setFirstName("John");
-//		client.setLastName("Doe");
-//		client.setDateOfBirth(Date.valueOf(LocalDate.of(1995, 02, 14)));
-//		client.setAddress("45 rue des pinguoins");
-//		client.setAccountNumber(945487621L);
-//		client.setPhoneNumber("06 57 84 35 19");
-//		return client;
-//	}
-	
+
 	@Autowired
 	private ClientService clientService;
 	
