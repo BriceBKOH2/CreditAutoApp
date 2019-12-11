@@ -11,23 +11,20 @@ import { Client } from '../class/client';
 export class SimulationService {
   constructor(private httpClient: HttpClient) {}
 
-  get endpointRate() {
+  get endPointRate() {
     return 'http://localhost:8080/credit_auto/api/rate';
   }
 
-  get endpointClient() {
+  get endPointClient() {
     return 'http://localhost:8080/credit_auto/api/client';
   }
 
-  postClient(client: Client) {
-    let params = new HttpParams().set('client', JSON.stringify(client));
-    console.log(params);
-
-    return this.httpClient.post(this.endpointClient, { params });
+  postClient(client: Client): Observable<Client> {
+    return this.httpClient.post<Client>(this.endPointClient, client);
   }
 
   getRates(): Observable<Rate[]> {
-    return this.httpClient.get<Rate[]>(this.endpointRate);
+    return this.httpClient.get<Rate[]>(this.endPointRate);
   }
 
   getRateForLoan(): Observable<Rate> {
@@ -39,7 +36,7 @@ export class SimulationService {
     console.log(params);
 
     return this.httpClient
-      .get(`${this.endpointRate}/decision`, { params })
+      .get(`${this.endPointRate}/decision`, { params })
       .pipe(map((rate: Rate) => rate));
   }
 }

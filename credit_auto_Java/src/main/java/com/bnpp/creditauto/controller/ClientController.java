@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.bnpp.creditauto.service.ClientService;
 
 @RestController
 @RequestMapping("/api/client")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 	
 	// Cette classe doit définir les methodes qui vont renvoyer du json
@@ -26,11 +28,11 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public List<Client> findAll() {
-		return clientService.findAll();
-	}
+//	@RequestMapping(method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<Client> findAll() {
+//		return clientService.findAll();
+//	}
 	
 	@RequestMapping(value = "/accountnumber/{accountNumber}", method = RequestMethod.GET)
 
