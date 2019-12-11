@@ -20,8 +20,8 @@ public class ContractService {
 	RateService rateSvc;
 
 	public void save(Contract contract) {
-		// TODO : gérer le isActive.
 		contractDao.persist(contract);
+		contract.setIsActive(true);
 	}
 	
 	public Contract findById(Long id) {
@@ -93,10 +93,4 @@ public class ContractService {
 
 		c.setAmountDue(Double.valueOf(totalAmount).longValue());
 	}
-
-	public List<Contract> findByClientId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

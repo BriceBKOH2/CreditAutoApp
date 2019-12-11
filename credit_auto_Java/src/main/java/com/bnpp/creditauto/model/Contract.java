@@ -22,14 +22,14 @@ public class Contract implements IdEntity {
 	private Long id;
 	
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Long vehiclePrice;
 	
 	/**
 	 * Amount lent to the client.
 	 */
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Long loanAmount;
 	
 	/**
@@ -37,18 +37,18 @@ public class Contract implements IdEntity {
 	 * It is equal to the Loan amount with the interests.
 	 */
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Long amountDue;
 	
 	/**
 	 * Duration, in months.
 	 */
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Integer loanDuration;
 	
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Double rate;
 	
 	@Column

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.model.Client;
+import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.service.ClientService;
 
 @RestController
@@ -86,6 +87,11 @@ public class ClientController {
 	public void update(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
 		client.setId(id);
 		clientService.update(client);
+	}
+	
+	@RequestMapping(value = "/id/{id}/contracts", method = RequestMethod.GET)
+	public List<Contract> getContracts(@PathVariable Long id) throws ClientNotFoundException {
+		return findById(id).getContracts();
 	}
 }
 
