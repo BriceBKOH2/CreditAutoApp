@@ -57,13 +57,13 @@ export class CalcSheetComponent implements OnInit {
       '0605040302',
       '03 diginamic street 34000 Montpellier',
       true,
-      123456789
+      987654321
     );
 
-    this.simulationService
-      .postClient(this.client)
-      .subscribe(response => (this.client = response));
-    console.log(this.client);
+    this.simulationService.postClient(this.client).subscribe(response => {
+      this.client = response;
+      console.log(this.client);
+    });
 
     this.simulationService.getRateForLoan().subscribe(response => {
       this.rateLoan = response;
