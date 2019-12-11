@@ -46,10 +46,26 @@ public class Client implements IdEntity {
 	private Long accountNumber;
 	
 	@OneToMany(mappedBy="client")
-	private List<Contract> contract;
+	private List<Contract> contracts;
 
 	/* Constructors */
 	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
+	}
+
 	public Client() {
 		
 	}
