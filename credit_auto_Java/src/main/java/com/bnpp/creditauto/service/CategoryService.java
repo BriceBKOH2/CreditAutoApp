@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bnpp.creditauto.dao.CategoryDao;
 import com.bnpp.creditauto.model.Category;
+import com.bnpp.creditauto.model.Client;
 
 @Service
 public class CategoryService {
