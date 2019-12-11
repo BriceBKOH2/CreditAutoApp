@@ -2,7 +2,7 @@
 
 INSERT INTO category (name) VALUES ('A'), ('B'), ('C'), ('D'), ('E'), ('F');
 
-INSERT INTO rate (name, amount) VALUES ('T1', 0.65), 
+INSERT INTO rate (name, rateAmount) VALUES ('T1', 0.65), 
                                                   ('T2', 0.34), 
                                                   ('T3', 0.45), 
                                                   ('T4', 0.21),
