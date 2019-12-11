@@ -2,20 +2,16 @@ package com.bnpp.creditauto;
 
 import java.sql.Date;
 
-import org.apache.catalina.webresources.Cache;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Client;
-import com.bnpp.creditauto.model.Rate;
 import com.bnpp.creditauto.service.ClientService;
 import com.bnpp.creditauto.service.RateService;
 
-@ComponentScan//("com.bnpp.creditauto")
+//@Configuration
+//@ComponentScan//("com.bnpp.creditauto")
 public class Test {
 
 	public static void main(String[] args) {

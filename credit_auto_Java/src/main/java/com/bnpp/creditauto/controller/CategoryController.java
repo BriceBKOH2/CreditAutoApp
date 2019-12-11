@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnpp.creditauto.model.Rate;
+import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.service.CategoryService;
-import com.bnpp.creditauto.service.RateService;
 
 @RestController
-@RequestMapping("/api/rate")
+@RequestMapping("/api/category")
 @CrossOrigin(origins = "http://localhost:4200")
-public class RateController {
+public class CategoryController {
+	
+	// Cette classe doit définir les methodes qui vont renvoyer du json
+	// Fera le lien entre le formulaire et le java.	
 	
 	@Autowired
-	private RateService rateSvc;
-	
-	@Autowired
-	private CategoryService categSvc;
-	
-//	@Autowired
-//	private JsonHelper jsonHelper;
+	private CategoryService categoryService;
+
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Category findById(@PathVariable Long id) {
+		return categoryService.findById(id);
+	}
 	
 	/**
 	 * Create and return an arbitrary rate.
@@ -35,20 +37,10 @@ public class RateController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public List<Rate> findAll() {
-		return rateSvc.findAll();
+	public List<Category> findAll() {
+		return categoryService.findAll();
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Rate findById(@PathVariable Long id) {
-		return rateSvc.findById(id);
-	}
 	
-	@RequestMapping(value = "/decision", method = RequestMethod.GET)
-	@ResponseBody
-	public Rate findRateDecision(int catId, int price, int dur) {		
-		return rateSvc.getDecisionRate(categSvc.findById(Long.valueOf(catId)), price, dur);
-	}
 	
 }

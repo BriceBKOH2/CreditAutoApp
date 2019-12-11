@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table
 public class Client implements IdEntity {
@@ -21,9 +23,11 @@ public class Client implements IdEntity {
 	private Long id;
 	
 	@Column
+	@NotBlank
 	private String firstName;
 	
 	@Column
+	@NotBlank
 	private String lastName;
 	
 	@Column
@@ -35,13 +39,12 @@ public class Client implements IdEntity {
 	@Column
 	private String address;
 	
-	@Column//(name="client_active")
+	@Column
 	private Boolean isActive;
 	
-	@Column//(unique = true)
-	private Long accountNumber; // Currently not bound to any table, can be set as a foreign key from the account
-								// table later
-
+	@Column(unique=true)
+	private Long accountNumber;
+	
 	@OneToMany(mappedBy="client")
 	private List<Contract> contract;
 
