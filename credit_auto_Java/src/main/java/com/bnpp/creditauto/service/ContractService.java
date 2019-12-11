@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bnpp.creditauto.dao.ClientDao;
 import com.bnpp.creditauto.dao.ContractDao;
 import com.bnpp.creditauto.exception.ContractNotFoundException;
 import com.bnpp.creditauto.exception.RateNotFoundException;
@@ -15,6 +16,9 @@ import com.bnpp.creditauto.model.Contract;
 public class ContractService {
 	@Autowired
 	ContractDao contractDao;
+	
+	@Autowired
+	ClientDao clientDao;
 
 	@Autowired
 	RateService rateSvc;
@@ -55,6 +59,11 @@ public class ContractService {
 	@Transactional
 	public List<Contract> findAll() {
 		return contractDao.findAll();
+	}
+	
+	@Transactional
+	public List<Contract> findAllByClientId(Long id) throws ContractNotFoundException {
+		return contractDao.findAllByClientId(id);
 	}
 
 	/**
