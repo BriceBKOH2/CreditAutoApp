@@ -15,7 +15,6 @@ import com.bnpp.creditauto.model.Rate;
 import com.bnpp.creditauto.service.ClientService;
 import com.bnpp.creditauto.service.RateService;
 
-//@Configuration
 //@ComponentScan//("com.bnpp.creditauto")
 public class Test {
 
