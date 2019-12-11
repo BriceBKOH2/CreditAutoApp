@@ -19,7 +19,7 @@ import com.bnpp.creditauto.service.ClientService;
 @RestController
 @RequestMapping("/api/client")
 public class ClientController {
-	// TODO
+	
 	// Cette classe doit définir les methodes qui vont renvoyer du json
 	// Fera le lien entre le formulaire et le java.	
 	
@@ -55,17 +55,18 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "/accountnumber/{accountNumber}", method = RequestMethod.GET)
-	public Client findOneByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
+
+	public Client findByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
 		return clientService.findByAccNumb(accountNumber);
 	}
 	
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-	public Client findOneById(@PathVariable Long id) throws ClientNotFoundException {
+	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
 		return clientService.findById(id);
 	}
 	
 	@RequestMapping(value = "{firstName}/{lastName}", method = RequestMethod.GET)
-	public List<Client> findOneByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
+	public List<Client> findByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
 		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
 	}
@@ -78,6 +79,12 @@ public class ClientController {
 		 clientService.save(client);
 		 System.out.println(client);
 		 return client;
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public void update(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
+		client.setId(id);
+		clientService.update(client);
 	}
 }
 

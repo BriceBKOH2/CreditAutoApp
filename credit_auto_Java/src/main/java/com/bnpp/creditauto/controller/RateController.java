@@ -50,5 +50,6 @@ public class RateController {
 	public Rate findRateDecision(int catId, int price, int dur) {		
 		return rateSvc.getDecisionRate(categSvc.findById(Long.valueOf(catId)), price, dur);
 	}
+	
 
 }
