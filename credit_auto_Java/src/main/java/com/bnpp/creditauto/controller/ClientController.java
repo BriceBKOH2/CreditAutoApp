@@ -19,7 +19,7 @@ import com.bnpp.creditauto.service.ClientService;
 @RestController
 @RequestMapping("/api/client")
 public class ClientController {
-	// TODO
+	
 	// Cette classe doit définir les methodes qui vont renvoyer du json
 	// Fera le lien entre le formulaire et le java.	
 	
@@ -38,7 +38,7 @@ public class ClientController {
 //		client.setId(2000L);
 //		client.setFirstName("John");
 //		client.setLastName("Doe");
-//		client.setDateOfBirth(new Date(1995, 02, 14));
+//		client.setDateOfBirth(Date.valueOf(LocalDate.of(1995, 02, 14)));
 //		client.setAddress("45 rue des pinguoins");
 //		client.setAccountNumber(945487621L);
 //		client.setPhoneNumber("06 57 84 35 19");
@@ -55,17 +55,17 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "/accountnumber/{accountNumber}", method = RequestMethod.GET)
-	public Client findOneByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
+	public Client findByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
 		return clientService.findByAccNumb(accountNumber);
 	}
 	
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-	public Client findOneById(@PathVariable Long id) throws ClientNotFoundException {
+	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
 		return clientService.findById(id);
 	}
 	
 	@RequestMapping(value = "{firstName}/{lastName}", method = RequestMethod.GET)
-	public List<Client> findOneByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
+	public List<Client> findByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
 		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
 	}

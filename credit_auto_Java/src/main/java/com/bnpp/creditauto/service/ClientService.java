@@ -19,7 +19,6 @@ public class ClientService {
 		return clientDao.persist(client);
 	}
 	
-	
 	public Client findById(Long id) {
 		return clientDao.findById(id);
 	}

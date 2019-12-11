@@ -27,4 +27,7 @@ public class CategoryService {
 		categDao.deleteAll();
 	}
 
+	public Category findById(Long id) {
+		return categDao.findById(id);
+	}
 }
