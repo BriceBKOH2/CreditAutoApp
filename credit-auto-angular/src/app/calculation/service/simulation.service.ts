@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Rate } from '../class/rate';
 
 import { Client } from '../class/client';
+import { Category } from '../class/category';
+import { Contract } from '../class/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +22,21 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/client';
   }
 
+  get endpointCategory() {
+    return 'http://localhost:8080/credit_auto/api/category';
+  }
+
   postClient(client: Client) {
-    let params = new HttpParams().set('client', JSON.stringify(client));
-
-    console.log(params);
-
-    return this.httpClient.post(this.endpointClient, { params });
+    return this.httpClient.post<Client>(this.endpointClient, client);
   }
 
   getRates(): Observable<Rate[]> {
     return this.httpClient.get<Rate[]>(this.endpointRate);
   }
 
-  getRateForLoan(): Observable<Rate> {
-    let params = new HttpParams()
-      .set('cat', '1')
-      .set('price', '5000')
-      .set('dur', '24');
+  getRateForLoan(contract: Contract): Observable<Rate> {
+    const params = new HttpParams()
+      .set('contract', JSON.stringify(contract));
 
     console.log(params);
 
@@ -44,4 +44,9 @@ export class SimulationService {
       .get(`${this.endpointRate}/decision`, { params })
       .pipe(map((rate: Rate) => rate));
   }
+
+   getCategories(): Observable<Category[]> {
+    return this.httpClient
+      .get<Category[]>(this.endpointCategory);
+     }
 }

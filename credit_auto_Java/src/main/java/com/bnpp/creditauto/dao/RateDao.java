@@ -4,7 +4,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.bnpp.creditauto.model.Category;
+import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
 
 @Repository
@@ -23,7 +23,7 @@ public class RateDao extends AbstractDao<Rate> {
 	 * @param duration duration in months of the loan
 	 * @return the Rate
 	 */
-	public Rate getDecisionRate(Category cat, int vehiclePrice, int duration) {
+	public Rate getDecisionRate(Contract contract) {
 
 		String jpql = "select rate from DecisionTable dt "
 				+ "where dt.categ = :cat "
@@ -34,9 +34,9 @@ public class RateDao extends AbstractDao<Rate> {
 		
 		TypedQuery<Rate> query = em.createQuery(jpql, Rate.class);
 		
-		query.setParameter("cat", cat);
-		query.setParameter("vehiclePrice", Long.valueOf(vehiclePrice));
-		query.setParameter("duration", Long.valueOf(duration));
+		query.setParameter("cat", contract.getVehicleCategory());
+		query.setParameter("vehiclePrice", contract.getVehiclePrice());
+		query.setParameter("duration", contract.getLoanDuration());
 		return query.getSingleResult();
 	}
 
