@@ -23,24 +23,7 @@ export class CalcSheetComponent implements OnInit {
 
   constructor(private simulationService: SimulationService) {}
 
-  ngOnInit() {
-    let cat1 = new Category('A', 1);
-    let cat2 = new Category('B', 2);
-    let cat3 = new Category('C', 3);
-    this.categories = [cat1, cat2, cat3];
-
-    this.client = new Client(
-      'Jade',
-      'Paul',
-      '12/4/1987',
-      '0605040302',
-      '03 diginamic street 34000 Montpellier',
-      true,
-      123456789
-    );
-
-    this.simulationService.postClient(this.client);
-  }
+  ngOnInit() {}
 
   showRates() {
     this.simulationService.getRates().subscribe(response => {
@@ -50,6 +33,21 @@ export class CalcSheetComponent implements OnInit {
   }
 
   loanCalculation() {
+    this.client = new Client(
+      'Jade',
+      'Paul',
+      '1987-04-12',
+      '0605040302',
+      '03 diginamic street 34000 Montpellier',
+      true,
+      123456789
+    );
+
+    this.simulationService.postClient(this.client).subscribe(response => {
+      this.client = response;
+      console.log(this.client);
+    });
+
     this.simulationService.getRateForLoan().subscribe(response => {
       this.rateLoan = response;
       console.log(this.rateLoan);
