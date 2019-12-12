@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table
 public class Client implements IdEntity {

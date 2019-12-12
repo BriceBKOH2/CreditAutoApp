@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.bnpp.creditauto.dao.CategoryDao;
 import com.bnpp.creditauto.model.Category;
-import com.bnpp.creditauto.model.Client;
 
 @Service
 public class CategoryService {
 	
 	@Autowired
 	CategoryDao categDao;
+	
+	public Category findById(Long id) {
+		return categDao.findById(id);
+	}
 	
 	public List<Category> findAll() {
 		return categDao.findAll();
@@ -25,10 +28,6 @@ public class CategoryService {
 	
 	public void deleteAll() {
 		categDao.deleteAll();
-	}
-
-	public Category findById(Long id) {
-		return categDao.findById(id);
 	}
 	
 	public Category findByName(String name) {

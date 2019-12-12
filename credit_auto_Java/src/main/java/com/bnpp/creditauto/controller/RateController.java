@@ -29,8 +29,8 @@ public class RateController {
 //	private JsonHelper jsonHelper;
 	
 	/**
-	 * Create and return an arbitrary rate.
-	 * For testing purposes.
+	 * Create and return an arbitrary rate. For testing purposes.
+	 * 
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -51,4 +51,5 @@ public class RateController {
 		return rateSvc.getDecisionRate(categSvc.findById(Long.valueOf(catId)), price, dur);
 	}
 	
+
 }
