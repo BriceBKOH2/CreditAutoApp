@@ -58,8 +58,7 @@ public class ContractDao extends AbstractDao<Contract> {
 		} catch (NoResultException e) {
 			throw new ContractNotFoundException(id); // We transform to string to differentiate with
 			// argument
-			// Long Id since accountNumber is also a Long type
-			
+			// Long Id since accountNumber is also a Long type	
 		}
 		return contracts;
 
