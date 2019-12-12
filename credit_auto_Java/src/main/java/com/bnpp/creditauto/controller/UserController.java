@@ -2,15 +2,19 @@ package com.bnpp.creditauto.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.UserNotFoundException;
@@ -19,6 +23,7 @@ import com.bnpp.creditauto.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
+@SessionAttributes(value="currentUser", types= {User.class})
 public class UserController {
 
 	@Autowired
@@ -58,12 +63,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void login(String login, String password) {
+	public User login(@RequestParam String login, @RequestParam String password, HttpSession httpSession) {
 		try {
-			userService.login(login, password);
 			System.out.println("Logged as " + login);
+			User user =  userService.login(login, password);
+			httpSession.setAttribute("connectedUser", user);
+			return user;
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 	}
