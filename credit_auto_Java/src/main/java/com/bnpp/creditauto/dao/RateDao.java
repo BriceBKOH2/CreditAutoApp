@@ -23,7 +23,6 @@ public class RateDao extends AbstractDao<Rate> {
 	 * @param duration duration in months of the loan
 	 * @return the Rate
 	 */
-
 	public Rate getDecisionRate(Contract contract) {
 
 		String jpql = "select rate from DecisionTable dt "

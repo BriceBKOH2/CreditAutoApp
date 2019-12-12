@@ -45,5 +45,6 @@ public class RateController {
 	public Rate findRateDecision(@RequestBody Contract contract) {
 		return rateSvc.getDecisionRate(contract);
 	}
+	
 
 }

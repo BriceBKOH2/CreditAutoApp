@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.creditauto.dao.UserDao;
+import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.UserNotFoundException;
+import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.User;
 
 @Service
@@ -16,6 +18,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	public User save(User user) {
+		return userDao.persist(user);
+	}
+	
 	@Transactional(rollbackFor = UserNotFoundException.class)
 	public List<User> findByNames(String firstName, String lastName) throws UserNotFoundException {
 		return userDao.findByNames(firstName, lastName);
@@ -23,5 +29,17 @@ public class UserService {
 	
 	public User findById(Long id) {
 		return userDao.findById(id);
+	}
+	
+	@Transactional
+	public List<User> findAll() {
+		return userDao.findAll();
+	}
+	
+	@Transactional(rollbackFor = UserNotFoundException.class)
+	public void update(User... users) throws UserNotFoundException {
+		for (User user : users) {
+			userDao.update(user);	
+		}
 	}
 }

@@ -57,7 +57,6 @@ public class ClientDao extends AbstractDao<Client> {
 			// Long Id since accountNumber is also a Long type
 		}
 		return client;
-
 	}
 	
 	
