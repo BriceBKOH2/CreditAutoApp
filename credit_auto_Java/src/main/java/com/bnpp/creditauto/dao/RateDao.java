@@ -1,9 +1,11 @@
 package com.bnpp.creditauto.dao;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Rate;
 
@@ -23,7 +25,7 @@ public class RateDao extends AbstractDao<Rate> {
 	 * @param duration duration in months of the loan
 	 * @return the Rate
 	 */
-	public Rate getDecisionRate(Category cat, int vehiclePrice, int duration) {
+	public Rate getDecisionRate(Category cat, long vehiclePrice, int duration) throws RateNotFoundException {
 
 		String jpql = "select rate from DecisionTable dt "
 				+ "where dt.categ = :cat "
@@ -37,7 +39,11 @@ public class RateDao extends AbstractDao<Rate> {
 		query.setParameter("cat", cat);
 		query.setParameter("vehiclePrice", Long.valueOf(vehiclePrice));
 		query.setParameter("duration", Long.valueOf(duration));
-		return query.getSingleResult();
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			throw new RateNotFoundException("No rate found for selected parameters.");
+		}
 	}
 
 	// Implemented in AbstractDao

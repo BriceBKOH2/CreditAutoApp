@@ -1,49 +1,84 @@
 package com.bnpp.creditauto.utils;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.bnpp.creditauto.App;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.DecisionTable;
 import com.bnpp.creditauto.model.Rate;
+import com.bnpp.creditauto.model.User;
 import com.bnpp.creditauto.service.CategoryService;
+import com.bnpp.creditauto.service.ClientService;
+import com.bnpp.creditauto.service.ContractService;
 import com.bnpp.creditauto.service.DecisionTableService;
 import com.bnpp.creditauto.service.RateService;
+import com.bnpp.creditauto.service.UserService;
 
 /**
  * Add some data to the database so that it can be operational for basic
  * features. Need to run only one time.
+ * Delete all clients.
  * Delete all and then adds default Categories, Rates and DecisionTable entries.
  * 
  * @author Jordi
  *
  */
-@ComponentScan
+@Service
 public class DBData {
+
+	@Autowired
+	private CategoryService categSvc;
+	@Autowired
+	private RateService rateSvc;
+	@Autowired
+	private DecisionTableService dtSvc;
+	@Autowired
+	private ClientService cliSvc;
+	@Autowired
+	private UserService userSvc;
+	@Autowired
+	private ContractService contractSvc;
 	
 	private static Category[] categs = new Category[6];
 	private static Rate[] rates = new Rate[6];
 	private static DecisionTable[] dTables = new DecisionTable[10];
+	private static User[] users = new User[4];
 	
-	public static void init() {
+	public void init() {
 		
-		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class)) {
-			CategoryService categSvc = context.getBean(CategoryService.class);
-			RateService rateSvc = context.getBean(RateService.class);
-			DecisionTableService dtSvc = context.getBean(DecisionTableService.class);
-			deleteAll(categSvc, rateSvc, dtSvc);
-			createCateg(categSvc);
-			createRates(rateSvc);
-			createDecisions(dtSvc);
+//		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class)) {
+//			CategoryService categSvc = context.getBean(CategoryService.class);
+//			RateService rateSvc = context.getBean(RateService.class);
+//			DecisionTableService dtSvc = context.getBean(DecisionTableService.class);
+//			ClientService cliSvc = context.getBean(ClientService.class);
+//			deleteAll(cliSvc, categSvc, rateSvc, dtSvc);
+//		}
+		deleteAll(cliSvc, categSvc, rateSvc, dtSvc, userSvc, contractSvc);
+		createCateg(categSvc);
+		createRates(rateSvc);
+		createDecisions(dtSvc);
+		createUsers(userSvc);
+	}
+
+	private void createUsers(UserService userSvc) {
+		users[0] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
+		// "password": "$2a$10$v34U8LTRhj/9.YEOfOtiOeC.Rd0ZsAG4jPkqNE9YEi4nwshlMI9F2",
+		users[1] = new User("User", "User", "user", PasswordEncoderGenerator.generateEncodedPassword("user"), "user@gmail.com");
+		users[2] = new User("Philippe", "Gestionnaire", "gestionnaire", PasswordEncoderGenerator.generateEncodedPassword("jesaisoùtutecaches"), "philippe@nanar.com");
+		users[3] = new User("Smith", "Agent", "agent", PasswordEncoderGenerator.generateEncodedPassword("agent"), "agentsmith@matrix.com");
+		
+		for (User user : users) {
+			userSvc.save(user);
 		}
 	}
 
-	private static void deleteAll(CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc) {
+	private static void deleteAll(ClientService cliSvc, CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc, UserService userSvc, ContractService contractSvc) {
+		contractSvc.deleteAll();
+		cliSvc.deleteAll();
 		dtSvc.deleteAll();
 		rateSvc.deleteAll();
 		categSvc.deleteAll();
+		userSvc.deleteAll();
 	}
 
 	private static void createDecisions(DecisionTableService dtSvc) {

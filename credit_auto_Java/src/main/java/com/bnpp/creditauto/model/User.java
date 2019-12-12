@@ -7,9 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="users")
-public class User implements IdEntity{
+public class User implements IdEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,25 +19,32 @@ public class User implements IdEntity{
 	private Long id;
 
 	@Column
+	@NotBlank
 	private String firstName;
 	
 	@Column
-	private String lasttName;
+	@NotBlank
+	private String lastName;
 	
 	@Column
+	@NotBlank
 	private String login;
 	
 	@Column
+	@NotBlank
 	private String password;
 	
 	@Column
+	@NotBlank
 	private String mail;
+	
+	public User() {}
 
 	public User(Long id, String firstName, String lasttName, String login, String password, String mail) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
-		this.lasttName = lasttName;
+		this.lastName = lasttName;
 		this.login = login;
 		this.password = password;
 		this.mail = mail;
@@ -44,7 +53,7 @@ public class User implements IdEntity{
 	public User(String firstName, String lasttName, String login, String password, String mail) {
 		super();
 		this.firstName = firstName;
-		this.lasttName = lasttName;
+		this.lastName = lasttName;
 		this.login = login;
 		this.password = password;
 		this.mail = mail;
@@ -66,12 +75,12 @@ public class User implements IdEntity{
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
-		return lasttName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLasttName(String lasttName) {
-		this.lasttName = lasttName;
+	public void setLastName(String lasttName) {
+		this.lastName = lasttName;
 	}
 
 	public String getLogin() {
@@ -100,7 +109,7 @@ public class User implements IdEntity{
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lasttName=" + lasttName + ", login=" + login
+		return "User [id=" + id + ", firstName=" + firstName + ", lasttName=" + lastName + ", login=" + login
 				+ ", password=" + password + ", mail=" + mail + "]";
 	}
 	

@@ -22,7 +22,10 @@ export class SimulationService {
 
   postClient(client: Client) {
     let params = new HttpParams().set('client', JSON.stringify(client));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 80832450af2b1f15b9a99a404e4b8ffa66cee2a1
     console.log(params);
 
     return this.httpClient.post(this.endpointClient, { params });
@@ -34,7 +37,7 @@ export class SimulationService {
 
   getRateForLoan(): Observable<Rate> {
     let params = new HttpParams()
-      .set('cat', '1')
+      .set('catId', '1')
       .set('price', '5000')
       .set('dur', '24');
 

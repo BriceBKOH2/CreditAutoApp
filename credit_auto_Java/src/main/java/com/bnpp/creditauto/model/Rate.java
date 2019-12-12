@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table
 public class Rate implements IdEntity {
@@ -20,6 +22,7 @@ public class Rate implements IdEntity {
     private Long id;
 	
 	@Column
+	@NotBlank
 	private String name;
 	
 	@Column
