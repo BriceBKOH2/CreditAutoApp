@@ -27,41 +27,21 @@ public class ClientController {
 	
 	// Cette classe doit définir les methodes qui vont renvoyer du json
 	// Fera le lien entre le formulaire et le java.	
-	
-//	@Autowired
-//	private RateService rateSvc;
-	
-	/**
-	 * Create and return an arbitrary client.
-	 * For testing purposes.
-	 * @return
-	 */
-//	@RequestMapping(method = RequestMethod.GET)
-//	
-//	public Client mock() {
-//		Client client = new Client();
-//		client.setId(2000L);
-//		client.setFirstName("John");
-//		client.setLastName("Doe");
-//		client.setDateOfBirth(Date.valueOf(LocalDate.of(1995, 02, 14)));
-//		client.setAddress("45 rue des pinguoins");
-//		client.setAccountNumber(945487621L);
-//		client.setPhoneNumber("06 57 84 35 19");
-//		return client;
-//	}
-	
+
 	@Autowired
 	private ClientService clientService;
 	
 	@Autowired
 	private ContractService contractService;
+
+	/* Methods */
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Client> findAll() {
 		return clientService.findAll();
 	}
-	
+
 	@RequestMapping(value = "/accountnumber/{accountNumber}", method = RequestMethod.GET)
 	public Client findByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
 		return clientService.findByAccNumb(accountNumber);
@@ -71,14 +51,15 @@ public class ClientController {
 	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
 		return clientService.findById(id);
 	}
-	
+
 	@RequestMapping(value = "{firstName}/{lastName}", method = RequestMethod.GET)
-	public List<Client> findByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
+	public List<Client> findByNames(@PathVariable String firstName, @PathVariable String lastName)
+			throws ClientNotFoundException {
 		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
 	}
-	
-	@RequestMapping(method = RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client create(@RequestBody Client client) throws ClientNotFoundException {
 		 
@@ -104,16 +85,3 @@ public class ClientController {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,9 @@
 .project
 /.settings
-
-credit_auto_Java/target/
+<<<<<<< HEAD
+/target
+.classpath
+=======
+.classpath
+/target
+>>>>>>> back
