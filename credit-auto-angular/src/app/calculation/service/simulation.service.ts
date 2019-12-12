@@ -35,13 +35,14 @@ export class SimulationService {
   }
 
   getRateForLoan(contract: Contract): Observable<Rate> {
-    const params = new HttpParams()
-      .set('contract', JSON.stringify(contract));
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Content-Type', 'application/json');
 
-    console.log(params);
+    console.log(JSON.stringify(contract));
 
     return this.httpClient
-      .get(`${this.endpointRate}/decision`, { params })
+      .post(`${this.endpointRate}/simulation`, JSON.stringify(contract), { headers })
       .pipe(map((rate: Rate) => rate));
   }
 

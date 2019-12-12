@@ -36,7 +36,7 @@ public class RateDao extends AbstractDao<Rate> {
 		
 		query.setParameter("cat", contract.getVehicleCategory());
 		query.setParameter("vehiclePrice", contract.getVehiclePrice());
-		query.setParameter("duration", contract.getLoanDuration());
+		query.setParameter("duration", contract.getLoanDuration().longValue());
 		return query.getSingleResult();
 	}
 

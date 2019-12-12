@@ -72,7 +72,8 @@ export class CalcSheetComponent implements OnInit {
         this.contractForm.value.vehiclePrice,
         this.contractForm.value.loanAmount,
         this.contractForm.value.loanDuration,
-        this.contractForm.value.vehicleCat);
+        this.contractForm.value.vehicleCat
+        );
 
     this.simulationService.getRateForLoan(contract).subscribe(response => {
       this.rateLoan = response;
