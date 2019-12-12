@@ -26,6 +26,10 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/category';
   }
 
+  get endPointContract() {
+    return 'http://localhost:8080/credit_auto/api/contract';
+  }
+
   putClient(client: Client) {
     return this.httpClient.put<Client>(this.endPointClient, client);
   }
@@ -38,7 +42,7 @@ export class SimulationService {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('Content-Type', 'application/json');
-
+    console.log('contract observable simul service');
     console.log(JSON.stringify(contract));
 
     return this.httpClient
@@ -50,4 +54,17 @@ export class SimulationService {
     return this.httpClient
       .get<Category[]>(this.endPointCategory);
      }
+  
+  gettotalAmount(contract: Contract): Observable<Contract> {
+      let headers: HttpHeaders = new HttpHeaders();
+      headers = headers.append('Accept', 'application/json');
+      headers = headers.append('Content-Type', 'application/json');
+      console.log('contract observable contract service');
+      console.log(JSON.stringify(contract));
+  
+      return this.httpClient
+        .post(`${this.endPointContract}`, JSON.stringify(contract), { headers })
+        .pipe(map((amountDue: Contract) => amountDue));
+    }
+
 }

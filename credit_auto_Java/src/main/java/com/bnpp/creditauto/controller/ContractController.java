@@ -49,13 +49,13 @@ public class ContractController extends AbstractController {
 		return contractSvc.findById(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody Contract c) {
 		contractSvc.save(c);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.POST)
 	public Contract contractSimulator(@RequestBody Contract c) {
 		try {
 			contractSvc.contractSimulator(c);

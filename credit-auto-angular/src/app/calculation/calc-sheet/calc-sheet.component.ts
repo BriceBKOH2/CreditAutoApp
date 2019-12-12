@@ -28,6 +28,7 @@ export class CalcSheetComponent implements OnInit {
   rateLoan: Rate;
   client: Client;
 
+
   contractForm$: BehaviorSubject<{ vehicleCat: string }>;
 
   contractForm = new FormGroup({
@@ -40,12 +41,9 @@ export class CalcSheetComponent implements OnInit {
   constructor(private simulationService: SimulationService) {}
 
   ngOnInit() {
-    /*let cat1 = new Category('A', 1);
-    let cat2 = new Category('B', 2);
-    let cat3 = new Category('C', 3);
-    this.categories = [cat1, cat2, cat3];*/
-
+    
     this.simulationService.getCategories().subscribe(response => {
+      console.log('component ts')
       console.log(response);
       this.categories = response;
     });
@@ -60,6 +58,7 @@ export class CalcSheetComponent implements OnInit {
   showRates() {
     this.simulationService.getRates().subscribe(response => {
       this.rate$ = response;
+      console.log('component ts showRates')
       console.log(this.rate$);
     });
   }
@@ -75,27 +74,47 @@ export class CalcSheetComponent implements OnInit {
     this.simulationService.getRateForLoan(contract).subscribe(response => {
       this.rateLoan = response;
       this.rate$ = [this.rateLoan];
+      console.log('component ts LoanCalculation')
       console.log(this.rateLoan);
     });
   }
 
+  amountCalculation(){
+    const contract: Contract = new Contract(
+      this.contractForm.value.vehiclePrice,
+      this.contractForm.value.loanAmount,
+      this.contractForm.value.loanDuration,
+      this.contractForm.value.vehicleCat
+    );
+
+    this.simulationService.gettotalAmount(contract).subscribe(response => {
+      this.contract = response;
+      console.log('component ts LoanCalculation')
+      console.log(this.contract);
+    });
+  }
+
+
   onSubmitForm() {
     console.log(this.contractForm.value);
     this.loanCalculation();
+    console.log('component ts onSubmitForm')
+    console.log(this.loanCalculation());
+    this.amountCalculation();
 
-    this.client = new Client(
-      'Jade',
-      'Paul',
-      '1987-04-12',
-      '0605040302',
-      '03 diginamic street 34000 Montpellier',
-      true,
-      1234567890
-    );
+    // this.client = new Client(
+    //   'Jade',
+    //   'Paul',
+    //   '1987-04-12',
+    //   '0605040302',
+    //   '03 diginamic street 34000 Montpellier',
+    //   true,
+    //   1234567896
+    // );
 
-    this.simulationService.putClient(this.client).subscribe(response => {
-      this.client = response;
-      console.log(this.client);
-    });
+    // this.simulationService.putClient(this.client).subscribe(response => {
+    //   this.client = response;
+    //   console.log(this.client);
+    // });
   }
 }

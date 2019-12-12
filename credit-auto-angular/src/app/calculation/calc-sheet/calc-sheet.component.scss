@@ -14,3 +14,16 @@ h2 {
   width: 60%;
   padding: 2%;
 }
+
+.amount {
+  background: #fff;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  padding: 5px 3px 3px 3px;
+  text-align: center;
+}
+
+.amount span {
+  font-size: 20px;
+  font-weight: bold;
+}
