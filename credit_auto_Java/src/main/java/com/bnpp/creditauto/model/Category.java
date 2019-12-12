@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * Vehicle Categories that will be used in the decision of the rate of the loan.
  * @author Jordi
@@ -28,6 +30,7 @@ public class Category implements IdEntity {
 	private Long id;
 
 	@Column
+	@NotBlank
 	private String name;
 	
 	@Override

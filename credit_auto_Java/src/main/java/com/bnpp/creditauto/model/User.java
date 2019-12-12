@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="users")
 public class User implements IdEntity{
@@ -17,18 +19,23 @@ public class User implements IdEntity{
 	private Long id;
 
 	@Column
+	@NotBlank
 	private String firstName;
 	
 	@Column
+	@NotBlank
 	private String lasttName;
 	
 	@Column
+	@NotBlank
 	private String login;
 	
 	@Column
+	@NotBlank
 	private String password;
 	
 	@Column
+	@NotBlank
 	private String mail;
 
 	public User(Long id, String firstName, String lasttName, String login, String password, String mail) {

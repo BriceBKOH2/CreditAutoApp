@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Rate } from '../class/rate';
-import { filter } from 'minimatch';
+import { Client } from '../class/client';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,35 @@ import { filter } from 'minimatch';
 export class SimulationService {
   constructor(private httpClient: HttpClient) {}
 
-  get endpoint() {
+  get endpointRate() {
     return 'http://localhost:8080/credit_auto/api/rate';
   }
 
+  get endpointClient() {
+    return 'http://localhost:8080/credit_auto/api/client';
+  }
+
+  postClient(client: Client) {
+    let params = new HttpParams().set('client', JSON.stringify(client));
+    console.log(params);
+
+    return this.httpClient.post(this.endpointClient, { params });
+  }
+
   getRates(): Observable<Rate[]> {
-    return this.httpClient.get<Rate[]>(this.endpoint);
+    return this.httpClient.get<Rate[]>(this.endpointRate);
+  }
+
+  getRateForLoan(): Observable<Rate> {
+    let params = new HttpParams()
+      .set('catId', '1')
+      .set('price', '5000')
+      .set('dur', '24');
+
+    console.log(params);
+
+    return this.httpClient
+      .get(`${this.endpointRate}/decision`, { params })
+      .pipe(map((rate: Rate) => rate));
   }
 }

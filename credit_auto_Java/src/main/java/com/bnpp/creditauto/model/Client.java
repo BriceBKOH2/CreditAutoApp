@@ -10,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table
+@Table//(uniqueConstraints= {@UniqueConstraint(columnNames = {"accountNumber"})})
 public class Client implements IdEntity {
 
 	@Id
@@ -21,9 +24,11 @@ public class Client implements IdEntity {
 	private Long id;
 	
 	@Column
+	@NotBlank
 	private String firstName;
 	
 	@Column
+	@NotBlank
 	private String lastName;
 	
 	@Column
@@ -38,10 +43,9 @@ public class Client implements IdEntity {
 	@Column//(name="client_active")
 	private Boolean isActive;
 	
-	@Column//(unique = true)
-	private Long accountNumber; // Currently not bound to any table, can be set as a foreign key from the account
-								// table later
-
+	@Column(unique=true)
+	private Long accountNumber;
+	
 	@OneToMany(mappedBy="client")
 	private List<Contract> contract;
 
