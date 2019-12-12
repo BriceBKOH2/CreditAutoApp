@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,7 +73,7 @@ public class ClientController {
 		return clientService.findByNames(firstName, lastName);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client create(@RequestBody Client client) throws ClientNotFoundException {
 

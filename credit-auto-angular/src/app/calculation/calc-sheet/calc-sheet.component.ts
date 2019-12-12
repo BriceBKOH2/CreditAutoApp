@@ -46,18 +46,6 @@ export class CalcSheetComponent implements OnInit {
     this.contractForm$ = new BehaviorSubject({ vehicleCat: this.contractForm.get('vehicleCat').value});
 
     this.showRates();
-
-    this.client = new Client(
-      'Jade',
-      'Paul',
-      '12/4/1987',
-      '0605040302',
-      '03 diginamic street 34000 Montpellier',
-      true,
-      123456789
-    );
-
-    this.simulationService.postClient(this.client);
   }
 
   showRates() {
@@ -85,5 +73,21 @@ export class CalcSheetComponent implements OnInit {
   onSubmitForm() {
     console.log(this.contractForm.value);
     this.loanCalculation();
+
+    this.client = new Client(
+      'Jade',
+      'Paul',
+      '1987-04-12',
+      '0605040302',
+      '03 diginamic street 34000 Montpellier',
+      true,
+      1234567890
+    );
+
+    this.simulationService.putClient(this.client).subscribe(response => 
+      {this.client = response;
+        console.log(this.client)
+      }
+      );
   }
 }

@@ -26,7 +26,7 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/category';
   }
 
-  postClient(client: Client) {
+  putClient(client: Client) {
     return this.httpClient.put<Client>(this.endpointClient, client);
   }
 
