@@ -25,7 +25,7 @@ public class RateDao extends AbstractDao<Rate> {
 	 * @param duration duration in months of the loan
 	 * @return the Rate
 	 */
-	public Rate getDecisionRate(Category cat, int vehiclePrice, int duration) throws RateNotFoundException {
+	public Rate getDecisionRate(Category cat, long vehiclePrice, int duration) throws RateNotFoundException {
 
 		String jpql = "select rate from DecisionTable dt "
 				+ "where dt.categ = :cat "

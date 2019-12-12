@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Client implements IdEntity {
@@ -45,11 +47,12 @@ public class Client implements IdEntity {
 	@Column(unique=true)
 	private Long accountNumber;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private List<Contract> contracts;
 
 	/* Constructors */
-	
+
 	public Client() {
 		
 	}

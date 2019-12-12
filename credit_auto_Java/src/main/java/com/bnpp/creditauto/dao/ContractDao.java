@@ -8,13 +8,11 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.ContractNotFoundException;
-import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.Contract;
 
 @Repository
-public class ContractDao extends AbstractDao<Contract>{
+public class ContractDao extends AbstractDao<Contract> {
 
 	@Override
 	protected Class<Contract> getEntityClass() {
@@ -43,7 +41,7 @@ public class ContractDao extends AbstractDao<Contract>{
 		}
 		session.delete(contract);
 	}
-	
+
 	/** Can return an empty list instead of an ContractNotFoundException */
 	public List<Contract> findAll() {
 		Session session = getSession();

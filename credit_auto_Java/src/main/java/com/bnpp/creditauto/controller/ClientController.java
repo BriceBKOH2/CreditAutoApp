@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.exception.ClientNotFoundException;
+import com.bnpp.creditauto.exception.ContractNotFoundException;
 import com.bnpp.creditauto.model.Client;
+import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.service.ClientService;
+import com.bnpp.creditauto.service.ContractService;
 
 @RestController
 @RequestMapping("/api/client")
@@ -50,6 +53,9 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 	
+	@Autowired
+	private ContractService contractService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Client> findAll() {
@@ -61,7 +67,7 @@ public class ClientController {
 		return clientService.findByAccNumb(accountNumber);
 	}
 	
-	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
 		return clientService.findById(id);
 	}
@@ -86,6 +92,16 @@ public class ClientController {
 	public void update(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
 		client.setId(id);
 		clientService.update(client);
+	}
+	
+	@RequestMapping(value = "/{id}/contracts", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Contract> getContracts(@PathVariable Long id) throws ClientNotFoundException {
+		try {
+			return contractService.findAllByClientId(id);
+		} catch (ContractNotFoundException e) {
+			return null;
+		}
 	}
 }
 
