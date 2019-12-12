@@ -2,21 +2,21 @@ import { Category } from './category';
 import { Client } from './client';
 
 export class Contract {
-  id: number;
+  vehicleCategory: Category;
   vehiclePrice: number;
   loanAmount: number;
   loanDuration: number;
   rate: number;
   amountDue: number;
+  id: number;
   isActive: boolean;
   client: Client;
-  vehicleCat: Category;
 
   constructor(
     vehiclePrice: number,
     loanAmount: number,
     loanDuration: number,
-    vehicleCat?: Category,
+    vehicleCategory?: Category,
     rate?: number,
     amountDue?: number,
     isActive?: boolean,
@@ -31,6 +31,6 @@ export class Contract {
     this.amountDue = amountDue;
     this.isActive = isActive;
     this.client = client;
-    this.vehicleCat = vehicleCat;
+    this.vehicleCategory = vehicleCategory;
   }
 }
