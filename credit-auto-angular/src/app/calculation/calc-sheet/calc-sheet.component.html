@@ -6,7 +6,6 @@
   <form (ngSubmit)="loanCalculation(myform)" #myform="ngForm">
     <div class="row">
       <div class="col">
-        <ng-container></ng-container>
         <div class="form-group">
           <label for="car_price">Montant de l'achat </label>
           <div>
@@ -43,9 +42,9 @@
             id="car_class"
             name="car_class"
           >
-            <option *ngFor="let category of categories">{{
-              category.name
-            }}</option>
+            <option *ngFor="let category of categories">
+              {{ category.name }}</option
+            >
           </select>
         </div>
 
