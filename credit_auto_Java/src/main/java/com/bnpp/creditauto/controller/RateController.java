@@ -39,7 +39,7 @@ public class RateController {
 		return rateSvc.findAll();
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Rate findById(@PathVariable Long id) {
 		return rateSvc.findById(id);

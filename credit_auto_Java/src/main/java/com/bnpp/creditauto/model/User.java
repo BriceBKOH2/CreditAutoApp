@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="users")
-public class User implements IdEntity{
+public class User implements IdEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class User implements IdEntity{
 	
 	@Column
 	@NotBlank
-	private String lasttName;
+	private String lastName;
 	
 	@Column
 	@NotBlank
@@ -37,12 +37,14 @@ public class User implements IdEntity{
 	@Column
 	@NotBlank
 	private String mail;
+	
+	public User() {}
 
 	public User(Long id, String firstName, String lasttName, String login, String password, String mail) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
-		this.lasttName = lasttName;
+		this.lastName = lasttName;
 		this.login = login;
 		this.password = password;
 		this.mail = mail;
@@ -51,7 +53,7 @@ public class User implements IdEntity{
 	public User(String firstName, String lasttName, String login, String password, String mail) {
 		super();
 		this.firstName = firstName;
-		this.lasttName = lasttName;
+		this.lastName = lasttName;
 		this.login = login;
 		this.password = password;
 		this.mail = mail;
@@ -73,12 +75,12 @@ public class User implements IdEntity{
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
-		return lasttName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLasttName(String lasttName) {
-		this.lasttName = lasttName;
+	public void setLastName(String lasttName) {
+		this.lastName = lasttName;
 	}
 
 	public String getLogin() {
@@ -107,7 +109,7 @@ public class User implements IdEntity{
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lasttName=" + lasttName + ", login=" + login
+		return "User [id=" + id + ", firstName=" + firstName + ", lasttName=" + lastName + ", login=" + login
 				+ ", password=" + password + ", mail=" + mail + "]";
 	}
 	

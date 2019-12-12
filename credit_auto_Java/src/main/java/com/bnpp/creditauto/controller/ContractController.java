@@ -13,44 +13,57 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.bnpp.creditauto.exception.ContractNotFoundException;
+
+import com.bnpp.creditauto.exception.ClientNotFoundException;
+import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.service.ContractService;
 
 @RestController
 @RequestMapping("/api/contract")
 @CrossOrigin(origins = "http://localhost:4200")
-public class ContractController {
+public class ContractController extends AbstractController {
 
 	@Autowired
-	private ContractService contractService;
+	private ContractService contractSvc;
+	
+//	@Autowired
+//	private JsonHelper jsonHelper;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Contract> findAll() {
-		return contractService.findAll();
-	}
-	
-	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-	public Contract findById(@PathVariable Long id) throws ContractNotFoundException {
-		return contractService.findById(id);
-	}
-	
-	
-	@RequestMapping(method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public Contract create(@RequestBody Contract contract) throws ContractNotFoundException {
-		 
-		 System.out.println(contract);
-		 contractService.save(contract);
-		 System.out.println(contract);
-		 return contract;
+		return contractSvc.findAll();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public void update(@PathVariable Long id, @RequestBody Contract contract) throws ContractNotFoundException {
 		contract.setId(id);
-		contractService.update(contract);
+		contractSvc.update(contract);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Contract findById(@PathVariable Long id) throws ClientNotFoundException {
+		return contractSvc.findById(id);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void create(@RequestBody Contract c) {
+		contractSvc.save(c);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public Contract contractSimulator(@RequestBody Contract c) {
+		try {
+			contractSvc.contractSimulator(c);
+		} catch (RateNotFoundException e) {
+			System.err.print(e.getMessage());
+			return null;
+		}
+		return c;
 	}
 	
 }
