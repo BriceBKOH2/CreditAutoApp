@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table//(uniqueConstraints= {@UniqueConstraint(columnNames = {"accountNumber"})})
+@Table
 public class Client implements IdEntity {
 
 	@Id
