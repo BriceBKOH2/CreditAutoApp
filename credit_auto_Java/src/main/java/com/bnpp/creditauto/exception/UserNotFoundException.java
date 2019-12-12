@@ -1,6 +1,6 @@
 package com.bnpp.creditauto.exception;
 
-public class UserNotFoundException extends Exception {
+public class UserNotFoundException extends NotFoundException {
 
 	/**
 	 * 
@@ -13,5 +13,9 @@ public class UserNotFoundException extends Exception {
 	
 	public UserNotFoundException(String firstName, String lastName) {
 		System.err.println("User firstName : " + firstName + " ans lastName : " + lastName + " not found in database");
+	}
+	
+	public UserNotFoundException(String msg) {
+		super(msg);
 	}
 }

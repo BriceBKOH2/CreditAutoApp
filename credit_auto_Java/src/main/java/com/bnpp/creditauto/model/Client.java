@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Client implements IdEntity {
@@ -21,9 +25,11 @@ public class Client implements IdEntity {
 	private Long id;
 	
 	@Column
+	@NotBlank
 	private String firstName;
 	
 	@Column
+	@NotBlank
 	private String lastName;
 	
 	@Column
@@ -35,18 +41,18 @@ public class Client implements IdEntity {
 	@Column
 	private String address;
 	
-	@Column//(name="client_active")
+	@Column
 	private Boolean isActive;
 	
-	@Column//(unique = true)
-	private Long accountNumber; // Currently not bound to any table, can be set as a foreign key from the account
-								// table later
-
+	@Column(unique=true)
+	private Long accountNumber;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
-	private List<Contract> contract;
+	private List<Contract> contracts;
 
 	/* Constructors */
-	
+
 	public Client() {
 		
 	}
@@ -148,9 +154,26 @@ public class Client implements IdEntity {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+	
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
+	}
 
 	/* Other Methods */
-
+	
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="

@@ -50,8 +50,9 @@ public abstract class AbstractDao<T extends IdEntity> {
 	}
 	
 	@Transactional
-	public void persist(Object entity) {
+	public T persist(T entity) {
 		em.persist(entity);
+		return entity;
 	}
 	
 	@Transactional
