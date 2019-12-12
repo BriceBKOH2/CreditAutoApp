@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.DecisionTable;
 import com.bnpp.creditauto.model.Rate;
+import com.bnpp.creditauto.model.User;
 import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.ClientService;
 import com.bnpp.creditauto.service.DecisionTableService;
 import com.bnpp.creditauto.service.RateService;
+import com.bnpp.creditauto.service.UserService;
 
 /**
  * Add some data to the database so that it can be operational for basic
@@ -31,10 +33,13 @@ public class DBData {
 	private DecisionTableService dtSvc;
 	@Autowired
 	private ClientService cliSvc;
+	@Autowired
+	private UserService userSvc;
 	
 	private static Category[] categs = new Category[6];
 	private static Rate[] rates = new Rate[6];
 	private static DecisionTable[] dTables = new DecisionTable[10];
+	private static User[] users = new User[4];
 	
 	public void init() {
 		
@@ -45,17 +50,27 @@ public class DBData {
 //			ClientService cliSvc = context.getBean(ClientService.class);
 //			deleteAll(cliSvc, categSvc, rateSvc, dtSvc);
 //		}
-		deleteAll(cliSvc, categSvc, rateSvc, dtSvc);
+		deleteAll(cliSvc, categSvc, rateSvc, dtSvc, userSvc);
 		createCateg(categSvc);
 		createRates(rateSvc);
 		createDecisions(dtSvc);
+		createUsers(userSvc);
 	}
 
-	private static void deleteAll(ClientService cliSvc, CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc) {
+	private void createUsers(UserService userSvc) {
+		users[0] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
+		users[1] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
+		users[2] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
+		users[3] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
+		
+	}
+
+	private static void deleteAll(ClientService cliSvc, CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc, UserService userSvc) {
 		cliSvc.deleteAll();
 		dtSvc.deleteAll();
 		rateSvc.deleteAll();
 		categSvc.deleteAll();
+		userSvc.deleteAll();
 	}
 
 	private static void createDecisions(DecisionTableService dtSvc) {

@@ -24,4 +24,8 @@ public class UserService {
 	public User findById(Long id) {
 		return userDao.findById(id);
 	}
+	
+	public void deleteAll() {
+		userDao.deleteAll();
+	}
 }
