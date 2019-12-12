@@ -52,5 +52,9 @@ public class ContractService {
 	public List<Contract> findAll() {
 		return contractDao.findAll();
 	}
+	
+	public List<Contract> findAllByClientId(Long id) throws ContractNotFoundException {
+		return contractDao.findAllByClientId(id);
+	}
 
 }
