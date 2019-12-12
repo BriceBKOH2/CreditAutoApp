@@ -58,10 +58,10 @@ public class DBData {
 	}
 
 	private void createUsers(UserService userSvc) {
-		users[0] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
-		users[1] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
-		users[2] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
-		users[3] = new User("Admin", "Admin", "admin", generateEncodedPassword("admin"), "admin@admin.com");
+		users[0] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
+		users[1] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
+		users[2] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
+		users[3] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
 		
 	}
 

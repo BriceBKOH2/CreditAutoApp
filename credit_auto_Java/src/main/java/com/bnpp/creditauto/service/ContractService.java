@@ -74,6 +74,7 @@ public class ContractService {
 	 * @param c The contract to be modified.
 	 * @throws RateNotFoundException 
 	 */
+	@Transactional
 	public void contractSimulator(Contract c) throws RateNotFoundException {
 		
 		c.setRate(rateSvc.getDecisionRate(

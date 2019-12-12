@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.bnpp.creditauto.exception.ContractNotFoundException;
+
 import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Contract;
@@ -35,16 +38,15 @@ public class ContractController extends AbstractController {
 		return contractSvc.findAll();
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public void update(@PathVariable Long id, @RequestBody Contract contract) throws ContractNotFoundException {
+		contract.setId(id);
+		contractSvc.update(contract);
+	}
+	
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
 	public Contract findById(@PathVariable Long id) throws ClientNotFoundException {
 		return contractSvc.findById(id);
-	}
-	
-	@RequestMapping(value = "/client/{id}", method = RequestMethod.GET)
-	public List<Contract> findByClientId(@PathVariable Long id) throws ClientNotFoundException {
-		//TODO
-//		return contractSvc.findByClientId(id);
-		return null;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -61,7 +63,6 @@ public class ContractController extends AbstractController {
 			System.err.print(e.getMessage());
 			return null;
 		}
-		
 		return c;
 	}
 	

@@ -29,5 +29,8 @@ public class CategoryService {
 	public void deleteAll() {
 		categDao.deleteAll();
 	}
-
+	
+	public Category findByName(String name) {
+		return categDao.findByName(name);
+	}
 }

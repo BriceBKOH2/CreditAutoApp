@@ -47,21 +47,23 @@ public class ContractDao extends AbstractDao<Contract> {
 		Session session = getSession();
 		return session.createQuery("FROM Contract", Contract.class).getResultList();
 	}
-
+	
+	
 	public List<Contract> findAllByClientId(Long id) throws ContractNotFoundException {
+		
 		Session session = getSession();
-		TypedQuery<Contract> query = session.createQuery("FROM Contract co WHERE co.client.id=:id ",Contract.class);
+		TypedQuery<Contract> query = session.createQuery("FROM Contract co WHERE co.client.id=:id ",
+														  Contract.class);
 		query.setParameter("id", id);
 		List<Contract> contracts;
+		
 		try {
 			contracts = query.getResultList();
 		} catch (NoResultException e) {
 			throw new ContractNotFoundException(id); // We transform to string to differentiate with
 			// argument
-			// Long Id since accountNumber is also a Long type	
 		}
 		return contracts;
-
 	}
 
 }
