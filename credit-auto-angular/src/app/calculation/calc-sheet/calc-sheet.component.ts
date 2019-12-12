@@ -15,7 +15,12 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./calc-sheet.component.scss']
 })
 export class CalcSheetComponent implements OnInit {
-  contract: Contract = new Contract(undefined, undefined, undefined, new Category('A'));
+  contract: Contract = new Contract(
+    undefined,
+    undefined,
+    undefined,
+    new Category('A')
+  );
   categories: Category[];
   myForm: string;
   query: string;
@@ -23,7 +28,7 @@ export class CalcSheetComponent implements OnInit {
   rateLoan: Rate;
   client: Client;
 
-  contractForm$: BehaviorSubject<{ vehicleCat: string}>;
+  contractForm$: BehaviorSubject<{ vehicleCat: string }>;
 
   contractForm = new FormGroup({
     vehiclePrice: new FormControl(''),
@@ -40,10 +45,14 @@ export class CalcSheetComponent implements OnInit {
     let cat3 = new Category('C', 3);
     this.categories = [cat1, cat2, cat3];*/
 
-    this.simulationService.getCategories().subscribe(response => { console.log(response);
-                                                                   this.categories = response; });
+    this.simulationService.getCategories().subscribe(response => {
+      console.log(response);
+      this.categories = response;
+    });
 
-    this.contractForm$ = new BehaviorSubject({ vehicleCat: this.contractForm.get('vehicleCat').value});
+    this.contractForm$ = new BehaviorSubject({
+      vehicleCat: this.contractForm.get('vehicleCat').value
+    });
 
     this.showRates();
   }
@@ -57,11 +66,11 @@ export class CalcSheetComponent implements OnInit {
 
   loanCalculation() {
     const contract: Contract = new Contract(
-        this.contractForm.value.vehiclePrice,
-        this.contractForm.value.loanAmount,
-        this.contractForm.value.loanDuration,
-        this.contractForm.value.vehicleCat
-        );
+      this.contractForm.value.vehiclePrice,
+      this.contractForm.value.loanAmount,
+      this.contractForm.value.loanDuration,
+      this.contractForm.value.vehicleCat
+    );
 
     this.simulationService.getRateForLoan(contract).subscribe(response => {
       this.rateLoan = response;
@@ -84,10 +93,9 @@ export class CalcSheetComponent implements OnInit {
       1234567890
     );
 
-    this.simulationService.putClient(this.client).subscribe(response => 
-      {this.client = response;
-        console.log(this.client)
-      }
-      );
+    this.simulationService.putClient(this.client).subscribe(response => {
+      this.client = response;
+      console.log(this.client);
+    });
   }
 }

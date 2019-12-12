@@ -26,7 +26,6 @@ public class Rate implements IdEntity {
 	private String name;
 	
 	@Column
-	@NotBlank
 	private Double rateAmount;
 	
 	@OneToMany(mappedBy="rate")

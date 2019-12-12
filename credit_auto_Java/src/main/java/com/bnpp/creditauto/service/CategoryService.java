@@ -14,6 +14,10 @@ public class CategoryService {
 	@Autowired
 	CategoryDao categDao;
 	
+	public Category findById(Long id) {
+		return categDao.findById(id);
+	}
+	
 	public List<Category> findAll() {
 		return categDao.findAll();
 	}
@@ -25,8 +29,8 @@ public class CategoryService {
 	public void deleteAll() {
 		categDao.deleteAll();
 	}
-
-	public Category findById(Long id) {
-		return categDao.findById(id);
+	
+	public Category findByName(String name) {
+		return categDao.findByName(name);
 	}
 }

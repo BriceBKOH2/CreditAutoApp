@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Table
 public class Contract implements IdEntity {
@@ -22,21 +20,33 @@ public class Contract implements IdEntity {
 	private Long id;
 
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Long vehiclePrice;
-
+	
+	/**
+	 * Amount lent to the client.
+	 */
 	@Column
-	private Long loanAmount; // Amount lent to the client
-
+//	@NotBlank
+	private Long loanAmount;
+	
+	/**
+	 * This is the total amount that the client have to pay. 
+	 * It is equal to the Loan amount with the interests.
+	 */
 	@Column
-	private Long amountDue; // Amount the client need to repay
-
+//	@NotBlank
+	private Long amountDue;
+	
+	/**
+	 * Duration, in months.
+	 */
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Integer loanDuration;
 
 	@Column
-	@NotBlank
+//	@NotBlank
 	private Double rate;
 
 	@Column
@@ -179,6 +189,22 @@ public class Contract implements IdEntity {
 
 	public void setVehicleCategory(Category vehicleCategory) {
 		this.vehicleCategory = vehicleCategory;
+	}
+	
+	public Long getAmountDue() {
+		return amountDue;
+	}
+
+	public void setAmountDue(Long amountDue) {
+		this.amountDue = amountDue;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	/* Other Methods */

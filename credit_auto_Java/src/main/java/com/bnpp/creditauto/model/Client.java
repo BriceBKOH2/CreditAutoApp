@@ -10,12 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table//(uniqueConstraints= {@UniqueConstraint(columnNames = {"accountNumber"})})
+@Table
 public class Client implements IdEntity {
 
 	@Id
@@ -40,17 +41,18 @@ public class Client implements IdEntity {
 	@Column
 	private String address;
 	
-	@Column//(name="client_active")
+	@Column
 	private Boolean isActive;
 	
 	@Column(unique=true)
 	private Long accountNumber;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
-	private List<Contract> contract;
+	private List<Contract> contracts;
 
 	/* Constructors */
-	
+
 	public Client() {
 		
 	}
@@ -152,9 +154,26 @@ public class Client implements IdEntity {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+	
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
+	}
 
 	/* Other Methods */
-
+	
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="

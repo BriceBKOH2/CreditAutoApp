@@ -14,42 +14,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.exception.ClientNotFoundException;
+import com.bnpp.creditauto.exception.ContractNotFoundException;
 import com.bnpp.creditauto.model.Client;
+import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.service.ClientService;
+import com.bnpp.creditauto.service.ContractService;
 
 @RestController
 @RequestMapping("/api/client")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
-
+	
 	// Cette classe doit définir les methodes qui vont renvoyer du json
-	// Fera le lien entre le formulaire et le java.
-
-//	@Autowired
-//	private RateService rateSvc;
-
-	/**
-	 * Create and return an arbitrary client. For testing purposes.
-	 * 
-	 * @return
-	 */
-//	@RequestMapping(method = RequestMethod.GET)
-//	
-//	public Client mock() {
-//		Client client = new Client();
-//		client.setId(2000L);
-//		client.setFirstName("John");
-//		client.setLastName("Doe");
-//		client.setDateOfBirth(Date.valueOf(LocalDate.of(1995, 02, 14)));
-//		client.setAddress("45 rue des pinguoins");
-//		client.setAccountNumber(945487621L);
-//		client.setPhoneNumber("06 57 84 35 19");
-//		return client;
-//	}
+	// Fera le lien entre le formulaire et le java.	
 
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private ContractService contractService;
 
+	/* Methods */
+	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Client> findAll() {
@@ -60,8 +46,8 @@ public class ClientController {
 	public Client findByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
 		return clientService.findByAccNumb(accountNumber);
 	}
-
-	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
 		return clientService.findById(id);
 	}
@@ -76,16 +62,26 @@ public class ClientController {
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client create(@RequestBody Client client) throws ClientNotFoundException {
-
-		System.out.println(client);
-		clientService.save(client);
-		System.out.println(client);
-		return client;
+		 
+		 System.out.println(client);
+		 clientService.save(client);
+		 System.out.println(client);
+		 return client;
 	}
-
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public void update(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
 		client.setId(id);
 		clientService.update(client);
+	}
+	
+	@RequestMapping(value = "/{id}/contracts", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Contract> getContracts(@PathVariable Long id) throws ClientNotFoundException {
+		try {
+			return contractService.findAllByClientId(id);
+		} catch (ContractNotFoundException e) {
+			return null;
+		}
 	}
 }

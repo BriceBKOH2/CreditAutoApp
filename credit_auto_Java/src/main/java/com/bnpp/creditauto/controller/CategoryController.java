@@ -24,12 +24,18 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Category findById(@PathVariable Long id) {
 		return categoryService.findById(id);
 	}
-
+	
+	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
+	@ResponseBody
+	public Category findByName(@PathVariable String name) {
+		return categoryService.findByName(name);
+	}
+	
 	/**
 	 * Create and return an arbitrary rate. For testing purposes.
 	 * 
