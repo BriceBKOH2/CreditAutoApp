@@ -44,7 +44,7 @@ public class ContractController extends AbstractController {
 		contractSvc.update(contract);
 	}
 	
-	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Contract findById(@PathVariable Long id) throws ClientNotFoundException {
 		return contractSvc.findById(id);
 	}

@@ -9,6 +9,7 @@ import com.bnpp.creditauto.model.Rate;
 import com.bnpp.creditauto.model.User;
 import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.ClientService;
+import com.bnpp.creditauto.service.ContractService;
 import com.bnpp.creditauto.service.DecisionTableService;
 import com.bnpp.creditauto.service.RateService;
 import com.bnpp.creditauto.service.UserService;
@@ -35,6 +36,8 @@ public class DBData {
 	private ClientService cliSvc;
 	@Autowired
 	private UserService userSvc;
+	@Autowired
+	private ContractService contractSvc;
 	
 	private static Category[] categs = new Category[6];
 	private static Rate[] rates = new Rate[6];
@@ -50,7 +53,7 @@ public class DBData {
 //			ClientService cliSvc = context.getBean(ClientService.class);
 //			deleteAll(cliSvc, categSvc, rateSvc, dtSvc);
 //		}
-		deleteAll(cliSvc, categSvc, rateSvc, dtSvc, userSvc);
+		deleteAll(cliSvc, categSvc, rateSvc, dtSvc, userSvc, contractSvc);
 		createCateg(categSvc);
 		createRates(rateSvc);
 		createDecisions(dtSvc);
@@ -59,13 +62,18 @@ public class DBData {
 
 	private void createUsers(UserService userSvc) {
 		users[0] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
-		users[1] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
-		users[2] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
-		users[3] = new User("Admin", "Admin", "admin", PasswordEncoderGenerator.generateEncodedPassword("admin"), "admin@admin.com");
+		// "password": "$2a$10$v34U8LTRhj/9.YEOfOtiOeC.Rd0ZsAG4jPkqNE9YEi4nwshlMI9F2",
+		users[1] = new User("User", "User", "user", PasswordEncoderGenerator.generateEncodedPassword("user"), "user@gmail.com");
+		users[2] = new User("Philippe", "Gestionnaire", "gestionnaire", PasswordEncoderGenerator.generateEncodedPassword("jesaisoùtutecaches"), "philippe@nanar.com");
+		users[3] = new User("Smith", "Agent", "agent", PasswordEncoderGenerator.generateEncodedPassword("agent"), "agentsmith@matrix.com");
 		
+		for (User user : users) {
+			userSvc.save(user);
+		}
 	}
 
-	private static void deleteAll(ClientService cliSvc, CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc, UserService userSvc) {
+	private static void deleteAll(ClientService cliSvc, CategoryService categSvc, RateService rateSvc, DecisionTableService dtSvc, UserService userSvc, ContractService contractSvc) {
+		contractSvc.deleteAll();
 		cliSvc.deleteAll();
 		dtSvc.deleteAll();
 		rateSvc.deleteAll();

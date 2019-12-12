@@ -30,7 +30,7 @@ public class UserController {
 		return userService.findAll();
 	}
 	
-	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public User findById(@PathVariable Long id) throws ClientNotFoundException {
 		return userService.findById(id);
 	}
@@ -55,5 +55,16 @@ public class UserController {
 	public void update(@PathVariable Long id, @RequestBody User client) throws UserNotFoundException {
 		client.setId(id);
 		userService.update(client);
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public void login(String login, String password) {
+		try {
+			userService.login(login, password);
+			System.out.println("Logged as " + login);
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

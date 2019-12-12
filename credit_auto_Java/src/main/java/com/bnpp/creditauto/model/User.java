@@ -37,6 +37,8 @@ public class User implements IdEntity {
 	@Column
 	@NotBlank
 	private String mail;
+	
+	public User() {}
 
 	public User(Long id, String firstName, String lasttName, String login, String password, String mail) {
 		super();

@@ -44,4 +44,9 @@ public class UserService {
 			userDao.update(user);	
 		}
 	}
+	
+	public User login(String login, String password) throws UserNotFoundException {
+		return userDao.findByCredentials(login, password);
+		
+	}
 }
