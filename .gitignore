@@ -1,9 +1,4 @@
 .project
-/.settings
-<<<<<<< HEAD
 .classpath
+/.settings
 /target
-=======
-
-credit_auto_Java/target/
->>>>>>> 80832450af2b1f15b9a99a404e4b8ffa66cee2a1
