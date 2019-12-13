@@ -4,6 +4,14 @@
 
 <web-app >
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>f1</filter-name>
+  	<filter-class>com.bnpp.creditauto.filter.ConnectionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>f1</filter-name>
+  	<url-pattern>/api/util</url-pattern>
+  </filter-mapping>
 </web-app>
 
 

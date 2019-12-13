@@ -14,8 +14,10 @@ public class ConnectionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		System.out.println(":)");
-		
+		System.out.println("Filter");
+		System.out.println(request.getAttributeNames());
+		chain.doFilter(request, response);
+		System.out.println("after chain");
 	}
 
 }
