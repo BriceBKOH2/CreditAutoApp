@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnpp.creditauto.filter.ConnectionFilter;
 import com.bnpp.creditauto.utils.DBData;
 
 /**
