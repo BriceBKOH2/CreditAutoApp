@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.creditauto.dao.RateDao;
+import com.bnpp.creditauto.exception.NotFoundException;
+import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
 
@@ -28,8 +30,12 @@ public class RateService {
 		return rateDao.getDecisionRate(contract);
 	}
 	
-	public Rate findById(Long id) {
-		return rateDao.findById(id);
+	public Rate findById(Long id) throws RateNotFoundException {
+		try {
+			return rateDao.findById(id);
+		} catch (NotFoundException e) {
+			throw new RateNotFoundException(id);
+		}
 	}
 	
 	public List<Rate> findAll() {

@@ -3,10 +3,10 @@
 <div
   class="container d-flex justify-content-around form1 alert alert-secondary"
 >
-  <form [formGroup]="contractForm" (ngSubmit)="onSubmitForm()" >
+  <form [formGroup]="contractForm" (ngSubmit)="onSubmitForm()">
     <div class="row">
       <div class="col">
-       <div class="form-group">
+        <div class="form-group">
           <label for="car_price">Montant de l'achat </label>
           <div>
             <input
@@ -18,13 +18,13 @@
               min="10000"
               placeholder="Ex: 10000"
             />
-            </div>
+          </div>
         </div>
 
         <div class="form-group">
           <label for="loan_amount">Montant du prêt </label>
           <input
-          formControlName="loanAmount"
+            formControlName="loanAmount"
             id="loan_amount"
             name="loan_amount"
             class="form-control"
@@ -42,10 +42,10 @@
             class="form-control"
             name="vehicleCat"
             id="car_class"
-            
           >
-            <option *ngFor="let category of categories"
-            [ngValue]="category">{{ category.name }}</option>
+            <option *ngFor="let category of categories" [ngValue]="category">{{
+              category.name
+            }}</option>
           </select>
         </div>
 
@@ -66,15 +66,15 @@
         <ng-container *ngIf="contract.amountDue">
           <div class="form-group amount">
             <label for="loan_amount">Montant du crédit :</label>
-          <br>
-           <span>{{ contract.amountDue }} €</span> 
+            <br />
+            <span>{{ contract.amountDue }} €</span>
           </div>
         </ng-container>
 
         <div>
-          <button class="btn btn-squared-default btn-success" type="submit">
+          <button class="btn btn btn-success" type="submit">
             Créer simulation
-          </button >
+          </button>
         </div>
       </div>
     </div>
@@ -95,9 +95,8 @@
         </div>
       </a>
       <button class="btn btn-squared-default btn-success">
-        Simulation 
-       </button>
+        Simulation
+      </button>
     </div>
   </ng-container>
-  
 </div>

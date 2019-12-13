@@ -46,25 +46,25 @@ export class SimulationService {
     console.log(JSON.stringify(contract));
 
     return this.httpClient
-      .post(`${this.endPointRate}/simulation`, JSON.stringify(contract), { headers })
+      .post(`${this.endPointRate}/simulation`, JSON.stringify(contract), {
+        headers
+      })
       .pipe(map((rate: Rate) => rate));
   }
 
-   getCategories(): Observable<Category[]> {
-    return this.httpClient
-      .get<Category[]>(this.endPointCategory);
-     }
-  
-  gettotalAmount(contract: Contract): Observable<Contract> {
-      let headers: HttpHeaders = new HttpHeaders();
-      headers = headers.append('Accept', 'application/json');
-      headers = headers.append('Content-Type', 'application/json');
-      console.log('contract observable contract service');
-      console.log(JSON.stringify(contract));
-  
-      return this.httpClient
-        .post(`${this.endPointContract}`, JSON.stringify(contract), { headers })
-        .pipe(map((amountDue: Contract) => amountDue));
-    }
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.endPointCategory);
+  }
 
+  gettotalAmount(contract: Contract): Observable<Contract> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Content-Type', 'application/json');
+    console.log('contract observable contract service');
+    console.log(JSON.stringify(contract));
+
+    return this.httpClient
+      .post(`${this.endPointContract}`, JSON.stringify(contract), { headers })
+      .pipe(map((amountDue: Contract) => amountDue));
+  }
 }

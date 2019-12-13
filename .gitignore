@@ -1,9 +1,4 @@
 .project
 /.settings
-<<<<<<< HEAD
-/target
-.classpath
-=======
 .classpath
 /target
->>>>>>> back

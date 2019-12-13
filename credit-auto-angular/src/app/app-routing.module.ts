@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'simul-page',
+    redirectTo: 'loginPage',
     pathMatch: 'full'
   },
   {
-    path: 'simul-page',
-    loadChildren: './calculation/calculation.module#CalculationModule'
+    path: 'loginPage',
+    loadChildren: './authentication/authentication.module#AuthenticationModule'
   }
 ];
 

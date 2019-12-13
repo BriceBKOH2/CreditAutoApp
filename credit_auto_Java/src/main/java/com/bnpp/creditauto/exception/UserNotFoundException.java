@@ -14,4 +14,8 @@ public class UserNotFoundException extends NotFoundException {
 	public UserNotFoundException(String firstName, String lastName) {
 		System.err.println("User firstName : " + firstName + " ans lastName : " + lastName + " not found in database");
 	}
+	
+	public UserNotFoundException(String msg) {
+		super(msg);
+	}
 }
