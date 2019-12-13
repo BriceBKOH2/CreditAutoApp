@@ -8,10 +8,9 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.UserNotFoundException;
-import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.User;
+import com.bnpp.creditauto.utils.PasswordEncoderGenerator;
 
 
 @Repository
@@ -49,6 +48,41 @@ public class UserDao extends AbstractDao<User> {
 			throw new UserNotFoundException(firstName, lastName);
 		}
 		return users;
+	}
+
+	public User findByCredentials(String login, String password) throws UserNotFoundException {
+
+		User user;
+		
+		// We check if User with login exists
+		TypedQuery<User> query = em.createQuery("FROM User usr WHERE usr.login=:login", User.class);
+		query.setParameter("login", login);
+		try {
+			user = query.getSingleResult();
+		} catch (NoResultException e) {
+			throw new UserNotFoundException("User with login " + login + " not found.");
+		}
+		
+		if (!PasswordEncoderGenerator.matches(password, user.getPassword())) {
+			throw new UserNotFoundException("Bad password");
+		}
+		
+		return user;
+		
+		// Checking login/password association
+		/*
+		query = em.createQuery("FROM User usr WHERE usr.login=:login "
+														+ "AND usr.password=:hashedPwd",
+														User.class);
+		query.setParameter("login", login);
+		query.setParameter("hashedPwd", password);
+		System.out.println(login);
+		System.out.println(password);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			throw new UserNotFoundException("Bad password");
+		}*/
 	}
 
 }
