@@ -54,7 +54,7 @@ public class Client implements IdEntity {
 	/* Constructors */
 
 	public Client() {
-		
+		this.isActive = true;
 	}
 
 	public Client(String firstName, String lastName, Date dateOfBirth, String phoneNumber, String address,
