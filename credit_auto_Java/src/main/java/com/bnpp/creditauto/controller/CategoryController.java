@@ -17,10 +17,10 @@ import com.bnpp.creditauto.service.CategoryService;
 @RequestMapping("/api/category")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
-	
+
 	// Cette classe doit définir les methodes qui vont renvoyer du json
-	// Fera le lien entre le formulaire et le java.	
-	
+	// Fera le lien entre le formulaire et le java.
+
 	@Autowired
 	private CategoryService categoryService;
 
@@ -37,8 +37,8 @@ public class CategoryController {
 	}
 	
 	/**
-	 * Create and return an arbitrary rate.
-	 * For testing purposes.
+	 * Create and return an arbitrary rate. For testing purposes.
+	 * 
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -46,7 +46,5 @@ public class CategoryController {
 	public List<Category> findAll() {
 		return categoryService.findAll();
 	}
-	
-	
-	
+
 }

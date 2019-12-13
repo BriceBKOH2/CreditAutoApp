@@ -40,13 +40,15 @@ public class ClientController {
 
 	@Autowired
 	private ContractService contractService;
+
+	/* Methods */
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Client> findAll() {
 		return clientService.findAll();
 	}
-	
+
 	@RequestMapping(value = "/accountnumber/{accountNumber}", method = RequestMethod.GET)
 	public Client findByAccount(@PathVariable Long accountNumber) throws ClientNotFoundException {
 		return clientService.findByAccNumb(accountNumber);
@@ -56,14 +58,15 @@ public class ClientController {
 	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
 		return clientService.findById(id);
 	}
-		
+	
 	@RequestMapping(value = "{firstName}/{lastName}", method = RequestMethod.GET)
-	public List<Client> findByNames(@PathVariable String firstName, @PathVariable String lastName) throws ClientNotFoundException {
+	public List<Client> findByNames(@PathVariable String firstName, @PathVariable String lastName)
+			throws ClientNotFoundException {
 		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
 	}
-	
-	@RequestMapping(method = RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client create(@RequestBody Client client) throws ClientNotFoundException {
 		 
@@ -87,16 +90,3 @@ public class ClientController {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

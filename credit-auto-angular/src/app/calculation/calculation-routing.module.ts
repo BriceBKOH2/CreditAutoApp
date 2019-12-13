@@ -4,7 +4,7 @@ import { CalcSheetComponent } from './calc-sheet/calc-sheet.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'simulPage',
     component: CalcSheetComponent
   }
 ];

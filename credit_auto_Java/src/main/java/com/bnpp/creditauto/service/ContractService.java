@@ -77,10 +77,7 @@ public class ContractService {
 	@Transactional
 	public void contractSimulator(Contract c) throws RateNotFoundException {
 		
-		c.setRate(rateSvc.getDecisionRate(
-				c.getVehicleCategory(),
-				c.getVehiclePrice(),
-				c.getLoanDuration()).getRateAmount());
+		c.setRate(rateSvc.getDecisionRate(c).getRateAmount());
 		
 		if (c.getRate() == null) {
 			throw new RateNotFoundException("Rate amount cannot be decided with current contract parameters:\n"

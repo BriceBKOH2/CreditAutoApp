@@ -13,65 +13,66 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Contract implements IdEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
-	
+
 	@Column
 //	@NotBlank
 	private Long vehiclePrice;
-	
+
 	/**
 	 * Amount lent to the client.
 	 */
 	@Column
 //	@NotBlank
 	private Long loanAmount;
-	
+
 	/**
-	 * This is the total amount that the client have to pay. 
-	 * It is equal to the Loan amount with the interests.
+	 * This is the total amount that the client have to pay. It is equal to the Loan
+	 * amount with the interests.
 	 */
 	@Column
 //	@NotBlank
 	private Long amountDue;
-	
+
 	/**
 	 * Duration, in months.
 	 */
+
 	@Column
 //	@NotBlank
 	private Integer loanDuration;
-	
+
 	@Column
 //	@NotBlank
 	private Double rate;
-	
+
 	@Column
 	private Boolean rentRight;
-	
+
 	@Column
 	private Date creationDate;
-	
+
 	@Column
 	private Boolean isActive;
-	
+
 	@ManyToOne
-	//@Column
+	// @Column
 	private Client client;
-	
+
 	@ManyToOne
-	//@Column
+	// @Column
 	private Category vehicleCategory;
-	
+
 	/* Constructors */
-	
+
 	public Contract() {
-		
+
 	}
-	
+
 	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
 			Date creationDate, Client client, Category vehicleCategory) {
 		super();
@@ -100,7 +101,7 @@ public class Contract implements IdEntity {
 		this.vehicleCategory = vehicleCategory;
 		this.isActive = true;
 	}
-	
+
 	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
 			Date creationDate, Client client, Category vehicleCategory, Boolean isActive) {
 		super();
@@ -114,7 +115,7 @@ public class Contract implements IdEntity {
 		this.vehicleCategory = vehicleCategory;
 		this.isActive = isActive;
 	}
-	
+
 	/* Getters and Setters */
 
 	@Override
@@ -191,8 +192,6 @@ public class Contract implements IdEntity {
 		this.vehicleCategory = vehicleCategory;
 	}
 
-	/* Other Methods */
-	
 	public Long getAmountDue() {
 		return amountDue;
 	}
@@ -215,7 +214,5 @@ public class Contract implements IdEntity {
 				+ ", loanDuration=" + loanDuration + ", rate=" + rate + ", rentRight=" + rentRight + ", creationDate="
 				+ creationDate + ", client=" + client + ", vehicleCategory=" + vehicleCategory + "]";
 	}
-	
-	
-	
+
 }
