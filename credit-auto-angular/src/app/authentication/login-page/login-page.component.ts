@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { IdentifiyingService } from '../service/identifiying.service';
 
 @Component({
   selector: 'app-login-page',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  loading = false;
+  submitted = false;
+  returnUrl: string;
 
-  constructor() { }
+  loginForm = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
 
-  ngOnInit() {
-  }
+  constructor(private identifiyingService: IdentifiyingService) {}
 
+  ngOnInit() {}
 }
