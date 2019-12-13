@@ -1,6 +1,6 @@
 package com.bnpp.creditauto.controller;
 
-import java.util.List; 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
-import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.RateService;
 
 @RestController
@@ -24,15 +24,8 @@ public class RateController {
 	@Autowired
 	private RateService rateSvc;
 
-	@Autowired
-	private CategoryService categSvc;
-
-//	@Autowired
-//	private JsonHelper jsonHelper;
-
 	/**
-	 * Create and return an arbitrary rate. For testing purposes.
-	 * 
+	 * Returns the list of all Rate objects.
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -41,12 +34,26 @@ public class RateController {
 		return rateSvc.findAll();
 	}
 
+	/**
+	 * Returns the Rate with the id in path variable.
+	 * @param id the id of the Rate to search for.
+	 * @return The rate with the id specified, null otherwise.
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Rate findById(@PathVariable Long id) {
-		return rateSvc.findById(id);
+		try {
+			return rateSvc.findById(id);
+		} catch (RateNotFoundException e) {
+			return null;
+		}
 	}
 
+	/**
+	 * Retrieves the correct rate from the database according to the infos in the contract.
+	 * @param contract 
+	 * @return
+	 */
 	@RequestMapping(value = "/simulation", method = RequestMethod.POST)
 	@ResponseBody
 	public Rate findRateDecision(@RequestBody Contract contract) {

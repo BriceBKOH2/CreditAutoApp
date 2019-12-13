@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bnpp.creditauto.utils.DBData;
 
 /**
- * Contient les méthodes utilitaires.
+ * Contains utilitary/helper methods.
  * @author Jordi
  *
  */
@@ -25,7 +25,7 @@ public class UtilController {
 	DBData dbdata;
 	
 	/**
-	 * Appelle le script d'initialisation de la base de données.
+	 * Calls the DBData::init method.
 	 */
 	@RequestMapping(value = "/initdb", method = RequestMethod.GET)
 	@ResponseStatus(code = HttpStatus.OK)

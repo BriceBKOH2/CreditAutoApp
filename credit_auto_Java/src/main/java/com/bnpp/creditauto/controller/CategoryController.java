@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bnpp.creditauto.exception.NotFoundException;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.service.CategoryService;
 
@@ -23,28 +24,45 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryService categoryService;
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Category findById(@PathVariable Long id) {
-		return categoryService.findById(id);
-	}
-	
-	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-	@ResponseBody
-	public Category findByName(@PathVariable String name) {
-		return categoryService.findByName(name);
-	}
 	
 	/**
-	 * Create and return an arbitrary rate. For testing purposes.
-	 * 
+	 * Returns a list of all categories.
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Category> findAll() {
 		return categoryService.findAll();
+	}
+
+	/**
+	 * Returns the Category object that corresponds to the id specified in the path variable.
+	 * @param id The id of the category to find.
+	 * @return the Category object that corresponds to the id specified, null otherwise.
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Category findById(@PathVariable Long id) {
+		try {
+			return categoryService.findById(id);
+		} catch (NotFoundException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Returns the first found Category object corresponding to the name specified.
+	 * @param name The name of the Category.
+	 * @return the first found Category object with the name specified, null otherwise.
+	 */
+	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
+	@ResponseBody
+	public Category findByName(@PathVariable String name) {
+		try {
+			return categoryService.findByName(name);
+		} catch (NotFoundException e) {
+			return null;
+		}
 	}
 
 }

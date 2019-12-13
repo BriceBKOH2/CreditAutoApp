@@ -32,7 +32,8 @@ public class Contract implements IdEntity {
 
 	/**
 	 * This is the total amount that the client have to pay. It is equal to the Loan
-	 * amount with the interests.
+	 * amount with the interests. Calculated with ContractService::contractSimulator
+	 * method.
 	 */
 	@Column
 //	@NotBlank
@@ -41,7 +42,6 @@ public class Contract implements IdEntity {
 	/**
 	 * Duration, in months.
 	 */
-
 	@Column
 //	@NotBlank
 	private Integer loanDuration;

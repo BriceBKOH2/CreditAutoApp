@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bnpp.creditauto.dao.CategoryDao;
+import com.bnpp.creditauto.exception.NotFoundException;
 import com.bnpp.creditauto.model.Category;
 
 @Service
@@ -14,7 +15,7 @@ public class CategoryService {
 	@Autowired
 	CategoryDao categDao;
 	
-	public Category findById(Long id) {
+	public Category findById(Long id) throws NotFoundException {
 		return categDao.findById(id);
 	}
 	
@@ -30,7 +31,7 @@ public class CategoryService {
 		categDao.deleteAll();
 	}
 	
-	public Category findByName(String name) {
+	public Category findByName(String name) throws NotFoundException {
 		return categDao.findByName(name);
 	}
 }
