@@ -3,11 +3,14 @@ package com.bnpp.creditauto.dao;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.bnpp.creditauto.exception.RateNotFoundException;
+import com.bnpp.creditauto.exception.UserNotFoundException;
 import com.bnpp.creditauto.model.Category;
 import com.bnpp.creditauto.model.Rate;
+import com.bnpp.creditauto.model.User;
 
 @Repository
 public class RateDao extends AbstractDao<Rate> {
@@ -50,4 +53,15 @@ public class RateDao extends AbstractDao<Rate> {
 //	public List<Rate> findAll() {
 //		return em.createQuery("from Rate", Rate.class).getResultList();
 //	}
+	
+	public void update(Rate rate) throws RateNotFoundException {
+		Session session = getSession();
+		Long id = rate.getId();
+		if (id == null) {
+			throw new RateNotFoundException(id);
+		} else if (session.find(Rate.class, rate.getId()) == null) {
+			throw new RateNotFoundException(id);
+		}
+		session.merge(rate);
+	}
 }

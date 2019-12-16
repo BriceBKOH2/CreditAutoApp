@@ -63,8 +63,9 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam String login, @RequestParam String password, HttpSession httpSession) {
 		try {
+			
 			User user = userService.login(login, password);
-			httpSession.setAttribute("connectedUser", user);
+			httpSession.setAttribute("connectedUser", user); 
 			System.out.println("Logged as " + login);
 			return "OK";
 		} catch (UserNotFoundException e) {

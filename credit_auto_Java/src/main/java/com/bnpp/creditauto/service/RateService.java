@@ -33,6 +33,11 @@ public class RateService {
 		}
 	}
 	
+	@Transactional
+	public void update(Rate rate) throws RateNotFoundException {
+		rateDao.update(rate);
+	}
+	
 	public Rate findById(Long id) {
 		return rateDao.findById(id);
 	}
