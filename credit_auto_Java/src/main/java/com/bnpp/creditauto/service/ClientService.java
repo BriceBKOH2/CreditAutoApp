@@ -66,4 +66,10 @@ public class ClientService {
 	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
 		return clientDao.findByNames(firstName, lastName);
 	}
+	
+	@Transactional
+	public Long getNewAccountNumber() {
+		return clientDao.getBiggestAccountNumber()+1;
+	}
+	
 }
