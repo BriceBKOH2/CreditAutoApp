@@ -69,7 +69,15 @@ public class ClientService {
 	
 	@Transactional
 	public Long getNewAccountNumber() {
-		return clientDao.getBiggestAccountNumber()+1;
+		Long result = clientDao.getHighestAccountNumber()+1;
+		do {
+			try {
+				clientDao.findByAccNumb(result);
+			} catch (ClientNotFoundException e) {
+				return result;
+			}
+			result++;
+		} while(true);
 	}
 	
 }
