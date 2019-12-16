@@ -34,6 +34,10 @@ export class SimulationService {
     return this.httpClient.put<Client>(this.endPointClient, client);
   }
 
+  putContract(contract: Contract) {
+    return this.httpClient.put<Contract>(this.endPointContract, contract);
+  }
+
   getRates(): Observable<Rate[]> {
     return this.httpClient.get<Rate[]>(this.endPointRate);
   }

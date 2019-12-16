@@ -2,15 +2,17 @@ import { Category } from './category';
 import { Client } from './client';
 
 export class Contract {
-  vehicleCategory: Category;
+  id: number;
   vehiclePrice: number;
   loanAmount: number;
+  amountDue: number;
   loanDuration: number;
   rate: number;
-  amountDue: number;
-  id: number;
+  rentRight: boolean;
+  creationDate: Date;
   isActive: boolean;
   client: Client;
+  vehicleCategory: Category;
 
   constructor(
     vehiclePrice: number,

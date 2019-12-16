@@ -69,8 +69,8 @@ public class ContractController extends AbstractController {
 	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void create(@RequestBody Contract c) {
-		contractSvc.save(c);
+	public Contract create(@RequestBody Contract c) {
+		return contractSvc.save(c);
 	}
 	
 	/**

@@ -27,6 +27,8 @@ export class CalcSheetComponent implements OnInit {
   rate$: Rate[];
   rateLoan: Rate;
   client: Client;
+  showButonSendContract = false;
+  date: Date;
 
 
   contractForm$: BehaviorSubject<{ vehicleCat: string }>;
@@ -41,10 +43,8 @@ export class CalcSheetComponent implements OnInit {
   constructor(private simulationService: SimulationService) {}
 
   ngOnInit() {
-    
+    this.date = new Date();
     this.simulationService.getCategories().subscribe(response => {
-      console.log('component ts');
-      console.log(response);
       this.categories = response;
     });
 
@@ -58,63 +58,45 @@ export class CalcSheetComponent implements OnInit {
   showRates() {
     this.simulationService.getRates().subscribe(response => {
       this.rate$ = response;
-      console.log('component ts showRates');
-      console.log(this.rate$);
     });
   }
 
   loanCalculation() {
-    const contract: Contract = new Contract(
+    this.contract = new Contract(
       this.contractForm.value.vehiclePrice,
       this.contractForm.value.loanAmount,
       this.contractForm.value.loanDuration,
       this.contractForm.value.vehicleCat
     );
 
-    this.simulationService.getRateForLoan(contract).subscribe(response => {
+    this.simulationService.getRateForLoan(this.contract).subscribe(response => {
+      this.contract.rate = response.rateAmount;
       this.rateLoan = response;
       this.rate$ = [this.rateLoan];
-      console.log('component ts LoanCalculation');
-      console.log(this.rateLoan);
+      this.amountCalculation();
     });
   }
 
   amountCalculation(){
-    const contract: Contract = new Contract(
-      this.contractForm.value.vehiclePrice,
-      this.contractForm.value.loanAmount,
-      this.contractForm.value.loanDuration,
-      this.contractForm.value.vehicleCat
-    );
-
-    this.simulationService.gettotalAmount(contract).subscribe(response => {
+    this.simulationService.gettotalAmount(this.contract).subscribe(response => {
       this.contract = response;
-      console.log('component ts LoanCalculation');
+      this.contract.creationDate = this.date;
       console.log(this.contract);
     });
   }
 
 
   onSubmitForm() {
-    console.log(this.contractForm.value);
     this.loanCalculation();
-    console.log('component ts onSubmitForm');
-    console.log(this.loanCalculation());
-    this.amountCalculation();
-
-    // this.client = new Client(
-    //   'Jade',
-    //   'Paul',
-    //   '1987-04-12',
-    //   '0605040302',
-    //   '03 diginamic street 34000 Montpellier',
-    //   true,
-    //   1234567896
-    // );
-
-    // this.simulationService.putClient(this.client).subscribe(response => {
-    //   this.client = response;
-    //   console.log(this.client);
-    // });
+    this.showButonSendContract = true;
   }
+
+  onCreateContract(){
+    console.log('le contract');
+    this.simulationService.putContract(this.contract).subscribe(response => {
+      this.contract = response;
+      console.log(this.contract);
+    });
+  }
+
 }

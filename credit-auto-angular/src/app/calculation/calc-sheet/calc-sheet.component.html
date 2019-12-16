@@ -3,7 +3,7 @@
 <div
   class="container d-flex justify-content-around form1 alert alert-secondary"
 >
-  <form [formGroup]="contractForm" (ngSubmit)="onSubmitForm()">
+  <form [formGroup]="contractForm">
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -43,9 +43,7 @@
             name="vehicleCat"
             id="car_class"
           >
-            <option *ngFor="let category of categories" [ngValue]="category">{{
-              category.name
-            }}</option>
+            <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
           </select>
         </div>
 
@@ -71,10 +69,19 @@
           </div>
         </ng-container>
 
-        <div>
-          <button class="btn btn btn-success" type="submit">
+        <div class= "d-flex">
+          <div>
+          <button class="btn btn btn-success" type="submit" (click)="onSubmitForm()">
             Créer simulation
           </button>
+        </div>
+        <div>
+          <ng-container *ngIf="showButonSendContract" >
+            <button class="btn btn-success" type="button" (click)="onCreateContract()">
+              Créer Contract
+            </button>
+          </ng-container>
+        </div>
         </div>
       </div>
     </div>
@@ -94,9 +101,6 @@
           </div>
         </div>
       </a>
-      <button class="btn btn-squared-default btn-success">
-        Simulation
-      </button>
     </div>
   </ng-container>
 </div>

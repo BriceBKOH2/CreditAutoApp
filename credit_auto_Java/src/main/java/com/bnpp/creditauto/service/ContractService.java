@@ -24,9 +24,10 @@ public class ContractService {
 	@Autowired
 	RateService rateSvc;
 
-	public void save(Contract contract) {
+	public Contract save(Contract contract) {
 		contractDao.persist(contract);
 		contract.setIsActive(true);
+		return contract;
 	}
 	
 	public Contract findById(Long id) throws ContractNotFoundException {

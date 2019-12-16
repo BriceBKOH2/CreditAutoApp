@@ -18,7 +18,7 @@ export class ClientCreationPageComponent implements OnInit {
 
     client: Client;
 
-    //clientForm$: BehaviorSubject<{client: Client}>;
+    
 
     clientForm = new FormGroup({
       clientlastname: new FormControl(''),
@@ -32,9 +32,7 @@ export class ClientCreationPageComponent implements OnInit {
   constructor(private clientService: ClientService) { }
 
   ngOnInit() {
-    //this.clientForm$ = new BehaviorSubject({
-    //  client: this.clientForm.get('client').value
-    //});
+    
   }
 
   onSubmitForm(){
