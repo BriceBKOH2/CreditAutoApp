@@ -3,7 +3,7 @@ import { SimulationService } from '../service/simulation.service';
 import { BehaviorSubject } from 'rxjs';
 import { Contract } from '../class/contract';
 import { Category } from '../class/category';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Rate } from '../class/rate';
 import { Client } from '../class/client';
 

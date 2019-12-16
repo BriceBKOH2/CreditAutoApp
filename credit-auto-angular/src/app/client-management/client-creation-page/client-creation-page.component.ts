@@ -8,6 +8,7 @@ import { Rate } from 'src/app/calculation/class/rate';
 import { Client } from 'src/app/calculation/class/client';
 import { map } from 'rxjs/operators';
 import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-creation-page',
@@ -15,21 +16,20 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./client-creation-page.component.scss']
 })
 export class ClientCreationPageComponent implements OnInit {
+  client: Client;
 
-    client: Client;
+  //clientForm$: BehaviorSubject<{client: Client}>;
 
-    //clientForm$: BehaviorSubject<{client: Client}>;
+  clientForm = new FormGroup({
+    clientlastname: new FormControl(''),
+    clientfirstname: new FormControl(''),
+    clientaccount: new FormControl(''),
+    clientaddress: new FormControl(''),
+    clientbirth: new FormControl(''),
+    clientphone: new FormControl('')
+  });
 
-    clientForm = new FormGroup({
-      clientlastname: new FormControl(''),
-      clientfirstname: new FormControl(''),
-      clientaccount: new FormControl(''),
-      clientaddress: new FormControl(''),
-      clientbirth: new FormControl(''),
-      clientphone: new FormControl(''),
-      });
-
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, router: Router) {}
 
   ngOnInit() {
     //this.clientForm$ = new BehaviorSubject({
@@ -37,7 +37,7 @@ export class ClientCreationPageComponent implements OnInit {
     //});
   }
 
-  onSubmitForm(){
+  onSubmitForm() {
     this.client = new Client(
       this.clientForm.value.clientfirstname,
       this.clientForm.value.clientlastname,
@@ -45,10 +45,10 @@ export class ClientCreationPageComponent implements OnInit {
       this.clientForm.value.clientphone,
       this.clientForm.value.clientaddress,
       this.clientForm.value.clientaccount
-      );
+    );
     this.clientService.putClient(this.client).subscribe(response => {
       this.client = response;
       console.log(this.client);
-    })
+    });
   }
 }

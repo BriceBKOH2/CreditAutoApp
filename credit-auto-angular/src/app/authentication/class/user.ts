@@ -1,8 +1,13 @@
 export class User {
   id: number;
-  username: string;
-  password: string;
   firstName: string;
   lastName: string;
-  token: string;
+  login: string;
+  password: string;
+  mail: string;
+
+  constructor(username: string, password: string) {
+    this.login = username;
+    this.password = password;
+  }
 }
