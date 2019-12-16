@@ -41,7 +41,6 @@ export class ClientCreationPageComponent implements OnInit {
     this.clientService.getNewAccountNumber().subscribe(response => {
       this.client.accountNumber = response;
       this.clientForm.get('clientAccount').setValue(this.client.accountNumber);
-      console.log(this.client.accountNumber);
     });
   }
 
