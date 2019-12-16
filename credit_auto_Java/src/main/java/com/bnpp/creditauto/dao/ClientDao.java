@@ -42,7 +42,6 @@ public class ClientDao extends AbstractDao<Client> {
 		session.delete(client);
 	}
 
-
 	public Client findByAccNumb(Long accountNumber) throws ClientNotFoundException {
 		Session session = getSession();
 		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.accountNumber=:accountNumber",
@@ -58,26 +57,49 @@ public class ClientDao extends AbstractDao<Client> {
 		}
 		return client;
 	}
-	
-	
+
 	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
-		
+
 		Session session = getSession();
-		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.firstName=:firstName "
-														+ "AND cl.lastName=:lastName",
-														Client.class);
+		TypedQuery<Client> query = session.createQuery(
+				"FROM Client cl WHERE cl.firstName=:firstName AND cl.lastName=:lastName", Client.class);
 		query.setParameter("firstName", firstName);
 		query.setParameter("lastName", lastName);
 		List<Client> clients;
-		
+
 		try {
 			clients = query.getResultList();
 		} catch (NoResultException e) {
 			throw new ClientNotFoundException(firstName, lastName); // We transform to string to differentiate with
-																			// argument
+																	// argument
 			// Long Id since accountNumber is also a Long type
 		}
 		return clients;
+	}
+
+	public Long getHighestAccountNumber() {
+		Session session = getSession();
+		TypedQuery<Long> query = session.createQuery(
+				"SELECT cl.id FROM Client cl ORDER BY cl.id DESC", Long.class).setMaxResults(1);
+		Long result = 0L;
+		try {
+			return query.getSingleResult(); // Return Highest Id number in Client table or NoResultException
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			System.out.println("No Client found in the Database");
+			return result; // Return 0 if no CLient in database
+		}
+//		
+//		query = session.createQuery("SELECT cl.accountNumber FROM Client cl WHERE cl.accountNumber=:result", Long.class );
+//		do {
+//			query.setParameter("result", result);
+//			try {
+//				query.getSingleResult();
+//			} catch (NoResultException e) {
+//				return result; // If accountNumber doesnt exist send new accountNumber to respect Unique constraint
+//			}
+//			result++;
+//		} while (true);
 	}
 
 }

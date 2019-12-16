@@ -7,29 +7,33 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <label for="client_lastname">Nom </label>
+          <label for="client_lastName">Nom </label>
           <div>
             <input
-              formControlName="clientlastname"
-              id="last_name"
-              name="last_name"
+              formControlName="clientLastName"
+              id="client_last_name"
+              name="client_last_name"
               class="form-control"
               type="text"
-              required minlength="4" maxlength="8"
+              required
+              minlength="4"
+              maxlength="8"
               placeholder="Durand"
             />
           </div>
         </div>
 
         <div class="form-group">
-          <label for="client_firstname">Prenom </label>
+          <label for="client_firstName">Prenom </label>
           <input
-            formControlName="clientfirstname"
-            id="first_name"
-            name="first_name"
+            formControlName="clientFirstName"
+            id="client_first_name"
+            name="client_first_name"
             class="form-control"
             type="text"
-            required minlength="4" maxlength="8"
+            required
+            minlength="4"
+            maxlength="8"
             placeholder="JP"
           />
         </div>
@@ -37,7 +41,7 @@
         <div class="form-group">
           <label for="client_account">Compte N° </label>
           <input
-            formControlName="clientaccount"
+            formControlName="clientAccount"
             class="form-control"
             name="client_account"
             id="client_account"
@@ -45,50 +49,53 @@
             min=""
             max="9999999999"
             placeholder="0123456789"
-          />            
+          />
         </div>
 
         <div class="form-group">
           <label for="client_address">Adresse </label>
           <input
-            formControlName="clientaddress"
+            formControlName="clientAddress"
             id="client_address"
             name="client_address"
             class="form-control"
             type="text"
-            required minlength="4" maxlength="30"
+            required
+            minlength="4"
+            maxlength="30"
             placeholder="1 rue des Pinsons"
           />
         </div>
 
         <div class="form-group">
-            <label for="client_birth">Date de naissance </label>
-            <input
-              formControlName="clientbirth"
-              id="client_birth"
-              name="client_birth"
-              class="form-control"
-              type="date"
-              id="start" name="trip-start"
-                value="2019-12-25"
-                min="1900-01-01"
-              placeholder="Ex:"
-            />
-          </div>
+          <label for="client_birth">Date de naissance </label>
+          <input
+            formControlName="clientBirthDate"
+            id="client_birth_date"
+            name="client_birth_date"
+            class="form-control"
+            type="date"
+            id="start"
+            name="trip-start"
+            value="2019-12-25"
+            min="1900-01-01"
+            placeholder="Ex:"
+          />
+        </div>
 
-          <div class="form-group">
-            <label for="client_phone">N° téléphone </label>
-            <input
-              formControlName="clientphone"
-              id="client_phone"
-              name="client_phone"
-              class="form-control"
-              type="tel"
-              pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
-                required
-              placeholder="Ex: 01-23-45-67-89"
-            />
-          </div>
+        <div class="form-group">
+          <label for="client_phoneNumber">N° téléphone </label>
+          <input
+            formControlName="clientPhoneNumber"
+            id="client_phone_number"
+            name="client_phone_number"
+            class="form-control"
+            type="tel"
+            pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
+            required
+            placeholder="Ex: 01-23-45-67-89"
+          />
+        </div>
         <div>
           <button class="btn btn btn-success" type="submit">
             Créer client
@@ -97,3 +104,4 @@
       </div>
     </div>
   </form>
+</div>
