@@ -3,14 +3,14 @@
 <div
   class="container d-flex justify-content-around form1 alert alert-secondary"
 >
-  <form (ngSubmit)="loanCalculation()" #myform="ngForm">
+  <form [formGroup]="contractForm" (ngSubmit)="onSubmitForm()">
     <div class="row">
       <div class="col">
         <div class="form-group">
           <label for="car_price">Montant de l'achat </label>
           <div>
             <input
-              [(ngModel)]="query"
+              formControlName="vehiclePrice"
               id="car_price"
               name="car_price"
               class="form-control"
@@ -24,6 +24,7 @@
         <div class="form-group">
           <label for="loan_amount">Montant du prêt </label>
           <input
+            formControlName="loanAmount"
             id="loan_amount"
             name="loan_amount"
             class="form-control"
@@ -37,12 +38,12 @@
         <div class="form-group">
           <label for="car_class">Catégorie de la voiture </label>
           <select
+            formControlName="vehicleCat"
             class="form-control"
-            name="car_class"
+            name="vehicleCat"
             id="car_class"
-            name="car_class"
           >
-            <option *ngFor="let category of categories">{{
+            <option *ngFor="let category of categories" [ngValue]="category">{{
               category.name
             }}</option>
           </select>
@@ -51,6 +52,7 @@
         <div class="form-group">
           <label for="loan_duration">Durée du crédit </label>
           <input
+            formControlName="loanDuration"
             id="loan_duration"
             name="loan_duration"
             class="form-control"
@@ -61,18 +63,16 @@
           />
         </div>
 
-        <ng-container *ngIf="loan$ | async as loan">
-          <div class="form-group">
-            <label for="loan_amount">Montant du crédit </label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="Ex: 5000"
-            /></div
-        ></ng-container>
+        <ng-container *ngIf="contract.amountDue">
+          <div class="form-group amount">
+            <label for="loan_amount">Montant du crédit :</label>
+            <br />
+            <span>{{ contract.amountDue }} €</span>
+          </div>
+        </ng-container>
 
         <div>
-          <button class="btn btn-squared-default btn-success" type="submit">
+          <button class="btn btn btn-success" type="submit">
             Créer simulation
           </button>
         </div>
@@ -80,7 +80,7 @@
     </div>
   </form>
 
-  <ng-container *ngIf="rateLoan">
+  <ng-container *ngIf="contract.rate">
     <div class="list-group">
       <a
         class="list-group-item list-group-item-action flex-column align-items-start"
@@ -88,12 +88,15 @@
         <div class="row">
           <div class="col">
             <h4>
-              {{ rateLoan.name }} :
-              <small class="text-muted">{{ rateLoan.rateAmount }}%</small>
+              Taux :
+              <small class="text-muted">{{ contract.rate }}%</small>
             </h4>
           </div>
         </div>
       </a>
+      <button class="btn btn-squared-default btn-success">
+        Simulation
+      </button>
     </div>
   </ng-container>
 </div>

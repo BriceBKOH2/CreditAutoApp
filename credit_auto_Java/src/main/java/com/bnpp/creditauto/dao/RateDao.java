@@ -1,16 +1,13 @@
 package com.bnpp.creditauto.dao;
 
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.bnpp.creditauto.exception.RateNotFoundException;
-import com.bnpp.creditauto.exception.UserNotFoundException;
-import com.bnpp.creditauto.model.Category;
+import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
-import com.bnpp.creditauto.model.User;
 
 @Repository
 public class RateDao extends AbstractDao<Rate> {
@@ -28,7 +25,7 @@ public class RateDao extends AbstractDao<Rate> {
 	 * @param duration duration in months of the loan
 	 * @return the Rate
 	 */
-	public Rate getDecisionRate(Category cat, long vehiclePrice, int duration) throws RateNotFoundException {
+	public Rate getDecisionRate(Contract contract) {
 
 		String jpql = "select rate from DecisionTable dt "
 				+ "where dt.categ = :cat "
@@ -39,14 +36,10 @@ public class RateDao extends AbstractDao<Rate> {
 		
 		TypedQuery<Rate> query = em.createQuery(jpql, Rate.class);
 		
-		query.setParameter("cat", cat);
-		query.setParameter("vehiclePrice", Long.valueOf(vehiclePrice));
-		query.setParameter("duration", Long.valueOf(duration));
-		try {
-			return query.getSingleResult();
-		} catch (NoResultException e) {
-			throw new RateNotFoundException("No rate found for selected parameters.");
-		}
+		query.setParameter("cat", contract.getVehicleCategory());
+		query.setParameter("vehiclePrice", contract.getVehiclePrice());
+		query.setParameter("duration", contract.getLoanDuration().longValue());
+		return query.getSingleResult();
 	}
 
 	// Implemented in AbstractDao

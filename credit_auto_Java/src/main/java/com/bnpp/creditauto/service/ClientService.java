@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.creditauto.dao.ClientDao;
 import com.bnpp.creditauto.exception.ClientNotFoundException;
+import com.bnpp.creditauto.exception.NotFoundException;
 import com.bnpp.creditauto.model.Client;
 
 @Service
@@ -19,8 +20,12 @@ public class ClientService {
 		return clientDao.persist(client);
 	}
 	
-	public Client findById(Long id) {
-		return clientDao.findById(id);
+	public Client findById(Long id) throws ClientNotFoundException {
+		try {
+			return clientDao.findById(id);
+		} catch (NotFoundException e) {
+			throw new ClientNotFoundException(id);
+		}
 	}
 
 	@Transactional(rollbackFor = ClientNotFoundException.class)

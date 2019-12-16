@@ -3,7 +3,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Rate } from '../class/rate';
+
 import { Client } from '../class/client';
+import { Category } from '../class/category';
+import { Contract } from '../class/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,6 @@ import { Client } from '../class/client';
 export class SimulationService {
   constructor(private httpClient: HttpClient) {}
 
-<<<<<<< HEAD
   get endPointRate() {
     return 'http://localhost:8080/credit_auto/api/rate';
   }
@@ -20,47 +22,49 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/client';
   }
 
-  postClient(client: Client): Observable<Client> {
-    return this.httpClient.post<Client>(this.endPointClient, client);
+  get endPointCategory() {
+    return 'http://localhost:8080/credit_auto/api/category';
+  }
+
+  get endPointContract() {
+    return 'http://localhost:8080/credit_auto/api/contract';
+  }
+
+  putClient(client: Client) {
+    return this.httpClient.put<Client>(this.endPointClient, client);
   }
 
   getRates(): Observable<Rate[]> {
     return this.httpClient.get<Rate[]>(this.endPointRate);
-=======
-  get endpointRate() {
-    return 'http://localhost:8080/credit_auto/api/rate';
   }
 
-  get endpointClient() {
-    return 'http://localhost:8080/credit_auto/api/client';
-  }
-
-  postClient(client: Client) {
-    let params = new HttpParams().set('client', JSON.stringify(client));
-    console.log(params);
-
-    return this.httpClient.post(this.endpointClient, { params });
-  }
-
-  getRates(): Observable<Rate[]> {
-    return this.httpClient.get<Rate[]>(this.endpointRate);
->>>>>>> 80832450af2b1f15b9a99a404e4b8ffa66cee2a1
-  }
-
-  getRateForLoan(): Observable<Rate> {
-    let params = new HttpParams()
-      .set('catId', '1')
-      .set('price', '5000')
-      .set('dur', '24');
-
-    console.log(params);
+  getRateForLoan(contract: Contract): Observable<Rate> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Content-Type', 'application/json');
+    console.log('contract observable simul service');
+    console.log(JSON.stringify(contract));
 
     return this.httpClient
-<<<<<<< HEAD
-      .get(`${this.endPointRate}/decision`, { params })
-=======
-      .get(`${this.endpointRate}/decision`, { params })
->>>>>>> 80832450af2b1f15b9a99a404e4b8ffa66cee2a1
+      .post(`${this.endPointRate}/simulation`, JSON.stringify(contract), {
+        headers
+      })
       .pipe(map((rate: Rate) => rate));
+  }
+
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.endPointCategory);
+  }
+
+  gettotalAmount(contract: Contract): Observable<Contract> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Content-Type', 'application/json');
+    console.log('contract observable contract service');
+    console.log(JSON.stringify(contract));
+
+    return this.httpClient
+      .post(`${this.endPointContract}`, JSON.stringify(contract), { headers })
+      .pipe(map((amountDue: Contract) => amountDue));
   }
 }

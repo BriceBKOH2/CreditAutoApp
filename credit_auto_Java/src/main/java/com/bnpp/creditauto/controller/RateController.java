@@ -12,27 +12,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.creditauto.exception.RateNotFoundException;
+import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
-import com.bnpp.creditauto.service.CategoryService;
 import com.bnpp.creditauto.service.RateService;
 
 @RestController
 @RequestMapping("/api/rate")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RateController {
-	
+
 	@Autowired
 	private RateService rateSvc;
-	
-	@Autowired
-	private CategoryService categSvc;
-	
-//	@Autowired
-//	private JsonHelper jsonHelper;
-	
+
 	/**
-	 * Create and return an arbitrary rate. For testing purposes.
-	 * 
+	 * Returns the list of all Rate objects.
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -40,19 +33,33 @@ public class RateController {
 	public List<Rate> findAll() {
 		return rateSvc.findAll();
 	}
-	
+
+	/**
+	 * Returns the Rate with the id in path variable.
+	 * @param id the id of the Rate to search for.
+	 * @return The rate with the id specified, null otherwise.
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Rate findById(@PathVariable Long id) {
-		return rateSvc.findById(id);
+		try {
+			return rateSvc.findById(id);
+		} catch (RateNotFoundException e) {
+			return null;
+		}
 	}
-	
-	@RequestMapping(value = "/decision", method = RequestMethod.GET)
+
+	/**
+	 * Retrieves the correct rate from the database according to the infos in the contract.
+	 * @param contract 
+	 * @return
+	 */
+	@RequestMapping(value = "/simulation", method = RequestMethod.POST)
 	@ResponseBody
-	public Rate findRateDecision(int catId, int price, int dur) {		
-		return rateSvc.getDecisionRate(categSvc.findById(Long.valueOf(catId)), price, dur);
+	public Rate findRateDecision(@RequestBody Contract contract) {
+		return rateSvc.getDecisionRate(contract);
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public void update(@PathVariable Long id, @RequestBody Rate rate) throws RateNotFoundException{
 		rate.setId(id);

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bnpp.creditauto.dao.ClientDao;
 import com.bnpp.creditauto.dao.ContractDao;
 import com.bnpp.creditauto.exception.ContractNotFoundException;
+import com.bnpp.creditauto.exception.NotFoundException;
 import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Contract;
 
@@ -28,8 +29,12 @@ public class ContractService {
 		contract.setIsActive(true);
 	}
 	
-	public Contract findById(Long id) {
-		return contractDao.findById(id);
+	public Contract findById(Long id) throws ContractNotFoundException {
+		try {
+			return contractDao.findById(id);
+		} catch (NotFoundException e) {
+			throw new ContractNotFoundException(id);
+		}
 	}
 
 	@Transactional(rollbackFor = ContractNotFoundException.class)
@@ -77,10 +82,7 @@ public class ContractService {
 	@Transactional
 	public void contractSimulator(Contract c) throws RateNotFoundException {
 		
-		c.setRate(rateSvc.getDecisionRate(
-				c.getVehicleCategory(),
-				c.getVehiclePrice(),
-				c.getLoanDuration()).getRateAmount());
+		c.setRate(rateSvc.getDecisionRate(c).getRateAmount());
 		
 		if (c.getRate() == null) {
 			throw new RateNotFoundException("Rate amount cannot be decided with current contract parameters:\n"

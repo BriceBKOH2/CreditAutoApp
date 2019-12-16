@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bnpp.creditauto.exception.NotFoundException;
 import com.bnpp.creditauto.model.IdEntity;
 
 /**
@@ -56,8 +57,12 @@ public abstract class AbstractDao<T extends IdEntity> {
 	}
 	
 	@Transactional
-	public T findById(Long id) {
-		return em.find(entityClass, id);
+	public T findById(Long id) throws NotFoundException {
+		T entity = em.find(entityClass, id);
+		if (entity == null) {
+			throw new NotFoundException("Entity with id " + id + " not found.");
+		}
+		return entity;
 	}
 
 	@Transactional

@@ -17,15 +17,13 @@ export class Client {
     dateOfBirth: string,
     phoneNumber: string,
     address: string,
-    isActive?: boolean,
-    accountNumber?: number
+    accountNumber: number
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.dateOfBirth = dateOfBirth;
     this.phoneNumber = phoneNumber;
     this.address = address;
-    this.isActive = isActive;
     this.accountNumber = accountNumber;
   }
 }
