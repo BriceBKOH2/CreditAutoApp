@@ -38,10 +38,31 @@ public class ClientController {
 	/* Methods */
 	
 	/**
+	 * Create the client with the object contained in the request's body.
+	 * @param client The new client to be created.
+	 * @return the created Client.
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public Long createAccountNumber() {
+		 return clientService.getNewAccountNumber();
+	}
+	
+	/**
+	 * Create the client with the object contained in the request's body.
+	 * @param client The new client to be created.
+	 * @return the created Client.
+	 */
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.CREATED)
+	public Client createClient(@RequestBody Client client) {
+		 return clientService.save(client);
+	}
+	
+	/**
 	 * Returns a list of all clients.
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Client> findAll() {
 		return clientService.findAll();
@@ -58,16 +79,6 @@ public class ClientController {
 		return clientService.findByAccNumb(accountNumber);
 	}
 	
-	/**
-	 * Retrieves the client with the id specified in the path variable.
-	 * @param id The id of the client to find.
-	 * @return the client found, if any.
-	 * @throws ClientNotFoundException if client with the specified id does not exist.
-	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
-		return clientService.findById(id);
-	}
 	
 	/**
 	 * Returns a list of all clients found with firstname and lastname in the request parameter. 
@@ -82,17 +93,16 @@ public class ClientController {
 		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
 	}
-
 	
 	/**
-	 * Create the client with the object contained in the request's body.
-	 * @param client The new client to be created.
-	 * @return the created Client.
+	 * Retrieves the client with the id specified in the path variable.
+	 * @param id The id of the client to find.
+	 * @return the client found, if any.
+	 * @throws ClientNotFoundException if client with the specified id does not exist.
 	 */
-	@RequestMapping(method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.CREATED)
-	public Client create(@RequestBody Client client) {
-		 return clientService.save(client);
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Client findById(@PathVariable Long id) throws ClientNotFoundException {
+		return clientService.findById(id);
 	}
 	
 	/**
@@ -102,8 +112,7 @@ public class ClientController {
 	 * @throws ClientNotFoundException if client with the id does not exist.
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void update(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
-		client.setId(id);
+	public void updateClient(@PathVariable Long id, @RequestBody Client client) throws ClientNotFoundException {
 		clientService.update(client);
 	}
 	

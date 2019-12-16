@@ -15,29 +15,42 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./client-creation-page.component.scss']
 })
 export class ClientCreationPageComponent implements OnInit {
+  client: Client;
 
-    client: Client;
+  //clientForm$: BehaviorSubject<{client: Client}>;
 
-    //clientForm$: BehaviorSubject<{client: Client}>;
+  clientForm = new FormGroup({
+    clientlastname: new FormControl(''),
+    clientfirstname: new FormControl(''),
+    clientaccount: new FormControl(''),
+    clientaddress: new FormControl(''),
+    clientbirth: new FormControl(''),
+    clientphone: new FormControl('')
+  });
 
-    clientForm = new FormGroup({
-      clientlastname: new FormControl(''),
-      clientfirstname: new FormControl(''),
-      clientaccount: new FormControl(''),
-      clientaddress: new FormControl(''),
-      clientbirth: new FormControl(''),
-      clientphone: new FormControl(''),
-      });
-
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService) {}
 
   ngOnInit() {
     //this.clientForm$ = new BehaviorSubject({
     //  client: this.clientForm.get('client').value
     //});
+
+    this.client = new Client(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    );
+
+    this.clientService.getNewAccountNumber().subscribe(response => {
+      this.client.accountNumber = response;
+      console.log(response);
+    });
   }
 
-  onSubmitForm(){
+  onSubmitForm() {
     this.client = new Client(
       this.clientForm.value.clientfirstname,
       this.clientForm.value.clientlastname,
@@ -45,10 +58,10 @@ export class ClientCreationPageComponent implements OnInit {
       this.clientForm.value.clientphone,
       this.clientForm.value.clientaddress,
       this.clientForm.value.clientaccount
-      );
+    );
     this.clientService.putClient(this.client).subscribe(response => {
       this.client = response;
       console.log(this.client);
-    })
+    });
   }
 }

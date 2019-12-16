@@ -42,7 +42,6 @@ public class ClientDao extends AbstractDao<Client> {
 		session.delete(client);
 	}
 
-
 	public Client findByAccNumb(Long accountNumber) throws ClientNotFoundException {
 		Session session = getSession();
 		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.accountNumber=:accountNumber",
@@ -58,26 +57,36 @@ public class ClientDao extends AbstractDao<Client> {
 		}
 		return client;
 	}
-	
-	
+
 	public List<Client> findByNames(String firstName, String lastName) throws ClientNotFoundException {
-		
+
 		Session session = getSession();
-		TypedQuery<Client> query = session.createQuery("FROM Client cl WHERE cl.firstName=:firstName "
-														+ "AND cl.lastName=:lastName",
-														Client.class);
+		TypedQuery<Client> query = session.createQuery(
+				"FROM Client cl WHERE cl.firstName=:firstName " + "AND cl.lastName=:lastName", Client.class);
 		query.setParameter("firstName", firstName);
 		query.setParameter("lastName", lastName);
 		List<Client> clients;
-		
+
 		try {
 			clients = query.getResultList();
 		} catch (NoResultException e) {
 			throw new ClientNotFoundException(firstName, lastName); // We transform to string to differentiate with
-																			// argument
+																	// argument
 			// Long Id since accountNumber is also a Long type
 		}
 		return clients;
+	}
+
+	public Long getBiggestAccountNumber() {
+		Session session = getSession();
+		TypedQuery<Long> query = session.createQuery(
+				"SELECT cl.id FROM Client cl ORDER BY cl.id DESC", Long.class).setMaxResults(1);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			return 0L;
+		}
 	}
 
 }

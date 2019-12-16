@@ -7,14 +7,11 @@ import { Client } from 'src/app/calculation/class/client';
 import { Category } from 'src/app/calculation/class/category';
 import { Contract } from 'src/app/calculation/class/contract';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   get endPointClient() {
     return 'http://localhost:8080/credit_auto/api/client';
@@ -24,4 +21,7 @@ export class ClientService {
     return this.httpClient.put<Client>(this.endPointClient, client);
   }
 
+  getNewAccountNumber() {
+    return this.httpClient.get<number>(this.endPointClient);
+  }
 }
