@@ -2,14 +2,31 @@
   <a class="navbar-brand" href="#">
     <img src="../assets/logo.png" class="logo mr-5" />
   </a>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div
+    class="collapse navbar-collapse"
+    (click)="isCollapsed = !isCollapsed"
+    [class.collapse]="isCollapsed"
+    id="navbarSupportedContent"
+  >
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="loginPage">Accueil</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="simulPage">Crédit</a>
+        <ng-container *ngIf="user">
+          <a class="nav-link" href="simulPage">Crédit</a>
+        </ng-container>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="clientcreationpage">Client</a>
@@ -25,11 +42,24 @@
       </li>
     </ul>
 
-    <div *ngIf="user">
-      🌐<em>{{ user.login }}</em>
-      <button class="btn btn-outline-success" (click)="logOut()">
-        Déconnexion
-      </button>
-    </div>
+    <ng-container *ngIf="user">
+      <div class="container d-flex inline-block justify-content-end">
+        <div>
+          <img src="../assets/login-logo.png" class="" width="20em" alt="" />
+        </div>
+        <div>
+          <em> {{ user.login }} </em>
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-secondary"
+            type="submit"
+            (click)="logOut()"
+          >
+            Déconnexion
+          </button>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </nav>
