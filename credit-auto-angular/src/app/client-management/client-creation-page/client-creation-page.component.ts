@@ -69,10 +69,15 @@ export class ClientCreationPageComponent implements OnInit {
   }
 
   onSubmitSelectionForm() {
-    if (this.clientSelectionForm.value.clientId !== undefined) {
+    if (
+      this.clientSelectionForm.value.clientId !== null &&
+      this.clientSelectionForm.value.clientId !== undefined
+    ) {
+      console.log(this.clientSelectionForm.value.clientId);
       this.clientService
         .findClient(this.clientSelectionForm.value.clientId)
         .subscribe(client => {
+          this.clients = new Array<Client>();
           this.clients.push(client);
           console.log(client);
           console.log(this.clients);
