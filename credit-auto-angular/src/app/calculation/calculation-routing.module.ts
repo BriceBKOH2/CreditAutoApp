@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CalcSheetComponent } from './calc-sheet/calc-sheet.component';
+import { IsSignedInGuard } from '../guards/is-signed-in.guard';
 
 const routes: Routes = [
   {
-    path: 'simulPage',
-    component: CalcSheetComponent
+    path: '',
+    component: CalcSheetComponent,
+    canActivate: [IsSignedInGuard]
   }
 ];
 

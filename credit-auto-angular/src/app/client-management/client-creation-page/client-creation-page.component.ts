@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Client } from 'src/app/calculation/class/client';
 import { Router } from '@angular/router';
 import { Contract } from 'src/app/calculation/class/contract';
-
 @Component({
   selector: 'app-client-creation-page',
   templateUrl: './client-creation-page.component.html',

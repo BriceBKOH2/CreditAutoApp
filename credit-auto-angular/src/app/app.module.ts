@@ -8,6 +8,8 @@ import { NavigationModule } from './navigation/navigation.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ClientManagementModule } from './client-management/client-management.module';
+import { StorageServiceModule } from 'ngx-webstorage-service';
+import { LocalstorageService } from './service/localstorage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,9 +21,10 @@ import { ClientManagementModule } from './client-management/client-management.mo
     HttpClientModule,
     AuthenticationModule,
     ClientManagementModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StorageServiceModule
   ],
-  providers: [],
+  providers: [LocalstorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

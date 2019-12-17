@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SimulationService } from '../service/simulation.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { Contract } from '../class/contract';
 import { Category } from '../class/category';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormControl} from '@angular/forms';
 import { Rate } from '../class/rate';
 import { Router } from '@angular/router';
+import { Client } from '../class/client';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -96,7 +97,6 @@ export class CalcSheetComponent implements OnInit {
     this.loanCalculation();
     this.showButonSendContract = true;
   }
-
   onCreateContract() {
     this.simulationService.putContract(this.contract).subscribe(response => {
       this.contract = response;
