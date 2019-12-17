@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Rate } from 'src/app/calculation/class/rate';
+import { HttpClient } from '@angular/common/http';
 import { Client } from 'src/app/calculation/class/client';
-import { Category } from 'src/app/calculation/class/category';
-import { Contract } from 'src/app/calculation/class/contract';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SimulationService } from '../service/simulation.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Contract } from '../class/contract';
 import { Category } from '../class/category';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Rate } from '../class/rate';
-import { Client } from '../class/client';
-import { map } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -15,22 +13,15 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./calc-sheet.component.scss']
 })
 export class CalcSheetComponent implements OnInit {
-  contract: Contract = new Contract(
-    undefined,
-    undefined,
-    undefined,
-    new Category('A')
-  );
+  contract: Contract;
   categories: Category[];
   myForm: string;
   query: string;
   rate$: Rate[];
   rateLoan: Rate;
-  client: Client;
   showButonSendContract = false;
   showButtonAttachClient = false;
   date: Date;
-
 
   contractForm$: BehaviorSubject<{ vehicleCat: string }>;
 
@@ -41,19 +32,37 @@ export class CalcSheetComponent implements OnInit {
     loanAmount: new FormControl('')
   });
 
-  constructor(private simulationService: SimulationService) {}
+  constructor(private simulationService: SimulationService, private router: Router) {
+    if(window.history.state.contract === undefined) {
+      this.contract = new Contract(
+        undefined,
+        undefined,
+        undefined,
+        new Category('A')
+    );
+    } else {
+      this.contract = window.history.state.contract;
+      console.log(this.contract);
+      this.contractForm.get('vehiclePrice').setValue(this.contract.vehiclePrice);
+      this.contractForm.get('loanAmount').setValue(this.contract.loanAmount);
+      this.contractForm.get('loanDuration').setValue(this.contract.loanDuration);
+      this.contractForm.get('vehicleCat').setValue(this.contract.vehicleCategory);
 
+    }
+      }
   ngOnInit() {
     this.date = new Date();
     this.simulationService.getCategories().subscribe(response => {
       this.categories = response;
     });
+    this.contract.client = window.history.state.client;
 
     this.contractForm$ = new BehaviorSubject({
       vehicleCat: this.contractForm.get('vehicleCat').value
     });
 
     this.showRates();
+    console.log(this.contract);
   }
 
   showRates() {
@@ -63,12 +72,10 @@ export class CalcSheetComponent implements OnInit {
   }
 
   loanCalculation() {
-    this.contract = new Contract(
-      this.contractForm.value.vehiclePrice,
-      this.contractForm.value.loanAmount,
-      this.contractForm.value.loanDuration,
-      this.contractForm.value.vehicleCat
-    );
+    this.contract.vehiclePrice = this.contractForm.value.vehiclePrice;
+    this.contract.loanAmount = this.contractForm.value.loanAmount;
+    this.contract.loanDuration = this.contractForm.value.loanDuration;
+    this.contract.vehicleCategory = this.contractForm.value.vehicleCat;
 
     this.simulationService.getRateForLoan(this.contract).subscribe(response => {
       this.contract.rate = response.rateAmount;
@@ -86,7 +93,6 @@ export class CalcSheetComponent implements OnInit {
     });
   }
 
-
   onSubmitForm() {
     this.loanCalculation();
     this.showButonSendContract = true;
@@ -94,6 +100,7 @@ export class CalcSheetComponent implements OnInit {
 
   onCreateContract() {
     console.log('le contract');
+    console.log(this.contract);
     this.simulationService.putContract(this.contract).subscribe(response => {
       this.contract = response;
       console.log(this.contract);
@@ -101,15 +108,9 @@ export class CalcSheetComponent implements OnInit {
     });
   }
 
-  onAttachClient(){
-    this.simulationService.findClient(20).subscribe(response => {
-      this.contract.client = response;
-      console.log(this.contract.client);
+  sendContractToClient(){
+    this.router.navigateByUrl('/clientcreationpage', {
+      state: { contract: this.contract}
     });
-
-    this.simulationService.putUpdateContract(this.contract.id).subscribe(response => {
-        this.contract = response;
-        console.log(this.contract);
-    });
-  }
+    }
 }

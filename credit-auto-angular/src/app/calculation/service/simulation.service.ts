@@ -80,7 +80,9 @@ export class SimulationService {
     return this.httpClient.get<Client>(`${this.endPointClient}/${id}`);
   }
 
-  putUpdateContract(id: number) {
-    return this.httpClient.put<Contract>(this.endPointUpdateContract, Contract);
+  getContractFromClientId(id: number) {
+    return this.httpClient.get<Contract[]>(
+      `${this.endPointContract}/client/${id}`
+    );
   }
 }

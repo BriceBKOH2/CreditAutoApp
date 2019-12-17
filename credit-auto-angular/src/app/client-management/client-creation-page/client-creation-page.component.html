@@ -41,7 +41,7 @@
         <div class="form-group">
           <label for="client_account">Compte N° </label>
           <input
-            formControlName="clientAccount"
+            formControlName="clientAccountNumber"
             class="form-control"
             name="client_account"
             id="client_account"
@@ -97,9 +97,31 @@
           />
         </div>
         <div>
-          <button class="btn btn btn-success" type="submit">
-            Créer client
-          </button>
+          <div class="d-flex">
+            <div>
+              <button class="btn btn btn-success" type="submit">
+                Créer client
+              </button>
+            </div>
+            <div>
+              <button
+                class="btn btn btn-success"
+                type="submit"
+                (click)="sendClientToDatabase()"
+              >
+                Sauver client
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="btn btn btn-success"
+              type="button"
+              (click)="sendClientToContract()"
+            >
+              Envoyer client dans contract
+            </button>
+          </div>
         </div>
       </div>
     </div>
