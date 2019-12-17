@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Client } from 'src/app/calculation/class/client';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,21 @@ export class ClientService {
     return this.httpClient.put<Client>(this.endPointClient, client);
   }
 
-  getNewAccountNumber() {
-    return this.httpClient.get<number>(this.endPointClient);
-  }
-
   findClient(id: number) {
     return this.httpClient.get<Client>(`${this.endPointClient}/${id}`);
+  }
+
+  findClientByNames(firsName: string, lastName: string) {
+    const param = new HttpParams()
+      .set('firstName', firsName)
+      .set('lastName', lastName);
+
+    return this.httpClient.get<Client[]>(`${this.endPointClient}/byname`, {
+      params: param
+    });
+  }
+
+  getNewAccountNumber() {
+    return this.httpClient.get<number>(this.endPointClient);
   }
 }

@@ -90,7 +90,6 @@ public class ClientController {
 	@RequestMapping(value = "/byname", method = RequestMethod.GET)
 	public List<Client> findByNames(@RequestParam String firstName, @RequestParam String lastName)
 			throws ClientNotFoundException {
-		System.out.println(lastName);
 		return clientService.findByNames(firstName, lastName);
 	}
 	
