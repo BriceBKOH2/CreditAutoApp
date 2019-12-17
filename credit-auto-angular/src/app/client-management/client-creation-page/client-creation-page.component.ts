@@ -79,6 +79,7 @@ export class ClientCreationPageComponent implements OnInit {
       this.clientService
         .findClient(this.clientSelectionForm.value.clientId)
         .subscribe(client => {
+          this.clients = new Array<Client>();
           this.clients.push(client);
           console.log(client);
           console.log(this.clients);
