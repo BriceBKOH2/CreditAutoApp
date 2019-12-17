@@ -39,8 +39,6 @@ export class CalcSheetComponent implements OnInit {
 
   ngOnInit() {
     this.simulationService.getCategories().subscribe(response => {
-      console.log('component ts');
-      console.log(response);
       this.categories = response;
     });
 
@@ -54,8 +52,6 @@ export class CalcSheetComponent implements OnInit {
   showRates() {
     this.simulationService.getRates().subscribe(response => {
       this.rate$ = response;
-      console.log('component ts showRates');
-      console.log(this.rate$);
     });
   }
 
@@ -70,8 +66,6 @@ export class CalcSheetComponent implements OnInit {
     this.simulationService.getRateForLoan(contract).subscribe(response => {
       this.rateLoan = response;
       this.rate$ = [this.rateLoan];
-      console.log('component ts LoanCalculation');
-      console.log(this.rateLoan);
     });
   }
 
@@ -85,16 +79,13 @@ export class CalcSheetComponent implements OnInit {
 
     this.simulationService.gettotalAmount(contract).subscribe(response => {
       this.contract = response;
-      console.log('component ts LoanCalculation');
-      console.log(this.contract);
     });
   }
 
   onSubmitForm() {
     console.log(this.contractForm.value);
     this.loanCalculation();
-    console.log('component ts onSubmitForm');
-    console.log(this.loanCalculation());
+
     this.amountCalculation();
 
     // this.client = new Client(

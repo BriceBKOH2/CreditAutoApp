@@ -5,7 +5,7 @@ import { IsSignedInGuard } from '../guards/is-signed-in.guard';
 
 const routes: Routes = [
   {
-    path: 'simulPage',
+    path: '',
     component: CalcSheetComponent,
     canActivate: [IsSignedInGuard]
   }

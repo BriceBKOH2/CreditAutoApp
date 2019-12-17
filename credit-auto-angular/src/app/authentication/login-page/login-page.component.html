@@ -1,8 +1,14 @@
 <ng-container *ngIf="isUserLogged()">
-  <div>Bienvenue, {{ user.firstName }} !</div>
-  <button class="btn btn btn-success" (click)="logOut()">
-    Déconnexion
-  </button>
+  <div class="container">
+    <div class="justify-content-center row">
+      <h5>Bienvenue, {{ user.firstName }} !</h5>
+    </div>
+    <div class="justify-content-center row">
+      <button class="btn btn btn-success" (click)="logOut()">
+        Déconnexion
+      </button>
+    </div>
+  </div>
 </ng-container>
 
 <div
