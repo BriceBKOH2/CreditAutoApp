@@ -6,13 +6,15 @@ import {
   UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IdentifiyingService } from '../service/identifiying.service';
+import { LocalstorageService } from '../service/localstorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsSignedInGuard implements CanActivate {
-  constructor(private identifiyingService: IdentifiyingService) {}
+  [x: string]: any;
+
+  constructor(private localstorageService: LocalstorageService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -22,9 +24,10 @@ export class IsSignedInGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.identifiyingService.isKnown) {
-      return true;
-    }
-    return false;
+    return this.localstorageService.getCurrentUser() !== undefined;
+    // if (this.localstorageService.getCurrentUser() !== 'empty') {
+    //   return true;
+    // }
+    // return false;
   }
 }

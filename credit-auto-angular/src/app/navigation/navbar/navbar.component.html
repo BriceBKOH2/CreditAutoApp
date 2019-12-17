@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil</a>
+        <a class="nav-link" href="loginPage">Accueil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="simulPage">Crédit</a>
@@ -24,5 +24,12 @@
         <a class="nav-link" href="#">Administration</a>
       </li>
     </ul>
+
+    <div *ngIf="user">
+      🌐<em>{{ user.login }}</em>
+      <button class="btn btn-outline-success" (click)="logOut()">
+        Déconnexion
+      </button>
+    </div>
   </div>
 </nav>

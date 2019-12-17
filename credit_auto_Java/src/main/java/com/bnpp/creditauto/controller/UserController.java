@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import com.bnpp.creditauto.service.UserService;
 @RestController
 @RequestMapping("/api/user")
 @SessionAttributes(value="currentUser", types= {User.class})
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -105,7 +107,7 @@ public class UserController {
 			httpSession.setAttribute("connectedUser", user);
 			return user;
 		} catch (UserNotFoundException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 			return null;
 		}
 		

@@ -1,4 +1,14 @@
-<div class="container d-flex justify-content-around alert alert-secondary">
+<ng-container *ngIf="isUserLogged()">
+  <div>Bienvenue, {{ user.firstName }} !</div>
+  <button class="btn btn btn-success" (click)="logOut()">
+    Déconnexion
+  </button>
+</ng-container>
+
+<div
+  *ngIf="!isUserLogged()"
+  class="container d-flex justify-content-around alert alert-secondary"
+>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="row">
       <div class="col">
