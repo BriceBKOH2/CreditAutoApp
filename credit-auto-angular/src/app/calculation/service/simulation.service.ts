@@ -71,4 +71,10 @@ export class SimulationService {
       .post(`${this.endPointContract}`, JSON.stringify(contract), { headers })
       .pipe(map((amountDue: Contract) => amountDue));
   }
+
+  getContractFromClientId(id: number) {
+    return this.httpClient.get<Contract[]>(
+      `${this.endPointContract}/client/${id}`
+    );
+  }
 }

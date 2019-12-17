@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SimulationService } from '../service/simulation.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Contract } from '../class/contract';
 import { Category } from '../class/category';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Rate } from '../class/rate';
-import { Client } from '../class/client';
-import { map } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -15,21 +12,14 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./calc-sheet.component.scss']
 })
 export class CalcSheetComponent implements OnInit {
-  contract: Contract = new Contract(
-    undefined,
-    undefined,
-    undefined,
-    new Category('A')
-  );
+  contract: Contract;
   categories: Category[];
   myForm: string;
   query: string;
   rate$: Rate[];
   rateLoan: Rate;
-  client: Client;
   showButonSendContract = false;
   date: Date;
-
 
   contractForm$: BehaviorSubject<{ vehicleCat: string }>;
 
@@ -43,16 +33,28 @@ export class CalcSheetComponent implements OnInit {
   constructor(private simulationService: SimulationService) {}
 
   ngOnInit() {
+    this.contract = new Contract(
+      undefined,
+      undefined,
+      undefined,
+      new Category('A')
+    );
     this.date = new Date();
     this.simulationService.getCategories().subscribe(response => {
       this.categories = response;
     });
+    this.contract.client = window.history.state.client;
 
     this.contractForm$ = new BehaviorSubject({
       vehicleCat: this.contractForm.get('vehicleCat').value
     });
 
     this.showRates();
+
+    this.simulationService
+      .getContractFromClientId(30)
+      .subscribe((contract: Contract[]) => console.log(contract[0]));
+    console.log(this.contract);
   }
 
   showRates() {
@@ -62,12 +64,10 @@ export class CalcSheetComponent implements OnInit {
   }
 
   loanCalculation() {
-    this.contract = new Contract(
-      this.contractForm.value.vehiclePrice,
-      this.contractForm.value.loanAmount,
-      this.contractForm.value.loanDuration,
-      this.contractForm.value.vehicleCat
-    );
+    this.contract.vehiclePrice = this.contractForm.value.vehiclePrice;
+    this.contract.loanAmount = this.contractForm.value.loanAmount;
+    this.contract.loanDuration = this.contractForm.value.loanDuration;
+    this.contract.vehicleCategory = this.contractForm.value.vehicleCat;
 
     this.simulationService.getRateForLoan(this.contract).subscribe(response => {
       this.contract.rate = response.rateAmount;
@@ -85,7 +85,6 @@ export class CalcSheetComponent implements OnInit {
     });
   }
 
-
   onSubmitForm() {
     this.loanCalculation();
     this.showButonSendContract = true;
@@ -98,5 +97,4 @@ export class CalcSheetComponent implements OnInit {
       console.log(this.contract);
     });
   }
-
 }
