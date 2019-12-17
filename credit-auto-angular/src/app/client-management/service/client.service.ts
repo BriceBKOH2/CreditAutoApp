@@ -24,4 +24,8 @@ export class ClientService {
   getNewAccountNumber() {
     return this.httpClient.get<number>(this.endPointClient);
   }
+
+  findClient(id: number) {
+    return this.httpClient.get<Client>(`${this.endPointClient}/${id}`);
+  }
 }

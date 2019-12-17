@@ -28,6 +28,7 @@ export class CalcSheetComponent implements OnInit {
   rateLoan: Rate;
   client: Client;
   showButonSendContract = false;
+  showButtonAttachClient = false;
   date: Date;
 
 
@@ -96,7 +97,19 @@ export class CalcSheetComponent implements OnInit {
     this.simulationService.putContract(this.contract).subscribe(response => {
       this.contract = response;
       console.log(this.contract);
+      this.showButtonAttachClient = true;
     });
   }
 
+  onAttachClient(){
+    this.simulationService.findClient(20).subscribe(response => {
+      this.contract.client = response;
+      console.log(this.contract.client);
+    });
+
+    this.simulationService.putUpdateContract(this.contract.id).subscribe(response => {
+        this.contract = response;
+        console.log(this.contract);
+    });
+  }
 }

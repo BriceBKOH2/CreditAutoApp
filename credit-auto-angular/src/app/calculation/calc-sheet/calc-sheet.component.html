@@ -81,6 +81,11 @@
               Créer Contract
             </button>
           </ng-container>
+          <ng-container *ngIf="showButtonAttachClient">
+            <button class="btn btn-success" type="button" (click)="onAttachClient()">
+              Attach Client
+            </button>
+          </ng-container>
         </div>
         </div>
       </div>
