@@ -32,4 +32,8 @@ Creating Client with specific request with Postman to feed the back and save it 
 Done a presentation of work done and what's left to Product Owner
 
 Sprint 3 :
-Front creates a Contract object with parameters from the form present in the simul page, form get its vehicule category from database
+Front creates a Contract object with parameters from the form present in the simul page, form get its vehicule category from database ans save contract object in database. 
+
+Spring 4 :
+Client creation page done, saving client object in database, can send client object in contract simulation page and save it in contract object. When contract object send to database with correct client object it saves the relation (put a contract object in already existing client object in database).
+Basic login and access right and restriction on differentes pages done.
