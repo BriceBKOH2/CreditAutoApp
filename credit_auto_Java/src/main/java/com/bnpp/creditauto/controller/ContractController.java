@@ -64,6 +64,20 @@ public class ContractController extends AbstractController {
 	}
 	
 	/**
+	 * Finds and returns the Contract object contained in Client with the id Client specified in the path variable.
+	 * @param id The id of the Client to search for.
+	 * @return The Contract object found, null otherwise.
+	 */
+	@RequestMapping(value = "/client/{id}", method = RequestMethod.GET)
+	public List<Contract> findContractByClientId(@PathVariable Long id){
+		try {
+			return contractSvc.findAllByClientId(id);
+		} catch (ContractNotFoundException e) {
+			return null;
+		}
+	}
+	
+	/**
 	 * Create the Contract with informations passed on in the request's body.
 	 * @param c The newly formed contract to save.
 	 */
