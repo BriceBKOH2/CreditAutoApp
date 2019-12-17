@@ -50,10 +50,6 @@ export class CalcSheetComponent implements OnInit {
     });
 
     this.showRates();
-
-    this.simulationService
-      .getContractFromClientId(30)
-      .subscribe((contract: Contract[]) => console.log(contract[0]));
     console.log(this.contract);
   }
 
@@ -81,7 +77,6 @@ export class CalcSheetComponent implements OnInit {
     this.simulationService.gettotalAmount(this.contract).subscribe(response => {
       this.contract = response;
       this.contract.creationDate = this.date;
-      console.log(this.contract);
     });
   }
 
@@ -91,7 +86,6 @@ export class CalcSheetComponent implements OnInit {
   }
 
   onCreateContract() {
-    console.log('le contract');
     this.simulationService.putContract(this.contract).subscribe(response => {
       this.contract = response;
       console.log(this.contract);

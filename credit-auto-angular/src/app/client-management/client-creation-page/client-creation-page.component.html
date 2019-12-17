@@ -1,129 +1,219 @@
 <h2 class="mb-5">Création client</h2>
 
-<div
-  class="container d-flex justify-content-around form1 alert alert-secondary"
->
-  <form [formGroup]="clientForm" (ngSubmit)="onSubmitForm()">
-    <div class="row">
-      <div class="col">
-        <div class="form-group">
-          <label for="client_lastName">Nom </label>
-          <div>
-            <input
-              formControlName="clientLastName"
-              id="client_last_name"
-              name="client_last_name"
-              class="form-control"
-              type="text"
-              required
-              minlength="4"
-              maxlength="8"
-              placeholder="Durand"
-            />
-          </div>
-        </div>
+<div class="d-flex">
+  <div>
+    <button
+      class="btn btn btn-success"
+      type="button"
+      (click)="displayCreationMenu()"
+    >
+      Création de client
+    </button>
+  </div>
+  <div>
+    <button
+      class="btn btn btn-success"
+      type="button"
+      (click)="displaySelectionMenu()"
+    >
+      Recherche de client
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="displayClientForm">
+  <div
+    class="container d-flex justify-content-around form1 alert alert-secondary"
+  >
+    <form [formGroup]="clientCreationForm" (ngSubmit)="onSubmitCreationForm()">
+      <div class="form-group">
+        <label for="client_firstName">Prenom </label>
+        <input
+          formControlName="clientFirstName"
+          id="client_first_name"
+          name="client_first_name"
+          class="form-control"
+          type="text"
+          required
+          minlength="4"
+          maxlength="20"
+          placeholder="JP"
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="client_firstName">Prenom </label>
-          <input
-            formControlName="clientFirstName"
-            id="client_first_name"
-            name="client_first_name"
-            class="form-control"
-            type="text"
-            required
-            minlength="4"
-            maxlength="8"
-            placeholder="JP"
-          />
-        </div>
+      <div class="form-group">
+        <label for="client_lastName">Nom </label>
+        <input
+          formControlName="clientLastName"
+          id="client_last_name"
+          name="client_last_name"
+          class="form-control"
+          type="text"
+          required
+          minlength="4"
+          maxlength="20"
+          placeholder="Durand"
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="client_account">Compte N° </label>
-          <input
-            formControlName="clientAccountNumber"
-            class="form-control"
-            name="client_account"
-            id="client_account"
-            type="number"
-            min=""
-            max="9999999999"
-            placeholder="0123456789"
-          />
-        </div>
+      <div class="form-group">
+        <label for="client_account">Compte N° </label>
+        <input
+          formControlName="clientAccountNumber"
+          class="form-control"
+          name="client_account"
+          id="client_account"
+          type="number"
+          min="1"
+          max="9999999999"
+          placeholder="0123456789"
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="client_address">Adresse </label>
-          <input
-            formControlName="clientAddress"
-            id="client_address"
-            name="client_address"
-            class="form-control"
-            type="text"
-            required
-            minlength="4"
-            maxlength="30"
-            placeholder="1 rue des Pinsons"
-          />
-        </div>
+      <div class="form-group">
+        <label for="client_address">Adresse </label>
+        <input
+          formControlName="clientAddress"
+          id="client_address"
+          name="client_address"
+          class="form-control"
+          type="text"
+          required
+          minlength="4"
+          maxlength="50"
+          placeholder="1 rue des Pinsons"
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="client_birth">Date de naissance </label>
-          <input
-            formControlName="clientBirthDate"
-            id="client_birth_date"
-            name="client_birth_date"
-            class="form-control"
-            type="date"
-            id="start"
-            name="trip-start"
-            value="2019-12-25"
-            min="1900-01-01"
-            placeholder="Ex:"
-          />
-        </div>
+      <div class="form-group">
+        <label for="client_birth">Date de naissance </label>
+        <input
+          formControlName="clientBirthDate"
+          id="client_birth_date"
+          name="client_birth_date"
+          class="form-control"
+          type="date"
+          id="start"
+          name="trip-start"
+          value="2019-12-25"
+          min="1900-01-01"
+          placeholder="Ex:"
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="client_phoneNumber">N° téléphone </label>
-          <input
-            formControlName="clientPhoneNumber"
-            id="client_phone_number"
-            name="client_phone_number"
-            class="form-control"
-            type="tel"
-            pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
-            required
-            placeholder="Ex: 01-23-45-67-89"
-          />
+      <div class="form-group">
+        <label for="client_phoneNumber">N° téléphone </label>
+        <input
+          formControlName="clientPhoneNumber"
+          id="client_phone_number"
+          name="client_phone_number"
+          class="form-control"
+          type="tel"
+          pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
+          required
+          placeholder="Ex: 01-23-45-67-89"
+        />
+      </div>
+
+      <div class="d-flex">
+        <div>
+          <button class="btn btn btn-success" type="submit">
+            Créer client
+          </button>
         </div>
         <div>
-          <div class="d-flex">
-            <div>
-              <button class="btn btn btn-success" type="submit">
-                Créer client
-              </button>
-            </div>
-            <div>
-              <button
-                class="btn btn btn-success"
-                type="submit"
-                (click)="sendClientToDatabase()"
-              >
-                Sauver client
-              </button>
-            </div>
-          </div>
-          <div>
-            <button
-              class="btn btn btn-success"
-              type="button"
-              (click)="sendClientToContract()"
-            >
-              Envoyer client dans contract
-            </button>
-          </div>
+          <button
+            class="btn btn btn-success"
+            type="submit"
+            (click)="sendClientToDatabase()"
+          >
+            Sauver client
+          </button>
         </div>
       </div>
-    </div>
-  </form>
-</div>
+      <div>
+        <button
+          class="btn btn btn-success"
+          type="button"
+          (click)="sendClientToContract()"
+        >
+          Envoyer client dans contract
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+<ng-container *ngIf="!displayClientForm">
+  <div
+    class="container d-flex justify-content-around form1 alert alert-secondary"
+  >
+    <form
+      [formGroup]="clientSelectionForm"
+      (ngSubmit)="onSubmitSelectionForm()"
+    >
+      <div class="form-group">
+        <div class="form-group">
+          <label for="client_id">Id Compte Client </label>
+          <input
+            formControlName="clientId"
+            class="form-control"
+            name="client_id"
+            id="client_id"
+            type="number"
+            min="1"
+            max="9999999999"
+            placeholder="1"
+          />
+        </div>
+
+        <p>Ou</p>
+
+        <label for="client_firstName">Prenom </label>
+        <input
+          formControlName="clientFirstName"
+          id="client_first_name"
+          name="client_first_name"
+          class="form-control"
+          type="text"
+          required
+          minlength="4"
+          maxlength="20"
+          placeholder="JP"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="client_lastName">Nom </label>
+        <input
+          formControlName="clientLastName"
+          id="client_last_name"
+          name="client_last_name"
+          class="form-control"
+          type="text"
+          required
+          minlength="4"
+          maxlength="20"
+          placeholder="Durand"
+        />
+      </div>
+
+      <div>
+        <button class="btn btn btn-success" type="submit">
+          Chercher client
+        </button>
+      </div>
+      <ng-container *ngIf="clients">
+        <div *ngFor="let client of clients">
+          <div
+            class="clientDisplay"
+            (click)="sendSelectedClientToContract(client)"
+          >
+            <h1>{{ client.firstName }} {{ client.lastName }}</h1>
+            <p>account number : {{ client.accountNumber }}</p>
+            <p>address : {{ client.address }}</p>
+            <p>phone number : {{ client.phoneNumber }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+</ng-container>

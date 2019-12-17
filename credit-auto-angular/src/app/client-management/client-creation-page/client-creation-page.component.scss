@@ -1,3 +1,8 @@
 h2 {
-    text-align: center;
-  }
+  text-align: center;
+}
+
+.clientDisplay:hover {
+  cursor: pointer;
+  background-color: gray;
+}

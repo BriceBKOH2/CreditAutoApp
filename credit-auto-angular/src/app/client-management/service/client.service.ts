@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Client } from 'src/app/calculation/class/client';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +10,26 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ClientService {
   constructor(private httpClient: HttpClient) {}
 
-  findClient(id: number) {
-    return this.httpClient.get<Client>(`${this.endPointClient}/${id}`);
-  }
-
   get endPointClient() {
     return 'http://localhost:8080/credit_auto/api/client';
   }
 
   putClient(client: Client) {
     return this.httpClient.put<Client>(this.endPointClient, client);
+  }
+
+  findClient(id: number) {
+    return this.httpClient.get<Client>(`${this.endPointClient}/${id}`);
+  }
+
+  findClientByNames(firsName: string, lastName: string) {
+    const param = new HttpParams()
+      .set('firstName', firsName)
+      .set('lastName', lastName);
+
+    return this.httpClient.get<Client[]>(`${this.endPointClient}/byname`, {
+      params: param
+    });
   }
 
   getNewAccountNumber() {
