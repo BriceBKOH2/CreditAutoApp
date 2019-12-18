@@ -63,6 +63,23 @@
           />
         </div>
 
+        <ng-container *ngIf="contract.rate">
+          <div class="list-group">
+            <a
+              class="list-group-item list-group-item-action flex-column align-items-start"
+            >
+              <div class="row">
+                <div class="col">
+                  <h4>
+                    Taux :
+                    <small class="text-muted">{{ contract.rate }}%</small>
+                  </h4>
+                </div>
+              </div>
+            </a>
+          </div>
+        </ng-container>
+
         <ng-container *ngIf="contract.amountDue">
           <div class="form-group amount">
             <label for="loan_amount">Montant du crédit :</label>
@@ -82,35 +99,38 @@
             </button>
           </div>
           <div>
-            <ng-container *ngIf="showButonSendContract">
+            <ng-container *ngIf="contract.amountDue">
+              <button
+                class="btn btn btn-success"
+                type="button"
+                (click)="sendContractToClient()"
+              >
+                Envoyer contrat dans client
+              </button>
+            </ng-container>
+            <ng-container *ngIf="contract.client">
               <button
                 class="btn btn-success"
                 type="button"
                 (click)="onCreateContract()"
               >
-                Créer Contract
+                Sauver Contract
               </button>
+              <div>
+                <ng-container *ngIf="showButonSendContract">
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    (click)="onCreateContract()"
+                  >
+                    Créer Contract
+                  </button>
+                </ng-container>
+              </div>
             </ng-container>
           </div>
         </div>
       </div>
     </div>
   </form>
-
-  <ng-container *ngIf="contract.rate">
-    <div class="list-group">
-      <a
-        class="list-group-item list-group-item-action flex-column align-items-start"
-      >
-        <div class="row">
-          <div class="col">
-            <h4>
-              Taux :
-              <small class="text-muted">{{ contract.rate }}%</small>
-            </h4>
-          </div>
-        </div>
-      </a>
-    </div>
-  </ng-container>
 </div>

@@ -3,8 +3,9 @@ import { SimulationService } from '../service/simulation.service';
 import { BehaviorSubject } from 'rxjs';
 import { Contract } from '../class/contract';
 import { Category } from '../class/category';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Rate } from '../class/rate';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -19,6 +20,7 @@ export class CalcSheetComponent implements OnInit {
   rate$: Rate[];
   rateLoan: Rate;
   showButonSendContract = false;
+  showButtonAttachClient = false;
   date: Date;
 
   contractForm$: BehaviorSubject<{ vehicleCat: string }>;
@@ -30,15 +32,32 @@ export class CalcSheetComponent implements OnInit {
     loanAmount: new FormControl('')
   });
 
-  constructor(private simulationService: SimulationService) {}
-
+  constructor(
+    private simulationService: SimulationService,
+    private router: Router
+  ) {
+    if (window.history.state.contract === undefined) {
+      this.contract = new Contract(
+        undefined,
+        undefined,
+        undefined,
+        new Category('A')
+      );
+    } else {
+      this.contract = window.history.state.contract;
+      this.contractForm
+        .get('vehiclePrice')
+        .setValue(this.contract.vehiclePrice);
+      this.contractForm.get('loanAmount').setValue(this.contract.loanAmount);
+      this.contractForm
+        .get('loanDuration')
+        .setValue(this.contract.loanDuration);
+      this.contractForm
+        .get('vehicleCat')
+        .setValue(this.contract.vehicleCategory);
+    }
+  }
   ngOnInit() {
-    this.contract = new Contract(
-      undefined,
-      undefined,
-      undefined,
-      new Category('A')
-    );
     this.date = new Date();
     this.simulationService.getCategories().subscribe(response => {
       this.categories = response;
@@ -89,6 +108,13 @@ export class CalcSheetComponent implements OnInit {
     this.simulationService.putContract(this.contract).subscribe(response => {
       this.contract = response;
       console.log(this.contract);
+      this.showButtonAttachClient = true;
+    });
+  }
+
+  sendContractToClient() {
+    this.router.navigateByUrl('/clientcreationpage', {
+      state: { contract: this.contract }
     });
   }
 }

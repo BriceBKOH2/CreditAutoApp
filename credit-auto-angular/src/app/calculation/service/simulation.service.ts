@@ -30,6 +30,10 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/contract';
   }
 
+  get endPointUpdateContract() {
+    return 'http://localhost:8080/credit_auto/api/contract/id';
+  }
+
   putClient(client: Client) {
     return this.httpClient.put<Client>(this.endPointClient, client);
   }
@@ -70,6 +74,10 @@ export class SimulationService {
     return this.httpClient
       .post(`${this.endPointContract}`, JSON.stringify(contract), { headers })
       .pipe(map((amountDue: Contract) => amountDue));
+  }
+
+  findClient(id: number) {
+    return this.httpClient.get<Client>(`${this.endPointClient}/${id}`);
   }
 
   getContractFromClientId(id: number) {

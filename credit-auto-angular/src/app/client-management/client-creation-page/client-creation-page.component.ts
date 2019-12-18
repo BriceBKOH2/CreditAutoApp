@@ -3,7 +3,7 @@ import { ClientService } from '../service/client.service';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Client } from 'src/app/calculation/class/client';
 import { Router } from '@angular/router';
-
+import { Contract } from 'src/app/calculation/class/contract';
 @Component({
   selector: 'app-client-creation-page',
   templateUrl: './client-creation-page.component.html',
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class ClientCreationPageComponent implements OnInit {
   clients: Client[];
   client: Client;
+  contract: Contract;
   displayClientForm: boolean;
 
   clientCreationForm = new FormGroup({
@@ -39,10 +40,13 @@ export class ClientCreationPageComponent implements OnInit {
       undefined,
       undefined
     );
+
+    this.contract = undefined;
     this.displayClientForm = true;
   }
 
   ngOnInit() {
+    this.contract = window.history.state.contract;
     this.clientService.getNewAccountNumber().subscribe(response => {
       this.client.accountNumber = response;
       this.clientCreationForm
@@ -69,15 +73,13 @@ export class ClientCreationPageComponent implements OnInit {
   }
 
   onSubmitSelectionForm() {
+    this.clients = new Array<Client>();
     if (this.clientSelectionForm.value.clientId) {
-      console.log(this.clientSelectionForm.value.clientId);
       this.clientService
         .findClient(this.clientSelectionForm.value.clientId)
         .subscribe(client => {
           this.clients = new Array<Client>();
           this.clients.push(client);
-          console.log(client);
-          console.log(this.clients);
         });
     } else if (
       this.clientSelectionForm.value.clientFirstName &&
@@ -90,7 +92,6 @@ export class ClientCreationPageComponent implements OnInit {
         )
         .subscribe(clients => {
           this.clients = clients;
-          console.log(this.clients);
         });
     }
   }
@@ -117,13 +118,13 @@ export class ClientCreationPageComponent implements OnInit {
     this.client.accountNumber = this.clientCreationForm.value.clientAccountNumber;
 
     this.router.navigateByUrl('/simulPage', {
-      state: { client: this.client }
+      state: { client: this.client, contract: this.contract }
     });
   }
 
   sendSelectedClientToContract(clientSelected: Client) {
     this.router.navigateByUrl('/simulPage', {
-      state: { client: clientSelected }
+      state: { client: clientSelected, contract: this.contract }
     });
   }
 }

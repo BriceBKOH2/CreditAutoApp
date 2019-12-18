@@ -40,7 +40,7 @@ public class ContractController extends AbstractController {
 	 * Updates the Contract object with the id specified in path variable, with the informations
 	 * contained in the body of the request.
 	 * @param id The id of the Contract object to modify.
-	 * @param contract The udpated contract object to take into account.
+	 * @param contract The updated contract object to take into account.
 	 * @throws ContractNotFoundException if no Contract objects are found with the id specified.
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
