@@ -56,8 +56,9 @@ public class RateController {
 	 * @param client The new client state that will replace the old one.
 	 * @throws ClientNotFoundException if client with the id does not exist.
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateClient(@PathVariable Long id, @RequestBody Rate rate) throws RateNotFoundException {
+	@RequestMapping(method = RequestMethod.PUT)
+	public void updateRate(@RequestBody Rate rate) throws RateNotFoundException {
+		System.out.println(rate);
 		rateSvc.update(rate);
 	}
 

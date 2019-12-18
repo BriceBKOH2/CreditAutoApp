@@ -5,9 +5,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.RateNotFoundException;
-import com.bnpp.creditauto.model.Client;
 import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
 
@@ -54,9 +52,4 @@ public class RateDao extends AbstractDao<Rate> {
 		}
 		session.merge(rate);
 	}
-	
-	// Implemented in AbstractDao
-//	public List<Rate> findAll() {
-//		return em.createQuery("from Rate", Rate.class).getResultList();
-//	}
 }
