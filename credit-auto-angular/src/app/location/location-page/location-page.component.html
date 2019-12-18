@@ -5,7 +5,7 @@
 >
     <form [formGroup]="contractSelectionForm">
         <label for="contractId">Id du contrat</label>
-        <input formControlName="contractId" id="contractId" type="text" />
+        <input formControlName="contractId" id="contractId" type="number" />
         <button class="btn btn-success" type="button" (click)="searchContract()">Rechercher</button>
     </form>
 </div>
