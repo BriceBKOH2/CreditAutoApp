@@ -21,7 +21,7 @@ public class Rate implements IdEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column
+	@Column(unique = true)
 	@NotBlank
 	private String name;
 	

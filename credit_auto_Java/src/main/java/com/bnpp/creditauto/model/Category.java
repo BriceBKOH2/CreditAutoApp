@@ -29,7 +29,7 @@ public class Category implements IdEntity {
 	@Column
 	private Long id;
 
-	@Column
+	@Column(unique = true)
 	@NotBlank
 	private String name;
 	

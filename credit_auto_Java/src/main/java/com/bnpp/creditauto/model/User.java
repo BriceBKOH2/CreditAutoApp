@@ -26,7 +26,7 @@ public class User implements IdEntity {
 	@NotBlank
 	private String lastName;
 	
-	@Column
+	@Column(unique= true)
 	@NotBlank
 	private String login;
 	
