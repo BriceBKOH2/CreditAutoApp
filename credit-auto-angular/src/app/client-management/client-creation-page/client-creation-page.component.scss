@@ -6,3 +6,47 @@ h2 {
   cursor: pointer;
   background-color: gray;
 }
+
+.btn-creation {
+  margin-bottom: 15px;
+}
+
+.btn-creation button:nth-child(1){
+  margin-right: 10px;
+}
+
+.btn-client button {
+  margin: 10px 0;
+}
+
+.form-simul {
+  width: 40%;
+}
+
+button {
+  width: 100%;
+}
+
+.div-width {
+  width: 50%;
+}
+
+.div-width:first-child {
+  padding-right: 5px;
+}
+
+.div-width:last-child {
+  padding-left: 5px;
+}
+
+.btn-cli {
+  width: 11%;
+}
+
+.btn-cli:first-child {
+  margin-right: 3px;
+}
+
+.btn-cli:last-child {
+  margin-left: 3px;
+}

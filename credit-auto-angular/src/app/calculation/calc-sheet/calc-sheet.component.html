@@ -3,7 +3,7 @@
 <div
   class="container d-flex justify-content-around form1 alert alert-secondary"
 >
-  <form [formGroup]="contractForm">
+  <form [formGroup]="contractForm" class="form-simul">
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -64,7 +64,7 @@
         </div>
 
         <ng-container *ngIf="contract.rate">
-          <div class="list-group">
+          <div class="list-group rate">
             <a
               class="list-group-item list-group-item-action flex-column align-items-start"
             >
@@ -88,10 +88,10 @@
           </div>
         </ng-container>
 
-        <div class="d-flex">
-          <div>
+        <div >
+          <div class="btn-width">
             <button
-              class="btn btn btn-success"
+              class="btn btn-success"
               type="submit"
               (click)="onSubmitForm()"
             >
@@ -101,7 +101,7 @@
           <div>
             <ng-container *ngIf="contract.amountDue">
               <button
-                class="btn btn btn-success"
+                class="btn btn-success"
                 type="button"
                 (click)="sendContractToClient()"
               >

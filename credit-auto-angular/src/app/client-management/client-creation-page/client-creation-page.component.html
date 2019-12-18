@@ -1,16 +1,16 @@
 <h2 class="mb-5">Création client</h2>
 
-<div class="d-flex">
-  <div>
+<div class="d-flex justify-content-center btn-creation ">
+  <div class="btn-cli">
     <button
-      class="btn btn btn-success"
+      class="btn btn-success"
       type="button"
       (click)="displayCreationMenu()"
     >
       Création de client
     </button>
   </div>
-  <div>
+  <div class="btn-cli">
     <button
       class="btn btn btn-success"
       type="button"
@@ -24,7 +24,7 @@
   <div
     class="container d-flex justify-content-around form1 alert alert-secondary"
   >
-    <form [formGroup]="clientCreationForm" (ngSubmit)="onSubmitCreationForm()">
+    <form [formGroup]="clientCreationForm" (ngSubmit)="onSubmitCreationForm()" class="form-simul">
       <div class="form-group">
         <label for="client_firstName">Prenom </label>
         <input
@@ -114,13 +114,13 @@
         />
       </div>
 
-      <div class="d-flex">
-        <div>
+      <div class="d-flex btn-client">
+        <div class="div-width">
           <button class="btn btn btn-success" type="submit">
             Créer client
           </button>
         </div>
-        <div>
+        <div class="div-width">
           <button
             class="btn btn btn-success"
             type="submit"
