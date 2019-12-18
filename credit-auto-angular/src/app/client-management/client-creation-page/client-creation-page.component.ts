@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../service/client.service';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Client } from 'src/app/calculation/class/client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-creation-page',
@@ -11,18 +12,18 @@ import { Client } from 'src/app/calculation/class/client';
 export class ClientCreationPageComponent implements OnInit {
   client: Client;
 
-  // clientForm$: BehaviorSubject<{client: Client}>;
+  //clientForm$: BehaviorSubject<{client: Client}>;
 
   clientForm = new FormGroup({
-    clientLastName: new FormControl('', Validators.required),
-    clientFirstName: new FormControl('', Validators.required),
-    clientAccount: new FormControl('', Validators.required),
-    clientAddress: new FormControl('', Validators.required),
-    clientBirthDate: new FormControl('', Validators.required),
-    clientPhoneNumber: new FormControl('', Validators.required)
+    clientlastname: new FormControl(''),
+    clientfirstname: new FormControl(''),
+    clientaccount: new FormControl(''),
+    clientaddress: new FormControl(''),
+    clientbirth: new FormControl(''),
+    clientphone: new FormControl('')
   });
 
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService, router: Router) {}
 
   ngOnInit() {
     this.client = new Client(
@@ -42,12 +43,12 @@ export class ClientCreationPageComponent implements OnInit {
 
   onSubmitForm() {
     this.client = new Client(
-      this.clientForm.value.clientFirstName,
-      this.clientForm.value.clientLastName,
-      this.clientForm.value.clientBirthDate,
-      this.clientForm.value.clientPhoneNumber,
-      this.clientForm.value.clientAddress,
-      this.clientForm.value.clientAccount
+      this.clientForm.value.clientfirstname,
+      this.clientForm.value.clientlastname,
+      this.clientForm.value.clientbirth,
+      this.clientForm.value.clientphone,
+      this.clientForm.value.clientaddress,
+      this.clientForm.value.clientaccount
     );
     this.clientService.putClient(this.client).subscribe(response => {
       this.client = response;

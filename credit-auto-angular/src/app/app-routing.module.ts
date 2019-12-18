@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'loginPage',
     loadChildren: './authentication/authentication.module#AuthenticationModule'
+  },
+  {
+    path: 'simulPage',
+    loadChildren: './calculation/calculation.module#CalculationModule'
   }
 ];
 

@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SimulationService } from '../service/simulation.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Contract } from '../class/contract';
 import { Category } from '../class/category';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Rate } from '../class/rate';
 import { Client } from '../class/client';
-import { map } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-calc-sheet',
@@ -29,7 +27,6 @@ export class CalcSheetComponent implements OnInit {
   client: Client;
   showButonSendContract = false;
   date: Date;
-
 
   contractForm$: BehaviorSubject<{ vehicleCat: string }>;
 
@@ -85,7 +82,6 @@ export class CalcSheetComponent implements OnInit {
     });
   }
 
-
   onSubmitForm() {
     this.loanCalculation();
     this.showButonSendContract = true;
@@ -98,5 +94,4 @@ export class CalcSheetComponent implements OnInit {
       console.log(this.contract);
     });
   }
-
 }
