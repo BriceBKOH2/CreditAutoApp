@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bnpp.creditauto.exception.ClientNotFoundException;
 import com.bnpp.creditauto.exception.RateNotFoundException;
 import com.bnpp.creditauto.model.Contract;
 import com.bnpp.creditauto.model.Rate;
@@ -47,6 +48,18 @@ public class RateController {
 		} catch (RateNotFoundException e) {
 			return null;
 		}
+	}
+	
+	/**
+	 * Update the client with id in path variable with the informations in the body of the PUT request.
+	 * @param id The id of the client to update.
+	 * @param client The new client state that will replace the old one.
+	 * @throws ClientNotFoundException if client with the id does not exist.
+	 */
+	@RequestMapping(method = RequestMethod.PUT)
+	public void updateRate(@RequestBody Rate rate) throws RateNotFoundException {
+		System.out.println(rate);
+		rateSvc.update(rate);
 	}
 
 	/**

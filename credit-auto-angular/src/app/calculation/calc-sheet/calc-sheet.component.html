@@ -64,27 +64,38 @@
         </div>
 
         <ng-container *ngIf="contract.rate">
-          <div class="list-group rate">
-            <a
-              class="list-group-item list-group-item-action flex-column align-items-start"
-            >
-              <div class="row">
-                <div class="col">
-                  <h4>
-                    Taux :
-                    <small class="text-muted">{{ contract.rate }}%</small>
-                  </h4>
-                </div>
-              </div>
-            </a>
+          <div class="form-group">
+            <label for="rate"><h4>Taux :</h4></label>
+            <br />
+            <span> {{ contract.rate }} %</span>
           </div>
         </ng-container>
 
         <ng-container *ngIf="contract.amountDue">
-          <div class="form-group amount">
-            <label for="loan_amount">Montant du crédit :</label>
+          <div class="form-group">
+            <label for="amount_due"><h4>Spécificité du crédit :</h4></label>
             <br />
-            <span>{{ contract.amountDue }} €</span>
+            <span
+              >Montant du crédit : {{ contract.amountDue }} € / Mensualité :
+              {{
+                contract.amountDue / contract.loanDuration | number: '1.2-2'
+              }}</span
+            >
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="contract.client">
+          <div class="form-group">
+            <label for="client"><h4>Compte Client :</h4></label>
+            <br />
+            <span
+              ><h5>
+                {{ contract.client.firstName }} {{ contract.client.lastName }}
+              </h5>
+              <p>account number : {{ contract.client.accountNumber }}</p>
+              <p>address : {{ contract.client.address }}</p>
+              <p>phone number : {{ contract.client.phoneNumber }}</p>
+            </span>
           </div>
         </ng-container>
 

@@ -207,10 +207,12 @@
             class="clientDisplay"
             (click)="sendSelectedClientToContract(client)"
           >
-            <h1>{{ client.firstName }} {{ client.lastName }}</h1>
-            <p>account number : {{ client.accountNumber }}</p>
-            <p>address : {{ client.address }}</p>
-            <p>phone number : {{ client.phoneNumber }}</p>
+            <span
+              ><h5>{{ client.firstName }} {{ client.lastName }}</h5>
+              <p>account number : {{ client.accountNumber }}</p>
+              <p>address : {{ client.address }}</p>
+              <p>phone number : {{ client.phoneNumber }}</p>
+            </span>
           </div>
         </div>
       </ng-container>

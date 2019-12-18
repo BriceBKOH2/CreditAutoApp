@@ -57,6 +57,7 @@ export class CalcSheetComponent implements OnInit {
         .setValue(this.contract.vehicleCategory);
     }
   }
+
   ngOnInit() {
     this.date = new Date();
     this.simulationService.getCategories().subscribe(response => {

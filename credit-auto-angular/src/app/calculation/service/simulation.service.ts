@@ -7,6 +7,7 @@ import { Rate } from '../class/rate';
 import { Client } from '../class/client';
 import { Category } from '../class/category';
 import { Contract } from '../class/contract';
+import { Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,6 @@ export class SimulationService {
     return 'http://localhost:8080/credit_auto/api/contract';
   }
 
-  get endPointUpdateContract() {
-    return 'http://localhost:8080/credit_auto/api/contract/id';
-  }
-
   putClient(client: Client) {
     return this.httpClient.put<Client>(this.endPointClient, client);
   }
@@ -44,6 +41,13 @@ export class SimulationService {
 
   getRates(): Observable<Rate[]> {
     return this.httpClient.get<Rate[]>(this.endPointRate);
+  }
+
+  setRate(rate: Rate) {
+    const params: Params = new HttpParams().set('id', `${rate.id}`);
+    console.log(
+      this.httpClient.put<Rate>(`${this.endPointRate}/${rate.id}`, rate, params)
+    );
   }
 
   getRateForLoan(contract: Contract): Observable<Rate> {

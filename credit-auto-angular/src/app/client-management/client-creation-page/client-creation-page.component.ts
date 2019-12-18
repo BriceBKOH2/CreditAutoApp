@@ -93,6 +93,18 @@ export class ClientCreationPageComponent implements OnInit {
         .subscribe(clients => {
           this.clients = clients;
         });
+    } else if (this.clientSelectionForm.value.clientFirstName) {
+      this.clientService
+        .findClientByFirstName(this.clientSelectionForm.value.clientFirstName)
+        .subscribe(clients => {
+          this.clients = clients;
+        });
+    } else if (this.clientSelectionForm.value.clientLastName) {
+      this.clientService
+        .findClientByLastName(this.clientSelectionForm.value.clientLastName)
+        .subscribe(clients => {
+          this.clients = clients;
+        });
     }
   }
 

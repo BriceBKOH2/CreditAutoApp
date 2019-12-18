@@ -1,0 +1,31 @@
+.rateDisplay:hover {
+  cursor: pointer;
+  background-color: gray;
+  transition: 0.3s all;
+}
+
+.rateDisplay{
+  transition: 0.3s all;
+}
+
+.rates {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+
+.taux {
+  width: 40%;
+  margin: auto;
+}
+
+#rate_amount {
+  margin: auto;
+  width: 15%;
+}

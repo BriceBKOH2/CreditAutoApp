@@ -1,0 +1,42 @@
+<h2>Selectionner un taux :</h2>
+
+<div class="taux">
+  <ng-container *ngIf="rates" >
+    <div *ngFor="let rateDB of rates" class="rates">
+      <div class="rateDisplay form-group" (click)="changeSelectedRate(rateDB)">
+        <label for="rateDB">
+          <h4>Taux : {{ rateDB.name }}</h4>
+        </label>
+        <br />
+        <span> {{ rateDB.rateAmount }} %</span>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="rate">
+  <form [formGroup]="rateForm" (ngSubmit)="onSubmitRateForm()">
+    <div class="form-group">
+      <label for="rate_amount">Taux :</label>
+      <br />
+      <span>{{ rate.name }}</span>
+    </div>
+    <div class="form-group">
+      <label for="rate_amount">montant du taux :</label>
+      <input
+        formControlName="rateAmount"
+        id="rate_amount"
+        name="rate_amount"
+        class="form-control"
+        type="number"
+        min="0"
+        placeholder="Ex : 0.5"
+      />
+    </div>
+    <div>
+      <button class="btn btn btn-success" type="submit">
+        Changer taux
+      </button>
+    </div>
+  </form>
+</ng-container>
