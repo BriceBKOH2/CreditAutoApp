@@ -15,6 +15,15 @@ const routes: Routes = [
   {
     path: 'simulPage',
     loadChildren: './calculation/calculation.module#CalculationModule'
+  },
+  {
+    path: 'clientcreationpage',
+    loadChildren:
+      './client-management/client-management.module#ClientManagementModule'
+  },
+  {
+    path: 'adminPage',
+    loadChildren: './admin-data/admin-data.module#AdminDataModule'
   }
 ];
 

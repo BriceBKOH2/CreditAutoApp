@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClientCreationPageComponent } from './client-creation-page/client-creation-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 import { IsSignedInGuard } from '../guards/is-signed-in.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: ClientCreationPageComponent,
+    component: AdminPageComponent,
     canActivate: [IsSignedInGuard]
   }
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ClientManagementRoutingModule {}
+export class AdminDataRoutingModule {}

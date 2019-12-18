@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.creditauto.dao.RateDao;
 import com.bnpp.creditauto.exception.NotFoundException;
@@ -25,7 +24,6 @@ public class RateService {
 	 * @param duration duration in months of the loan
 	 * @return the Rate if found, null otherwise.
 	 */
-	@Transactional
 	public Rate getDecisionRate(Contract contract) {
 		return rateDao.getDecisionRate(contract);
 	}
@@ -41,12 +39,15 @@ public class RateService {
 	public List<Rate> findAll() {
 		return rateDao.findAll();
 	}
-
+	
 	public void save(Rate rate) {
 		rateDao.persist(rate);
 	}
-
-	@Transactional
+	
+	public void update(Rate rate) throws RateNotFoundException {
+		rateDao.update(rate);
+	}
+	
 	public void deleteAll() {
 		rateDao.deleteAll();
 	}
