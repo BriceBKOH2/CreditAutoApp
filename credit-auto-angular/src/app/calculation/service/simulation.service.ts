@@ -45,8 +45,10 @@ export class SimulationService {
 
   setRate(rate: Rate) {
     const params: Params = new HttpParams().set('id', `${rate.id}`);
-    console.log(
-      this.httpClient.put<Rate>(`${this.endPointRate}/${rate.id}`, rate, params)
+    return this.httpClient.put<Rate>(
+      `${this.endPointRate}/${rate.id}`,
+      rate,
+      params
     );
   }
 
