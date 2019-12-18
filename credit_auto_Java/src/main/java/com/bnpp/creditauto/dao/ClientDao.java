@@ -76,6 +76,42 @@ public class ClientDao extends AbstractDao<Client> {
 		}
 		return clients;
 	}
+	
+	public List<Client> findByFirstName(String firstName) throws ClientNotFoundException {
+
+		Session session = getSession();
+		TypedQuery<Client> query = session.createQuery(
+				"FROM Client cl WHERE cl.firstName=:firstName", Client.class);
+		query.setParameter("firstName", firstName);
+		List<Client> clients;
+
+		try {
+			clients = query.getResultList();
+		} catch (NoResultException e) {
+			throw new ClientNotFoundException(firstName, "No input"); // We transform to string to differentiate with
+																	// argument
+			// Long Id since accountNumber is also a Long type
+		}
+		return clients;
+	}
+	
+	public List<Client> findByLastName(String lastName) throws ClientNotFoundException {
+
+		Session session = getSession();
+		TypedQuery<Client> query = session.createQuery(
+				"FROM Client cl WHERE cl.lastName=:lastName", Client.class);
+		query.setParameter("lastName", lastName);
+		List<Client> clients;
+
+		try {
+			clients = query.getResultList();
+		} catch (NoResultException e) {
+			throw new ClientNotFoundException("No input", lastName); // We transform to string to differentiate with
+																	// argument
+			// Long Id since accountNumber is also a Long type
+		}
+		return clients;
+	} 
 
 	public Long getHighestAccountNumber() {
 		Session session = getSession();

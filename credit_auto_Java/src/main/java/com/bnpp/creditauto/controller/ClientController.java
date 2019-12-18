@@ -81,16 +81,40 @@ public class ClientController {
 	
 	
 	/**
-	 * Returns a list of all clients found with firstname and lastname in the request parameter. 
+	 * Returns a list of all clients found with firstName and lastName in the request parameter. 
 	 * @param firstName The first name of the client.
 	 * @param lastName The last name of the client.
-	 * @return a list of all clients found with firstname and lastname parameters. 
+	 * @return a list of all clients found with firstName and lastName parameters. 
 	 * @throws ClientNotFoundException if client with the names in parameters does not exist.
 	 */
 	@RequestMapping(value = "/byname", method = RequestMethod.GET)
 	public List<Client> findByNames(@RequestParam String firstName, @RequestParam String lastName)
 			throws ClientNotFoundException {
 		return clientService.findByNames(firstName, lastName);
+	}
+	
+	/**
+	 * Returns a list of all clients found with firstName in the request parameter. 
+	 * @param firstName The first name of the client.
+	 * @return a list of all clients found with firstName parameters. 
+	 * @throws ClientNotFoundException if client with the name in parameters does not exist.
+	 */
+	@RequestMapping(value = "/byfirstname", method = RequestMethod.GET)
+	public List<Client> findByFirstName(@RequestParam String firstName)
+			throws ClientNotFoundException {
+		return clientService.findByFirstName(firstName);
+	}
+	
+	/**
+	 * Returns a list of all clients found with lastName in the request parameter. 
+	 * @param firstName The last name of the client.
+	 * @return a list of all clients found with lastName parameters. 
+	 * @throws ClientNotFoundException if client with the name in parameters does not exist.
+	 */
+	@RequestMapping(value = "/bylastname", method = RequestMethod.GET)
+	public List<Client> findByLastName(@RequestParam String lastName)
+			throws ClientNotFoundException {
+		return clientService.findByLastName(lastName);
 	}
 	
 	/**
