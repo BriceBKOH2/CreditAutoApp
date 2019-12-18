@@ -71,7 +71,8 @@ public class Contract implements IdEntity {
 	/* Constructors */
 
 	public Contract() {
-
+		isActive = true;
+		rentRight = true;
 	}
 
 	public Contract(Long vehiclePrice, Long loanAmount, Integer loanDuration, Double rate, Boolean rentRight,
