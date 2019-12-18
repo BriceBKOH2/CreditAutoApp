@@ -99,7 +99,7 @@
           </div>
         </ng-container>
 
-        <div >
+        <div>
           <div class="btn-width">
             <button
               class="btn btn-success"
@@ -109,7 +109,7 @@
               Créer simulation
             </button>
           </div>
-          <div>
+          <div class="btn-width">
             <ng-container *ngIf="contract.amountDue">
               <button
                 class="btn btn-success"
@@ -119,25 +119,16 @@
                 Envoyer contrat dans client
               </button>
             </ng-container>
+          </div>
+          <div class="btn-width">
             <ng-container *ngIf="contract.client">
               <button
-                class="btn btn-success"
+                class="btn btn-success btn-width"
                 type="button"
                 (click)="onCreateContract()"
               >
                 Sauver Contract
               </button>
-              <div>
-                <ng-container *ngIf="showButonSendContract">
-                  <button
-                    class="btn btn-success"
-                    type="button"
-                    (click)="onCreateContract()"
-                  >
-                    Créer Contract
-                  </button>
-                </ng-container>
-              </div>
             </ng-container>
           </div>
         </div>
