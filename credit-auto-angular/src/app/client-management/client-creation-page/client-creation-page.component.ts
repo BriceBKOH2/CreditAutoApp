@@ -69,10 +69,7 @@ export class ClientCreationPageComponent implements OnInit {
   }
 
   onSubmitSelectionForm() {
-    if (
-      this.clientSelectionForm.value.clientId !== null &&
-      this.clientSelectionForm.value.clientId !== undefined
-    ) {
+    if (this.clientSelectionForm.value.clientId) {
       console.log(this.clientSelectionForm.value.clientId);
       this.clientService
         .findClient(this.clientSelectionForm.value.clientId)
@@ -82,7 +79,10 @@ export class ClientCreationPageComponent implements OnInit {
           console.log(client);
           console.log(this.clients);
         });
-    } else {
+    } else if (
+      this.clientSelectionForm.value.clientFirstName &&
+      this.clientSelectionForm.value.clientLastName
+    ) {
       this.clientService
         .findClientByNames(
           this.clientSelectionForm.value.clientFirstName,
