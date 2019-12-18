@@ -16,10 +16,12 @@ public class ClientService {
 	@Autowired
 	ClientDao clientDao;
 	
+	@Transactional
 	public Client save(Client client) {
 		return clientDao.persist(client);
 	}
 	
+	@Transactional
 	public Client findById(Long id) throws ClientNotFoundException {
 		try {
 			return clientDao.findById(id);

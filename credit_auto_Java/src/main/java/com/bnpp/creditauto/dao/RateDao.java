@@ -1,5 +1,7 @@
 package com.bnpp.creditauto.dao;
 
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
@@ -16,7 +18,12 @@ public class RateDao extends AbstractDao<Rate> {
 	protected Class<Rate> getEntityClass() {
 		return Rate.class;
 	}
-
+	
+	@Override
+	public List<Rate> findAll(){
+		return em.createQuery("FROM Rate rt ORDER BY rt.id ASC", Rate.class).getResultList();
+	}
+	
 	// aller chercher le bon taux en fonction des paramètres saisis par le conseiller.
 	/**
 	 * Method that retrieve the correct rate from the database according to parameters entered.
@@ -42,6 +49,7 @@ public class RateDao extends AbstractDao<Rate> {
 		return query.getSingleResult();
 	}
 
+	
 	public void update(Rate rate) throws RateNotFoundException {
 		Session session = getSession();
 		Long id = rate.getId();
