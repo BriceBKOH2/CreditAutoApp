@@ -10,6 +10,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { ClientManagementModule } from './client-management/client-management.module';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LocalstorageService } from './service/localstorage.service';
+import { LocationModule } from './location/location.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { LocalstorageService } from './service/localstorage.service';
     AppRoutingModule,
     CalculationModule,
     NavigationModule,
+    LocationModule,
     HttpClientModule,
     AuthenticationModule,
     ClientManagementModule,

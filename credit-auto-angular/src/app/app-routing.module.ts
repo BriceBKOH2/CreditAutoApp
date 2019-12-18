@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'simulPage',
     loadChildren: './calculation/calculation.module#CalculationModule'
+  },
+  {
+    path: 'locationPage',
+    loadChildren: './location/location.module#LocationModule'
   }
 ];
 

@@ -1,0 +1,30 @@
+<h3>Rechercher un contrat par ID</h3>
+
+<div
+  class="container d-flex justify-content-around form1 alert alert-secondary"
+>
+    <form [formGroup]="contractSelectionForm">
+        <label for="contractId">Id du contrat</label>
+        <input formControlName="contractId" id="contractId" type="text" />
+        <button class="btn btn-success" type="button" (click)="searchContract()">Rechercher</button>
+    </form>
+</div>
+
+<ng-container *ngIf="contract">
+    <div
+    class="container alert alert-secondary"
+    >
+    <h4>Détails du contrat</h4>
+        <p>
+            ID : {{contract.id}}
+        </p>
+        <p>
+            Montant dû : {{contract.amountDue}} <br>
+            Durée de {{contract.loanDuration}} mois
+        </p>
+        <p>
+            Contrat du client {{contract.client.firstName}} {{contract.client.lastName}}.
+        </p>
+        <p>Droit de location du contrat : {{contract.rentRight}}</p>
+    </div>
+</ng-container>
