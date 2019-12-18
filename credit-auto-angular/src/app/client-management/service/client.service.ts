@@ -32,6 +32,22 @@ export class ClientService {
     });
   }
 
+  findClientByFirstName(firstName: string) {
+    const param = new HttpParams().set('firstName', firstName);
+
+    return this.httpClient.get<Client[]>(`${this.endPointClient}/byfirstname`, {
+      params: param
+    });
+  }
+
+  findClientByLastName(lastName: string) {
+    const param = new HttpParams().set('lastName', lastName);
+
+    return this.httpClient.get<Client[]>(`${this.endPointClient}/bylastname`, {
+      params: param
+    });
+  }
+
   getNewAccountNumber() {
     return this.httpClient.get<number>(this.endPointClient);
   }
