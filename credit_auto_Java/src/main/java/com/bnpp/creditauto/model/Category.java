@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Vehicle Categories that will be used in the decision of the rate of the loan.
+ * 
  * @author Jordi
  * @author JP
  *
@@ -18,7 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table
 public class Category implements IdEntity {
-	
+
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + "]";
@@ -32,7 +33,7 @@ public class Category implements IdEntity {
 	@Column(unique = true)
 	@NotBlank
 	private String name;
-	
+
 	@Override
 	public Long getId() {
 		return id;
@@ -46,10 +47,10 @@ public class Category implements IdEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Category() {
 	}
-	
+
 	public Category(String name) {
 		this.name = name;
 	}
