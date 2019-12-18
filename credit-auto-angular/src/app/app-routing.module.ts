@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'adminPage',
     loadChildren: './admin-data/admin-data.module#AdminDataModule'
+  },
+  {
+    path: 'locationPage',
+    loadChildren: './location/location.module#LocationModule'
   }
 ];
 

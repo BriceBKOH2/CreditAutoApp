@@ -35,7 +35,8 @@ export class AdminPageComponent implements OnInit {
 
   onSubmitRateForm() {
     this.rate.rateAmount = this.rateForm.value.rateAmount;
-    this.simulationService.setRate(this.rate).subscribe();
-    this.getRates();
+    this.simulationService.setRate(this.rate).subscribe(() => {
+      this.getRates();
+    });
   }
 }
