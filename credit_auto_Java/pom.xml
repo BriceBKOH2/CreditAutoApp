@@ -16,7 +16,7 @@
 		<postgresql.version>42.2.8</postgresql.version>
 		<hibernate.version>5.4.4.Final</hibernate.version>
 		<hibernate.validator.version>5.2.2.Final</hibernate.validator.version>
-		<jackson.version>2.10.1</jackson.version>
+		<jackson.version>2.10.5.1</jackson.version>
 		<servlet.version>4.0.1</servlet.version>
 	</properties>
 	<dependencyManagement>
